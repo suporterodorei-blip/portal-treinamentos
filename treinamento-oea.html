@@ -1,0 +1,911 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Treinamento OEA - Portos e Aeroportos</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #0d3a6b 0%, #164380 25%, #1a5099 50%, #164380 75%, #0a2540 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
+            position: relative;
+        }
+        
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 20% 50%, rgba(26, 80, 153, 0.3) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 80%, rgba(10, 37, 64, 0.4) 0%, transparent 50%),
+                        radial-gradient(circle at 40% 20%, rgba(22, 67, 128, 0.2) 0%, transparent 40%);
+            pointer-events: none;
+        }
+        
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .container {
+            background: #ffffff;
+            border-radius: 20px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+            max-width: 1000px;
+            width: 100%;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #164380 0%, #0a2540 100%);
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+        }
+        
+        .logo-container {
+            text-align: center;
+            margin-bottom: 20px;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 15px;
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .logo-container img {
+            max-width: 100%;
+            height: auto;
+            max-height: 80px;
+            object-fit: contain;
+            display: block;
+            margin: 0 auto;
+        }
+        
+        .logo-placeholder {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 14px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            border: 2px dashed rgba(255, 255, 255, 0.3);
+        }
+        
+        .logo-placeholder strong {
+            display: block;
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+        
+        .header h1 {
+            font-size: clamp(24px, 5vw, 32px);
+            margin-bottom: 8px;
+            font-weight: 700;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        
+        .header p {
+            font-size: clamp(16px, 4vw, 20px);
+            font-weight: 600;
+            margin-top: 12px;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+            opacity: 0.95;
+        }
+        
+        .content {
+            padding: clamp(20px, 5vw, 48px);
+        }
+        
+        .slide {
+            display: none;
+            animation: fadeIn 0.5s;
+        }
+        
+        .slide.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .slide h2 {
+            color: #1e3a8a;
+            margin-bottom: 24px;
+            font-size: clamp(22px, 4vw, 28px);
+            font-weight: 700;
+            line-height: 1.3;
+        }
+        
+        .slide h3 {
+            color: #2563eb;
+            margin-top: 24px;
+            margin-bottom: 14px;
+            font-size: clamp(16px, 3vw, 19px);
+            font-weight: 600;
+        }
+        
+        .slide p {
+            color: #374151;
+            line-height: 1.8;
+            margin-bottom: 16px;
+            font-size: clamp(15px, 2.5vw, 16px);
+        }
+        
+        .slide ul {
+            margin: 20px 0;
+            padding-left: 0;
+            list-style: none;
+        }
+        
+        .slide li {
+            color: #374151;
+            line-height: 1.8;
+            margin-bottom: 14px;
+            font-size: clamp(14px, 2.5vw, 16px);
+            padding-left: 24px;
+            position: relative;
+        }
+        
+        .slide li::before {
+            content: "●";
+            position: absolute;
+            left: 0;
+            color: #3b82f6;
+            font-weight: bold;
+            font-size: 12px;
+            top: 6px;
+        }
+        
+        .info-box li::before {
+            color: #2563eb;
+        }
+        
+        .alert-box li::before {
+            color: #f59e0b;
+        }
+        
+        .success-box li::before {
+            color: #10b981;
+        }
+        
+        .slide strong {
+            color: #1f2937;
+            font-weight: 600;
+        }
+        
+        .content-box {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            padding: clamp(20px, 4vw, 28px);
+            border-radius: 12px;
+            margin: 24px 0;
+            border-left: 4px solid #3b82f6;
+        }
+        
+        .content-box h3 {
+            margin-top: 0;
+        }
+        
+        .info-box {
+            background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+            padding: clamp(20px, 4vw, 28px);
+            border-radius: 12px;
+            margin: 24px 0;
+            border-left: 4px solid #2563eb;
+        }
+        
+        .info-box h3 {
+            margin-top: 0;
+        }
+        
+        .alert-box {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            padding: clamp(20px, 4vw, 28px);
+            border-radius: 12px;
+            margin: 24px 0;
+            border-left: 4px solid #f59e0b;
+        }
+        
+        .success-box {
+            background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+            padding: clamp(20px, 4vw, 28px);
+            border-radius: 12px;
+            margin: 24px 0;
+            border-left: 4px solid #10b981;
+        }
+
+        .numbered-box {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            padding: clamp(16px, 3vw, 20px);
+            border-radius: 12px;
+            margin: 16px 0;
+            border-left: 4px solid #f59e0b;
+        }
+
+        .numbered-box h4 {
+            color: #92400e;
+            margin: 0 0 12px 0;
+            font-size: clamp(15px, 2.5vw, 17px);
+            font-weight: 600;
+        }
+
+        .numbered-box p {
+            margin: 0;
+            color: #374151;
+        }
+        
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+            padding-top: 24px;
+            border-top: 2px solid #e5e7eb;
+            gap: 16px;
+        }
+        
+        .btn {
+            padding: 14px 32px;
+            border: none;
+            border-radius: 12px;
+            font-size: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            letter-spacing: 0.3px;
+            user-select: none;
+            touch-action: manipulation;
+            display: inline-block;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #164380 0%, #0a2540 100%);
+            color: white;
+            box-shadow: 0 4px 12px rgba(22, 67, 128, 0.3);
+        }
+        
+        .btn-primary:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(22, 67, 128, 0.4);
+        }
+        
+        .btn-primary:active:not(:disabled) {
+            transform: translateY(0);
+        }
+        
+        .btn-secondary {
+            background: white;
+            color: #4b5563;
+            border: 2px solid #d1d5db;
+        }
+        
+        .btn-secondary:hover:not(:disabled) {
+            background: #f9fafb;
+            border-color: #9ca3af;
+        }
+        
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        .progress-bar {
+            height: 6px;
+            background: #e5e7eb;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 32px;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #164380 0%, #1a5099 100%);
+            transition: width 0.4s ease;
+        }
+
+        .quiz-completed-message {
+            background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+            padding: 20px;
+            border-radius: 12px;
+            margin-top: 20px;
+            border-left: 4px solid #10b981;
+            display: none;
+            animation: fadeIn 0.5s;
+        }
+
+        .quiz-completed-message.show {
+            display: block;
+        }
+
+        .quiz-completed-message p {
+            color: #065f46;
+            font-weight: 600;
+            margin: 0;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                border-radius: 0;
+            }
+            
+            .content {
+                padding: 24px 20px;
+            }
+            
+            .header {
+                padding: 24px 20px;
+            }
+            
+            .btn {
+                padding: 12px 24px;
+                font-size: 14px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 0;
+            }
+            
+            .slide li {
+                padding-left: 28px;
+            }
+            
+            .navigation {
+                flex-direction: column;
+                gap: 12px;
+            }
+            
+            .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo-container">
+                <!-- DESCOMENTE E COLE O LINK DA LOGO AQUI: -->
+                <!-- <img src="COLE_O_LINK_AQUI" alt="Logo Rodorei" id="companyLogo"> -->
+                
+                <div class="logo-placeholder">
+                    <strong>📋 Próximo Passo: Adicionar Logo</strong>
+                    1. Upload da logo em: Recursos-Treinamentos/logos<br>
+                    2. Copiar link da imagem<br>
+                    3. Colar no código acima (onde está escrito COLE_O_LINK_AQUI)<br>
+                    4. Remover este texto
+                </div>
+            </div>
+            <h1>Programa OEA</h1>
+            <p>Ações e Cuidados em Portos e Aeroportos</p>
+        </div>
+        
+        <div class="content">
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressBar"></div>
+            </div>
+            
+            <!-- Slide 1 -->
+            <div class="slide active" data-slide="0">
+                <h2>Bem-vindo ao Treinamento OEA</h2>
+                <p>Este treinamento interno aborda os principais cuidados e procedimentos necessários para atendimento em portos e aeroportos conforme o Programa Brasileiro de Operador Econômico Autorizado.</p>
+                
+                <div class="info-box">
+                    <h3>🎯 Objetivos do Treinamento</h3>
+                    <ul>
+                        <li>Garantir a transferência de conhecimento nos processos de carregamento e descarregamento</li>
+                        <li>Assegurar o cumprimento das normas de segurança relacionadas ao OEA</li>
+                        <li>Cumprir todos os procedimentos operacionais dos locais de operação</li>
+                        <li>Garantir o cumprimento de todas as regulamentações da OEA</li>
+                    </ul>
+                </div>
+                
+                <div class="content-box">
+                    <p><strong>Duração estimada:</strong> 20 minutos</p>
+                    <p><strong>Formato:</strong> 12 módulos interativos com avaliação final</p>
+                </div>
+            </div>
+            
+            <!-- Slide 2 -->
+            <div class="slide" data-slide="1">
+                <h2>O Programa OEA</h2>
+                <p>O Operador Econômico Autorizado (OEA) é um programa que certifica empresas que demonstram alto padrão de segurança e conformidade na cadeia logística internacional.</p>
+                
+                <div class="info-box">
+                    <h3>Pilares do Programa OEA</h3>
+                    <ul>
+                        <li><strong>Confiabilidade:</strong> Histórico consistente de cumprimento das obrigações legais</li>
+                        <li><strong>Segurança:</strong> Controles rigorosos em todas as etapas da operação</li>
+                        <li><strong>Gestão:</strong> Processos documentados e auditáveis</li>
+                        <li><strong>Transparência:</strong> Compartilhamento de informações com autoridades</li>
+                        <li><strong>Rastreabilidade:</strong> Controle completo da cadeia logística</li>
+                    </ul>
+                </div>
+                
+                <div class="success-box">
+                    <h3>✓ Benefícios da Certificação OEA</h3>
+                    <ul>
+                        <li>Facilidades e agilidade no desembaraço aduaneiro</li>
+                        <li>Redução de custos operacionais</li>
+                        <li>Reconhecimento internacional</li>
+                        <li>Maior competitividade no mercado</li>
+                        <li>Redução de inspeções físicas</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Slide 3 -->
+            <div class="slide" data-slide="2">
+                <h2>Sigilo e Segurança da Informação</h2>
+                <p>A proteção de informações confidenciais é fundamental para a segurança das operações e a conformidade com o programa OEA.</p>
+                
+                <div class="alert-box">
+                    <h3>⚠️ Informações que NUNCA devem ser compartilhadas:</h3>
+                    <ul>
+                        <li>Macros e procedimentos operacionais confidenciais</li>
+                        <li>Senhas de sistemas e acessos</li>
+                        <li>Rotas específicas de transporte</li>
+                        <li>Dados sensíveis de clientes</li>
+                        <li>Informações sobre cargas e valores</li>
+                        <li>Detalhes de segurança das operações</li>
+                    </ul>
+                </div>
+                
+                <div class="info-box">
+                    <h3>Boas Práticas</h3>
+                    <ul>
+                        <li>Não comente sobre rotas ou cargas com pessoas não autorizadas</li>
+                        <li>Não mostre documentos a terceiros</li>
+                        <li>Mantenha senhas e acessos em sigilo absoluto</li>
+                        <li>Reporte imediatamente qualquer tentativa de obter informações confidenciais</li>
+                        <li>Utilize apenas canais oficiais da empresa para comunicação</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Slide 4 -->
+            <div class="slide" data-slide="3">
+                <h2>Identificação de Cargas Suspeitas</h2>
+                <p>A identificação de materiais ilícitos é essencial para a segurança da operação e conformidade legal.</p>
+                
+                <div class="alert-box">
+                    <h3>⚠️ Materiais Ilícitos - Definições:</h3>
+                    <p><strong>Considere material ilícito:</strong> Armas, munições, explosivos, drogas ou qualquer outro material que não tenha a documentação correta para o transporte.</p>
+                </div>
+                
+                <div class="info-box">
+                    <h3>Cuidados na Verificação</h3>
+                    <ul>
+                        <li>Sempre verifique o veículo antes de iniciar a operação</li>
+                        <li>Identifique possíveis violações ou alterações no veículo</li>
+                        <li>Observe se há compartimentos ocultos ou modificações suspeitas</li>
+                        <li>Verifique a unidade de carga completamente</li>
+                        <li>Inspecione o veículo para localizar itens estranhos ou suspeitos</li>
+                        <li>Confirme se a carga corresponde à documentação</li>
+                    </ul>
+                </div>
+                
+                <div class="numbered-box">
+                    <h4>🚨 Em caso de suspeita:</h4>
+                    <p>Acione IMEDIATAMENTE o Gestor Imediato para ciência e providências. NÃO tente resolver sozinho.</p>
+                </div>
+            </div>
+            
+            <!-- Slide 5 -->
+            <div class="slide" data-slide="4">
+                <h2>Checklist do Veículo</h2>
+                <p>A inspeção completa do veículo antes de cada operação é obrigatória e fundamental para a segurança.</p>
+                
+                <div class="info-box">
+                    <h3>✓ Itens Obrigatórios do Checklist</h3>
+                    <ul>
+                        <li>Conferir toda a documentação (sua, do veículo e da carga)</li>
+                        <li>Verificar necessidade de EPIs para o serviço</li>
+                        <li>Inspecionar o veículo para identificar problemas mecânicos</li>
+                        <li>Confirmar com o Rastreamento o sinal do veículo</li>
+                        <li>Verificar limpeza do veículo (sem sujidade ou sinais de pragas)</li>
+                        <li>Conferir validade do certificado de controle de pragas</li>
+                        <li>Verificar estado dos lacres</li>
+                    </ul>
+                </div>
+                
+                <div class="alert-box">
+                    <h3>⚠️ Importante</h3>
+                    <p><strong>Anotar TODA e QUALQUER não conformidade no Checklist da empresa.</strong> Este documento é essencial para rastreabilidade e auditoria.</p>
+                </div>
+                
+                <div class="numbered-box">
+                    <h4>📋 Tirar todas as dúvidas sobre o atendimento</h4>
+                    <p>Antes de sair para o serviço, confirme TODOS os detalhes da operação com seu gestor ou coordenador.</p>
+                </div>
+            </div>
+            
+            <!-- Slide 6 -->
+            <div class="slide" data-slide="5">
+                <h2>Limpeza e Controle de Pragas</h2>
+                <p>A higiene dos equipamentos e o controle de pragas são requisitos essenciais do programa OEA e da legislação sanitária internacional.</p>
+                
+                <div class="info-box">
+                    <h3>Limpeza dos Equipamentos</h3>
+                    <ul>
+                        <li>Sempre manter o veículo limpo sem sinais de sujidade</li>
+                        <li>Manter o baú sempre varrido e em bom estado de conservação</li>
+                        <li>Verificar ausência de resíduos de cargas anteriores</li>
+                        <li>Garantir que não há odores ou contaminações</li>
+                        <li>Limpar o veículo após cada operação quando necessário</li>
+                    </ul>
+                </div>
+                
+                <div class="alert-box">
+                    <h3>⚠️ Controle de Pragas</h3>
+                    <ul>
+                        <li>Sempre verificar validade do certificado de controle de pragas</li>
+                        <li>Manter o selo do controle de pragas visível no veículo</li>
+                        <li>Checagem visual da existência de vestígios de pragas (insetos, roedores)</li>
+                        <li>Nos carregamentos, verificar paletes sem sinais de pragas</li>
+                        <li>NÃO carregar paletes com sinais visíveis de infestação</li>
+                        <li>Em cargas de importação/exportação, verificar se paletes têm anotação IPPC ou HT</li>
+                    </ul>
+                </div>
+                
+                <div class="numbered-box">
+                    <h4>🚨 Relatar Imediatamente</h4>
+                    <p>Qualquer inconformidade relacionada a limpeza e/ou pragas deve ser relatada de imediato ao gestor responsável.</p>
+                </div>
+            </div>
+            
+            <!-- Slide 7 -->
+            <div class="slide" data-slide="6">
+                <h2>Lacração dos Veículos</h2>
+                <p>A lacração correta é um dos principais controles de segurança para garantir a integridade da carga durante todo o transporte.</p>
+                
+                <div class="info-box">
+                    <h3>Tipos de Lacres</h3>
+                    <ul>
+                        <li><strong>Lacre Rodorei (Vazio):</strong> Utilizado em veículos vazios ou situações específicas</li>
+                        <li><strong>Lacre RFB:</strong> Lacre da Receita Federal do Brasil para cargas específicas</li>
+                        <li><strong>Lacre do Cliente:</strong> Quando exigido pelo cliente ou operação</li>
+                    </ul>
+                </div>
+                
+                <div class="alert-box">
+                    <h3>⚠️ REGRAS IMPORTANTES DE LACRAÇÃO</h3>
+                    <ul>
+                        <li><strong>1.</strong> Sempre conferir a numeração do lacre com a documentação</li>
+                        <li><strong>2.</strong> Sempre confirmar/lacrar ou acompanhar a lacração pessoalmente</li>
+                        <li><strong>3.</strong> NUNCA trafegar sem lacre</li>
+                        <li><strong>4.</strong> Em caso de paradas, SEMPRE checar o lacre</li>
+                        <li><strong>5.</strong> NÃO ceder lacres a terceiros</li>
+                        <li><strong>6.</strong> Lacrar com a maior agilidade possível após o término do carregamento</li>
+                    </ul>
+                </div>
+                
+                <div class="numbered-box">
+                    <h4>🔍 Sinais de Violação</h4>
+                    <p>Fique atento a sinais de violação ou adulteração na carga, veículo ou lacres. Isso pode indicar riscos de fraude, contrabando e adulteração de cargas. Reporte IMEDIATAMENTE.</p>
+                </div>
+            </div>
+            
+            <!-- Slide 8 -->
+            <div class="slide" data-slide="7">
+                <h2>Segurança no Trajeto - Parte 1</h2>
+                <p>Durante o transporte, é fundamental seguir rigorosamente as regras de trânsito e gerenciamento de risco.</p>
+                
+                <div class="info-box">
+                    <h3>🚗 Regras de Trânsito</h3>
+                    <ul>
+                        <li><strong>1.</strong> Respeitar as Leis de Trânsito</li>
+                        <li><strong>2.</strong> Respeitar os Limites de Velocidade</li>
+                        <li><strong>3.</strong> Respeitar os Veículos ao Redor</li>
+                        <li><strong>4.</strong> Não efetuar ultrapassagens perigosas</li>
+                        <li><strong>5.</strong> Não parar em locais não permitidos</li>
+                        <li><strong>6.</strong> Não mostrar nenhum documento a terceiros</li>
+                        <li><strong>7.</strong> Respeitar as rotas pré-definidas pela empresa</li>
+                    </ul>
+                </div>
+                
+                <div class="alert-box">
+                    <h3>⚠️ Gerenciamento de Risco</h3>
+                    <ul>
+                        <li>Usar SEMPRE a rota previamente aprovada</li>
+                        <li>SEMPRE respeitar as regras de GR (Gerenciamento de Risco)</li>
+                        <li>Realizar envio de macros de acordo com cada fase do serviço</li>
+                        <li>Assegurar que os lacres não sejam rompidos no trajeto</li>
+                        <li>Não comentar sua rota com terceiros</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Slide 9 -->
+            <div class="slide" data-slide="8">
+                <h2>Segurança no Trajeto - Parte 2</h2>
+                <p>Reconhecer situações suspeitas e seguir protocolos de segurança pode prevenir incidentes graves.</p>
+                
+                <div class="alert-box">
+                    <h3>⚠️ Reconhecimento de Situações Suspeitas</h3>
+                    <ul>
+                        <li>Pessoas estranhas tentando abordar ou seguir o veículo</li>
+                        <li>Veículos sem autorização tentando se aproximar</li>
+                        <li>Solicitações incomuns ou fora do padrão</li>
+                        <li>Documentos incoerentes ou suspeitos</li>
+                        <li>Tentativas de obter informações sobre a carga ou rota</li>
+                        <li>Comportamentos anormais em pontos de parada</li>
+                    </ul>
+                </div>
+                
+                <div class="info-box">
+                    <h3>Cuidados em Paradas</h3>
+                    <ul>
+                        <li>Em necessidade de parada, escolher local homologado e com câmeras</li>
+                        <li>Em caso de parada necessária, verificar veículo para identificar possíveis objetos ilícitos</li>
+                        <li>Em paradas, sempre conferir os lacres</li>
+                        <li>Nunca parar em locais isolados ou sem movimento</li>
+                        <li>Evitar paradas desnecessárias</li>
+                    </ul>
+                </div>
+                
+                <div class="numbered-box">
+                    <h4>🚨 Ação Imediata</h4>
+                    <p>Em qualquer situação suspeita, acione IMEDIATAMENTE o centro de controle ou seu gestor. Não tente resolver sozinho.</p>
+                </div>
+            </div>
+            
+            <!-- Slide 10 -->
+            <div class="slide" data-slide="9">
+                <h2>Proibições Absolutas</h2>
+                <p>Existem condutas que são estritamente proibidas e podem resultar em desligamento imediato, além de responsabilização legal.</p>
+                
+                <div class="alert-box">
+                    <h3>🚫 NUNCA FAÇA:</h3>
+                    <ul>
+                        <li>Transportar nada que não esteja declarado na documentação de transporte</li>
+                        <li>Dar carona a qualquer pessoa</li>
+                        <li>Levar qualquer tipo de embalagem ou produto não autorizado</li>
+                        <li>Desviar da rota pré-estabelecida sem autorização</li>
+                        <li>Comentar sobre rotas, cargas ou valores com terceiros</li>
+                        <li>Abrir ou violar lacres por qualquer motivo</li>
+                        <li>Aceitar qualquer tipo de "presente" ou "agrado" de terceiros</li>
+                        <li>Permitir acesso de pessoas não autorizadas ao veículo ou carga</li>
+                    </ul>
+                </div>
+                
+                <div class="info-box">
+                    <h3>Consequências</h3>
+                    <p>O descumprimento destas regras pode resultar em:</p>
+                    <ul>
+                        <li>Desligamento por justa causa</li>
+                        <li>Responsabilização civil e criminal</li>
+                        <li>Perda da certificação OEA da empresa</li>
+                        <li>Multas e sanções legais</li>
+                        <li>Prejuízos irreparáveis à imagem da empresa</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Slide 11 -->
+            <div class="slide" data-slide="10">
+                <h2>Comunicação de Anomalias</h2>
+                <p>A comunicação imediata de qualquer anomalia é essencial para a segurança das operações e pode prevenir incidentes graves.</p>
+                
+                <div class="alert-box">
+                    <h3>⚠️ O que Reportar IMEDIATAMENTE</h3>
+                    <ul>
+                        <li>Sinais de violação ou adulteração na carga, veículo ou lacres</li>
+                        <li>Presença de materiais suspeitos ou não declarados</li>
+                        <li>Pessoas ou veículos suspeitos seguindo ou abordando</li>
+                        <li>Solicitações incomuns ou fora do procedimento padrão</li>
+                        <li>Tentativas de subornar ou coagir</li>
+                        <li>Qualquer não conformidade nos processos de segurança</li>
+                        <li>Problemas mecânicos que possam comprometer a operação</li>
+                        <li>Acidentes ou incidentes durante o trajeto</li>
+                    </ul>
+                </div>
+                
+                <div class="info-box">
+                    <h3>Como Reportar</h3>
+                    <ul>
+                        <li>Entre em contato IMEDIATAMENTE com o Gestor Imediato</li>
+                        <li>Acione o centro de controle ou rastreamento</li>
+                        <li>Informe todos os detalhes: local, horário, descrição completa</li>
+                        <li>Preserve evidências (fotos, documentos, testemunhas)</li>
+                        <li>NÃO tente resolver o problema sozinho</li>
+                        <li>Aguarde orientações antes de prosseguir</li>
+                        <li>Documente tudo no checklist da empresa</li>
+                    </ul>
+                </div>
+                
+                <div class="numbered-box">
+                    <h4>💡 Lembre-se</h4>
+                    <p>É melhor reportar uma suspeita que depois se mostre falsa do que deixar de reportar uma situação real. SEMPRE que tiver dúvida, reporte!</p>
+                </div>
+            </div>
+            
+            <!-- Slide 12 -->
+            <div class="slide" data-slide="11">
+                <h2>Parabéns! Treinamento Concluído</h2>
+                <p>Você completou com sucesso o treinamento de Operador Econômico Autorizado (OEA). Agora você está preparado para realizar operações em portos e aeroportos com segurança e conformidade.</p>
+                
+                <div class="success-box">
+                    <h3>✓ Pontos-Chave para Lembrar</h3>
+                    <ul>
+                        <li>A certificação OEA depende do cumprimento rigoroso de todos os procedimentos</li>
+                        <li>Mantenha sempre sigilo sobre informações confidenciais da empresa</li>
+                        <li>Faça inspeção completa do veículo antes de cada operação</li>
+                        <li>Reporte IMEDIATAMENTE qualquer situação suspeita ou irregular</li>
+                        <li>NUNCA transporte nada que não esteja declarado na documentação</li>
+                        <li>Sempre confira e proteja os lacres durante todo o trajeto</li>
+                        <li>Mantenha o veículo limpo e com controle de pragas em dia</li>
+                        <li>Respeite as rotas e regras de gerenciamento de risco</li>
+                    </ul>
+                </div>
+                
+                <div class="info-box">
+                    <h3>📋 Checklist Rápido Diário</h3>
+                    <ul>
+                        <li>✓ Documentação conferida (pessoal, veículo e carga)</li>
+                        <li>✓ Veículo inspecionado (mecânica e limpeza)</li>
+                        <li>✓ Controle de pragas válido e visível</li>
+                        <li>✓ Lacres conferidos e íntegros</li>
+                        <li>✓ Rastreamento confirmado</li>
+                        <li>✓ EPIs verificados</li>
+                        <li>✓ Rota confirmada e autorizada</li>
+                    </ul>
+                </div>
+                
+                <div class="content-box">
+                    <p><strong>Próxima Etapa:</strong> Clique no botão abaixo para responder ao questionário de avaliação e validar seu conhecimento sobre os procedimentos OEA.</p>
+                </div>
+
+                <div class="quiz-completed-message" id="quizCompletedMessage">
+                    <p>✓ Questionário aberto! Se precisar acessar novamente, clique no botão "Reabrir Avaliação".</p>
+                </div>
+            </div>
+            
+            <!-- Navigation -->
+            <div class="navigation">
+                <button class="btn btn-secondary" id="prevBtn" type="button">← Anterior</button>
+                <button class="btn btn-primary" id="nextBtn" type="button">Próximo →</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        (function() {
+            var currentSlide = 0;
+            var totalSlides = 12;
+            var quizOpened = false;
+            var quizWindow = null;
+            
+            function updateProgress() {
+                var progress = ((currentSlide + 1) / totalSlides) * 100;
+                var progressBar = document.getElementById('progressBar');
+                if (progressBar) {
+                    progressBar.style.width = progress + '%';
+                }
+            }
+            
+            function showSlide(n) {
+                var slides = document.querySelectorAll('.slide');
+                for (var i = 0; i < slides.length; i++) {
+                    slides[i].classList.remove('active');
+                }
+                
+                if (slides[n]) {
+                    slides[n].classList.add('active');
+                }
+                
+                var prevBtn = document.getElementById('prevBtn');
+                var nextBtn = document.getElementById('nextBtn');
+                
+                if (prevBtn) {
+                    prevBtn.disabled = (n === 0);
+                }
+                
+                if (nextBtn) {
+                    if (n === 11) {
+                        nextBtn.textContent = quizOpened ? 'Reabrir Avaliação' : 'Fazer Avaliação →';
+                    } else {
+                        nextBtn.textContent = 'Próximo →';
+                    }
+                }
+                
+                updateProgress();
+                
+                setTimeout(function() {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                }, 100);
+            }
+            
+            function nextSlide() {
+                if (currentSlide === 11) {
+                    if (quizWindow && !quizWindow.closed) {
+                        try {
+                            quizWindow.focus();
+                            alert('O questionário já está aberto em outra aba.');
+                            return;
+                        } catch(e) {
+                            console.log('Erro ao focar janela');
+                        }
+                    }
+                    
+                    quizWindow = window.open('https://surveymars.com/q/NQzcgPVBi', '_blank');
+                    
+                    if (!quizOpened) {
+                        quizOpened = true;
+                        var nextBtn = document.getElementById('nextBtn');
+                        if (nextBtn) {
+                            nextBtn.textContent = 'Reabrir Avaliação';
+                        }
+                        var message = document.getElementById('quizCompletedMessage');
+                        if (message) {
+                            message.classList.add('show');
+                        }
+                    }
+                } else if (currentSlide < totalSlides - 1) {
+                    currentSlide++;
+                    showSlide(currentSlide);
+                }
+            }
+            
+            function prevSlide() {
+                if (currentSlide > 0) {
+                    currentSlide--;
+                    showSlide(currentSlide);
+                }
+            }
+            
+            function init() {
+                showSlide(currentSlide);
+                
+                var prevBtn = document.getElementById('prevBtn');
+                var nextBtn = document.getElementById('nextBtn');
+                
+                if (prevBtn) {
+                    prevBtn.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        prevSlide();
+                    });
+                    prevBtn.addEventListener('touchend', function(e) {
+                        e.preventDefault();
+                        prevSlide();
+                    });
+                }
+                
+                if (nextBtn) {
+                    nextBtn.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        nextSlide();
+                    });
+                    nextBtn.addEventListener('touchend', function(e) {
+                        e.preventDefault();
+                        nextSlide();
+                    });
+                }
+            }
+            
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', init);
+            } else {
+                init();
+            }
+        })();
+    </script>
+</body>
+</html>

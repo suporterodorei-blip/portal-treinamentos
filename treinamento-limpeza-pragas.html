@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Treinamento - Limpeza e Controle de Pragas em Caminhões</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #0d3a6b 0%, #164380 25%, #1a5099 50%, #164380 75%, #0a2540 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
+            position: relative;
+        }
+        
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 20% 50%, rgba(26, 80, 153, 0.3) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 80%, rgba(10, 37, 64, 0.4) 0%, transparent 50%),
+                        radial-gradient(circle at 40% 20%, rgba(22, 67, 128, 0.2) 0%, transparent 40%);
+            pointer-events: none;
+        }
+        
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .container {
+            background: #ffffff;
+            border-radius: 20px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+            max-width: 1000px;
+            width: 100%;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #164380 0%, #0a2540 100%);
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+        }
+        
+        .logo-container {
+            text-align: center;
+            margin-bottom: 20px;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 15px;
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .logo-container img {
+            max-width: 100%;
+            height: auto;
+            max-height: 80px;
+            object-fit: contain;
+            display: block;
+            margin: 0 auto;
+        }
+        
+        .logo-placeholder {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 14px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            border: 2px dashed rgba(255, 255, 255, 0.3);
+        }
+        
+        .logo-placeholder strong {
+            display: block;
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+        
+        .header h1 {
+            font-size: clamp(24px, 5vw, 32px);
+            margin-bottom: 8px;
+            font-weight: 700;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        
+        .header p {
+            font-size: clamp(13px, 3vw, 15px);
+            opacity: 0.95;
+        }
+        
+        .content {
+            padding: clamp(20px, 5vw, 48px);
+        }
+        
+        .slide {
+            display: none;
+            animation: fadeIn 0.5s;
+        }
+        
+        .slide.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .slide h2 {
+            color: #1e3a8a;
+            margin-bottom: 24px;
+            font-size: clamp(22px, 4vw, 28px);
+            font-weight: 700;
+            line-height: 1.3;
+        }
+        
+        .slide h3 {
+            color: #2563eb;
+            margin-top: 24px;
+            margin-bottom: 14px;
+            font-size: clamp(16px, 3vw, 19px);
+            font-weight: 600;
+        }
+        
+        .slide p {
+            color: #374151;
+            line-height: 1.8;
+            margin-bottom: 16px;
+            font-size: clamp(15px, 2.5vw, 16px);
+        }
+        
+        .slide ul {
+            margin: 20px 0;
+            padding-left: 0;
+            list-style: none;
+        }
+        
+        .slide li {
+            color: #374151;
+            line-height: 1.8;
+            margin-bottom: 14px;
+            font-size: clamp(14px, 2.5vw, 16px);
+            padding-left: 24px;
+            position: relative;
+        }
+        
+        .slide li::before {
+            content: "◆";
+            position: absolute;
+            left: 0;
+            color: #3b82f6;
+            font-weight: bold;
+            font-size: 12px;
+            top: 6px;
+        }
+        
+        .info-box li::before {
+            color: #2563eb;
+        }
+        
+        .alert-box li::before {
+            color: #f59e0b;
+        }
+        
+        .success-box li::before {
+            color: #10b981;
+        }
+        
+        .slide strong {
+            color: #1f2937;
+            font-weight: 600;
+        }
+        
+        .content-box {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            padding: clamp(20px, 4vw, 28px);
+            border-radius: 12px;
+            margin: 24px 0;
+            border-left: 4px solid #3b82f6;
+        }
+        
+        .content-box h3 {
+            margin-top: 0;
+        }
+        
+        .info-box {
+            background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+            padding: clamp(20px, 4vw, 28px);
+            border-radius: 12px;
+            margin: 24px 0;
+            border-left: 4px solid #2563eb;
+        }
+        
+        .info-box h3 {
+            margin-top: 0;
+        }
+        
+        .alert-box {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            padding: clamp(20px, 4vw, 28px);
+            border-radius: 12px;
+            margin: 24px 0;
+            border-left: 4px solid #f59e0b;
+        }
+        
+        .success-box {
+            background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+            padding: clamp(20px, 4vw, 28px);
+            border-radius: 12px;
+            margin: 24px 0;
+            border-left: 4px solid #10b981;
+        }
+
+        .numbered-box {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            padding: clamp(16px, 3vw, 20px);
+            border-radius: 12px;
+            margin: 16px 0;
+            border-left: 4px solid #f59e0b;
+        }
+
+        .numbered-box h4 {
+            color: #92400e;
+            margin: 0 0 12px 0;
+            font-size: clamp(15px, 2.5vw, 17px);
+            font-weight: 600;
+        }
+
+        .numbered-box p {
+            margin: 0;
+            color: #374151;
+        }
+        
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+            padding-top: 24px;
+            border-top: 2px solid #e5e7eb;
+            gap: 16px;
+        }
+        
+        .btn {
+            padding: 14px 32px;
+            border: none;
+            border-radius: 12px;
+            font-size: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            letter-spacing: 0.3px;
+            user-select: none;
+            touch-action: manipulation;
+            display: inline-block;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #164380 0%, #0a2540 100%);
+            color: white;
+            box-shadow: 0 4px 12px rgba(22, 67, 128, 0.3);
+        }
+        
+        .btn-primary:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(22, 67, 128, 0.4);
+        }
+        
+        .btn-primary:active:not(:disabled) {
+            transform: translateY(0);
+        }
+        
+        .btn-secondary {
+            background: white;
+            color: #4b5563;
+            border: 2px solid #d1d5db;
+        }
+        
+        .btn-secondary:hover:not(:disabled) {
+            background: #f9fafb;
+            border-color: #9ca3af;
+        }
+        
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        .progress-bar {
+            height: 6px;
+            background: #e5e7eb;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 32px;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #164380 0%, #1a5099 100%);
+            transition: width 0.4s ease;
+        }
+
+        .quiz-completed-message {
+            background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+            padding: 20px;
+            border-radius: 12px;
+            margin-top: 20px;
+            border-left: 4px solid #10b981;
+            display: none;
+            animation: fadeIn 0.5s;
+        }
+
+        .quiz-completed-message.show {
+            display: block;
+        }
+
+        .quiz-completed-message p {
+            color: #065f46;
+            font-weight: 600;
+            margin: 0;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                border-radius: 0;
+            }
+            
+            .content {
+                padding: 24px 20px;
+            }
+            
+            .header {
+                padding: 24px 20px;
+            }
+            
+            .btn {
+                padding: 12px 24px;
+                font-size: 14px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 0;
+            }
+            
+            .slide li {
+                padding-left: 28px;
+            }
+            
+            .navigation {
+                flex-direction: column;
+                gap: 12px;
+            }
+            
+            .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo-container">
+                <div class="logo-placeholder">
+                    <strong>Minha sequência: logo-rodorei.png</strong>
+                    1. Ambiente no Sharepoint: Recursos-Treinamentos/logos<br>
+                    2. link da imagem<br>
+                    3. Preciso alterar o código para ser responsivo (onde está QUANDO EU CRIAR A ESTRUTURA NO SHAREPOINT)<br>
+                    4. Não posso esquecer de remover este texto
+                </div>
+            </div>
+            <h1>Limpeza e Controle de Pragas em Caminhões</h1>
+            <p style="font-size: clamp(16px, 4vw, 20px); font-weight: 600; margin-top: 12px; text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);">Conformidade com o Programa OEA</p>
+            <p style="font-size: clamp(13px, 3vw, 15px); margin-top: 8px; opacity: 0.9;">2025-09</p>
+        </div>
+        
+        <div class="content">
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressBar"></div>
+            </div>
+            
+            <!-- Slide 1 -->
+            <div class="slide active">
+                <h2>Bem-vindo ao Treinamento</h2>
+                <p>Este treinamento apresenta os procedimentos e requisitos essenciais de limpeza e controle de pragas em caminhões, garantindo a conformidade com o Programa OEA (Operador Econômico Autorizado).</p>
+                
+                <div class="info-box">
+                    <h3>🎯 Objetivos do Treinamento</h3>
+                    <ul>
+                        <li>Garantir padrões de higiene e segurança no transporte</li>
+                        <li>Atender aos requisitos do OEA</li>
+                        <li>Reduzir riscos de contaminação, pragas e não conformidades</li>
+                        <li>Transmitir conhecimentos sobre as regras sobre o tema</li>
+                    </ul>
+                </div>
+                
+                <div class="content-box">
+                    <p><strong>Duração estimada:</strong> 45 minutos</p>
+                    <p><strong>Formato:</strong> 9 módulos com conteúdo prático e procedimentos operacionais</p>
+                </div>
+            </div>
+            
+            <!-- Slide 2 -->
+            <div class="slide">
+                <h2>Importância da Limpeza e Controle</h2>
+                <p>A manutenção da higiene e controle de pragas em caminhões vai muito além de uma simples limpeza. É uma garantia de segurança, qualidade e conformidade regulatória.</p>
+                
+                <div class="info-box">
+                    <h3>🔒 Segurança da Carga</h3>
+                    <ul>
+                        <li>Garantia da integridade da carga no transporte</li>
+                        <li>Conformidade sanitária rigorosa</li>
+                        <li>Imagem da empresa preservada</li>
+                    </ul>
+                </div>
+                
+                <div class="success-box">
+                    <h3>✓ Reputação e Credibilidade</h3>
+                    <ul>
+                        <li>Reputação da empresa fortalecida</li>
+                        <li>Rastreabilidade e credibilidade no OEA</li>
+                        <li>Compromisso com boas práticas globais</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Slide 3 -->
+            <div class="slide">
+                <h2>OEA e Segurança da Cadeia Logística</h2>
+                <p>O Programa OEA (Operador Econômico Autorizado) é uma certificação internacional que reconhece empresas confiáveis na cadeia logística.</p>
+                
+                <div class="content-box">
+                    <h3>O que o OEA Exige?</h3>
+                    <ul>
+                        <li><strong>Segurança da cadeia logística:</strong> Controle rigoroso em todas as etapas</li>
+                        <li><strong>Prevenção contra ilícitos:</strong> Limpeza e controle de pragas evitam contaminações</li>
+                        <li><strong>Boas práticas globais:</strong> Demonstração de compromisso com padrões internacionais</li>
+                    </ul>
+                </div>
+                
+                <div class="numbered-box">
+                    <h4>💡 Conexão Direta</h4>
+                    <p>Limpeza e controle de pragas = prevenção contra ilícitos e contaminações</p>
+                </div>
+            </div>
+            
+            <!-- Slide 4 -->
+            <div class="slide">
+                <h2>Limpeza Interna do Caminhão</h2>
+                <p>A limpeza interna é essencial para garantir que nenhum resíduo ou contaminante comprometa a carga transportada.</p>
+                
+                <div class="alert-box">
+                    <h3>⚠️ Procedimentos Obrigatórios</h3>
+                    <ul>
+                        <li><strong>Varrer a cada operação:</strong> Remover todos os resíduos sólidos após cada descarga</li>
+                        <li><strong>Lavar periodicamente:</strong> Limpeza profunda com água e produtos adequados</li>
+                        <li><strong>Remover resíduos sólidos:</strong> Nunca iniciar um carregamento sem limpeza prévia</li>
+                        <li><strong>Produtos adequados:</strong> Não utilizar produtos nocivos à saúde na limpeza interna</li>
+                    </ul>
+                </div>
+                
+                <div class="info-box">
+                    <h3>📋 Registro das Operações</h3>
+                    <p>Sempre registrar as operações de limpeza realizadas. A rastreabilidade é fundamental para o OEA.</p>
+                </div>
+            </div>
+            
+            <!-- Slide 5 -->
+            <div class="slide">
+                <h2>Limpeza Externa do Caminhão</h2>
+                <p>A aparência externa reflete o cuidado com todo o veículo e evita a entrada de contaminantes para o interior.</p>
+                
+                <div class="success-box">
+                    <h3>✓ Áreas de Atenção</h3>
+                    <ul>
+                        <li><strong>Lavar cabine, rodas e carroceria:</strong> Limpeza completa de todas as superfícies externas</li>
+                        <li><strong>Evitar acúmulo de lama e sujeira:</strong> Previne corrosão e deterioração</li>
+                        <li><strong>Uso de produtos adequados e biodegradáveis:</strong> Respeito ao meio ambiente</li>
+                    </ul>
+                </div>
+                
+                <div class="numbered-box">
+                    <h4>🚛 Lembre-se</h4>
+                    <p>Caminhão limpo = carga segura = empresa confiável</p>
+                </div>
+            </div>
+            
+            <!-- Slide 6 -->
+            <div class="slide">
+                <h2>Controle de Pragas</h2>
+                <p>O controle de pragas é crítico para evitar contaminação da carga e garantir a conformidade sanitária.</p>
+                
+                <div class="alert-box">
+                    <h3>🔍 Procedimentos de Controle</h3>
+                    <ul>
+                        <li><strong>Inspeção visual antes do carregamento:</strong> Verificar sinais de infestação</li>
+                        <li><strong>Fechamento correto de portas e vedações:</strong> Impedir entrada de pragas</li>
+                        <li><strong>Uso de armadilhas e repelentes permitidos:</strong> Somente produtos autorizados</li>
+                        <li><strong>Comunicação imediata em caso de infestação:</strong> Reportar ao gestor imediatamente</li>
+                    </ul>
+                </div>
+                
+                <div class="numbered-box">
+                    <h4>⚠️ Atenção</h4>
+                    <p>Qualquer sinal de infestação (fezes, ninhos, roeduras) deve ser comunicado IMEDIATAMENTE antes do carregamento.</p>
+                </div>
+            </div>
+            
+            <!-- Slide 7 -->
+            <div class="slide">
+                <h2>Registro e Rastreabilidade</h2>
+                <p>O OEA exige documentação completa de todas as operações de limpeza e controle de pragas realizadas.</p>
+                
+                <div class="info-box">
+                    <h3>📄 Documentos Obrigatórios</h3>
+                    <ul>
+                        <li><strong>Lavagem externa:</strong> Solicitar comprovante do estabelecimento</li>
+                        <li><strong>Dedetização:</strong> Fixar no veículo o atestado com data e validade</li>
+                        <li><strong>Lançamento nos controles:</strong> Registrar a data de lavagem ou dedetização</li>
+                        <li><strong>CheckList:</strong> Registrar necessidades de lavagem identificadas</li>
+                        <li><strong>Arquivamento:</strong> Informações mantidas pelos setores de qualidade e frota</li>
+                    </ul>
+                </div>
+                
+                <div class="numbered-box">
+                    <h4>💡 Importante</h4>
+                    <p>Sem documentação adequada, não há como comprovar a conformidade. Guarde todos os comprovantes!</p>
+                </div>
+            </div>
+            
+            <!-- Slide 8 -->
+            <div class="slide">
+                <h2>Responsabilidades</h2>
+                <p>O sucesso do programa depende da atuação coordenada de todos os envolvidos, cada um cumprindo seu papel.</p>
+                
+                <div class="content-box">
+                    <h3>👨‍✈️ Motoristas</h3>
+                    <ul>
+                        <li>Zelar pela limpeza do veículo diariamente</li>
+                        <li>Informar qualquer necessidade de limpeza adicional</li>
+                        <li>Reportar imediatamente sinais de infestação</li>
+                    </ul>
+                </div>
+                
+                <div class="info-box">
+                    <h3>🔧 Gestor de Frota</h3>
+                    <ul>
+                        <li>Agendar a higienização periódica dos veículos</li>
+                        <li>Checar a qualidade dos serviços realizados</li>
+                        <li>Orientar equipe de motoristas sempre que necessário</li>
+                    </ul>
+                </div>
+                
+                <div class="success-box">
+                    <h3>✓ Qualidade</h3>
+                    <ul>
+                        <li>Agendar a dedetização da frota</li>
+                        <li>Manter em arquivo os registros dos serviços e validades</li>
+                        <li>Contratar apenas empresas homologadas</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Slide 9 -->
+            <div class="slide">
+                <h2>Compromisso com a Excelência</h2>
+                <p>A manutenção dos padrões de limpeza e controle de pragas é responsabilidade de todos e garantia de sucesso no OEA.</p>
+                
+                <div class="success-box">
+                    <h3>✓ Princípios Fundamentais</h3>
+                    <ul>
+                        <li>Higiene e segurança sempre em primeiro lugar</li>
+                        <li>Documentação completa de todas as operações</li>
+                        <li>Comunicação imediata de problemas</li>
+                        <li>Manutenção preventiva constante</li>
+                        <li>Comprometimento com as boas práticas do OEA</li>
+                    </ul>
+                </div>
+                
+                <div class="info-box">
+                    <h3>📋 Checklist Rápido Diário</h3>
+                    <ul>
+                        <li>✓ Inspeção visual da carroceria e cabine</li>
+                        <li>✓ Verificação de portas e vedações</li>
+                        <li>✓ Limpeza de resíduos após cada operação</li>
+                        <li>✓ Registro de atividades realizadas</li>
+                        <li>✓ Comunicação de necessidades identificadas</li>
+                        <li>✓ Verificação da validade da dedetização</li>
+                    </ul>
+                </div>
+                
+                <div class="alert-box">
+                    <h3>🎯 Nossa Meta</h3>
+                    <p>Manter 100% de conformidade com os requisitos do OEA, garantindo a segurança da cadeia logística e a credibilidade da empresa no mercado nacional e internacional.</p>
+                </div>
+                
+                <div class="content-box">
+                    <p><strong>Próxima Etapa:</strong> Clique no botão abaixo para responder ao questionário de avaliação e validar seu conhecimento sobre limpeza e controle de pragas.</p>
+                </div>
+
+                <div class="quiz-completed-message" id="quizCompletedMessage">
+                    <p>✓ Questionário aberto! Se precisar acessar novamente, clique no botão "Reabrir Avaliação".</p>
+                </div>
+            </div>
+            
+            <!-- Navigation -->
+            <div class="navigation">
+                <button class="btn btn-secondary" id="prevBtn" type="button" onclick="prevSlide()">← Anterior</button>
+                <button class="btn btn-primary" id="nextBtn" type="button" onclick="nextSlide()">Próximo →</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const totalSlides = 9;
+        let quizOpened = false;
+        let quizWindow = null;
+        
+        function updateProgress() {
+            const progress = ((currentSlide + 1) / totalSlides) * 100;
+            document.getElementById('progressBar').style.width = progress + '%';
+        }
+        
+        function showSlide(n) {
+            const slides = document.querySelectorAll('.slide');
+            slides.forEach(slide => slide.classList.remove('active'));
+            
+            if (slides[n]) {
+                slides[n].classList.add('active');
+            }
+            
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            
+            if (prevBtn) {
+                prevBtn.disabled = n === 0;
+            }
+            
+            if (nextBtn) {
+                if (n === 8) {
+                    if (quizOpened) {
+                        nextBtn.textContent = 'Reabrir Avaliação';
+                    } else {
+                        nextBtn.textContent = 'Fazer Avaliação →';
+                    }
+                } else {
+                    nextBtn.textContent = 'Próximo →';
+                }
+            }
+            
+            updateProgress();
+            
+            setTimeout(function() {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }, 100);
+        }
+        
+        function nextSlide() {
+            if (currentSlide === 8) {
+                if (quizWindow && !quizWindow.closed) {
+                    try {
+                        quizWindow.focus();
+                        alert('O questionário já está aberto em outra aba. A aba foi colocada em foco para você.');
+                        return;
+                    } catch(e) {
+                        console.log('Erro ao focar janela');
+                    }
+                }
+                
+                quizWindow = window.open('https://surveymars.com/q/yrVcumVXc', '_blank', 'noopener,noreferrer');
+                
+                if (!quizOpened) {
+                    quizOpened = true;
+                    
+                    const nextBtn = document.getElementById('nextBtn');
+                    if (nextBtn) {
+                        nextBtn.textContent = 'Reabrir Avaliação';
+                    }
+                    
+                    const message = document.getElementById('quizCompletedMessage');
+                    if (message) {
+                        message.classList.add('show');
+                    }
+                }
+            } else if (currentSlide < totalSlides - 1) {
+                currentSlide++;
+                showSlide(currentSlide);
+            }
+        }
+        
+        function prevSlide() {
+            if (currentSlide > 0) {
+                currentSlide--;
+                showSlide(currentSlide);
+            }
+        }
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            showSlide(currentSlide);
+        });
+    </script>
+</body>
+</html>

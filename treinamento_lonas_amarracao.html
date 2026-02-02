@@ -1,0 +1,958 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Treinamento - Lonamento e Amarração das Cargas com Cintas e Catracas</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #0d3a6b 0%, #164380 25%, #1a5099 50%, #164380 75%, #0a2540 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
+            position: relative;
+        }
+        
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 20% 50%, rgba(26, 80, 153, 0.3) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 80%, rgba(10, 37, 64, 0.4) 0%, transparent 50%),
+                        radial-gradient(circle at 40% 20%, rgba(22, 67, 128, 0.2) 0%, transparent 40%);
+            pointer-events: none;
+        }
+        
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .container {
+            background: #ffffff;
+            border-radius: 20px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+            max-width: 1000px;
+            width: 100%;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #164380 0%, #0a2540 100%);
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+        }
+        
+        .logo-container {
+            text-align: center;
+            margin-bottom: 20px;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 15px;
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .logo-container img {
+            max-width: 100%;
+            height: auto;
+            max-height: 80px;
+            object-fit: contain;
+            display: block;
+            margin: 0 auto;
+        }
+        
+        .logo-placeholder {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 14px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            border: 2px dashed rgba(255, 255, 255, 0.3);
+        }
+        
+        .logo-placeholder strong {
+            display: block;
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+        
+        .header h1 {
+            font-size: clamp(24px, 5vw, 32px);
+            margin-bottom: 8px;
+            font-weight: 700;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        
+        .header p {
+            font-size: clamp(13px, 3vw, 15px);
+            opacity: 0.95;
+        }
+        
+        .content {
+            padding: clamp(20px, 5vw, 48px);
+        }
+        
+        .slide {
+            display: none;
+            animation: fadeIn 0.5s;
+        }
+        
+        .slide.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .slide h2 {
+            color: #1e3a8a;
+            margin-bottom: 24px;
+            font-size: clamp(22px, 4vw, 28px);
+            font-weight: 700;
+            line-height: 1.3;
+        }
+        
+        .slide h3 {
+            color: #2563eb;
+            margin-top: 24px;
+            margin-bottom: 14px;
+            font-size: clamp(16px, 3vw, 19px);
+            font-weight: 600;
+        }
+        
+        .slide p {
+            color: #374151;
+            line-height: 1.8;
+            margin-bottom: 16px;
+            font-size: clamp(15px, 2.5vw, 16px);
+        }
+        
+        .slide ul {
+            margin: 20px 0;
+            padding-left: 0;
+            list-style: none;
+        }
+        
+        .slide li {
+            color: #374151;
+            line-height: 1.8;
+            margin-bottom: 14px;
+            font-size: clamp(14px, 2.5vw, 16px);
+            padding-left: 24px;
+            position: relative;
+        }
+        
+        .slide li::before {
+            content: "◆";
+            position: absolute;
+            left: 0;
+            color: #3b82f6;
+            font-weight: bold;
+            font-size: 12px;
+            top: 6px;
+        }
+        
+        .info-box li::before {
+            color: #2563eb;
+        }
+        
+        .alert-box li::before {
+            color: #f59e0b;
+        }
+        
+        .success-box li::before {
+            color: #10b981;
+        }
+        
+        .slide strong {
+            color: #1f2937;
+            font-weight: 600;
+        }
+        
+        .content-box {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            padding: clamp(20px, 4vw, 28px);
+            border-radius: 12px;
+            margin: 24px 0;
+            border-left: 4px solid #3b82f6;
+        }
+        
+        .content-box h3 {
+            margin-top: 0;
+        }
+        
+        .info-box {
+            background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+            padding: clamp(20px, 4vw, 28px);
+            border-radius: 12px;
+            margin: 24px 0;
+            border-left: 4px solid #2563eb;
+        }
+        
+        .info-box h3 {
+            margin-top: 0;
+        }
+        
+        .alert-box {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            padding: clamp(20px, 4vw, 28px);
+            border-radius: 12px;
+            margin: 24px 0;
+            border-left: 4px solid #f59e0b;
+        }
+        
+        .success-box {
+            background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+            padding: clamp(20px, 4vw, 28px);
+            border-radius: 12px;
+            margin: 24px 0;
+            border-left: 4px solid #10b981;
+        }
+
+        .numbered-box {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            padding: clamp(16px, 3vw, 20px);
+            border-radius: 12px;
+            margin: 16px 0;
+            border-left: 4px solid #f59e0b;
+        }
+
+        .numbered-box h4 {
+            color: #92400e;
+            margin: 0 0 12px 0;
+            font-size: clamp(15px, 2.5vw, 17px);
+            font-weight: 600;
+        }
+
+        .numbered-box p {
+            margin: 0;
+            color: #374151;
+        }
+
+        .equipment-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin: 24px 0;
+        }
+
+        .equipment-item {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            border: 2px solid #e5e7eb;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .equipment-item:hover {
+            border-color: #3b82f6;
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2);
+        }
+
+        .equipment-number {
+            background: linear-gradient(135deg, #164380 0%, #0a2540 100%);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 12px;
+            font-weight: 700;
+            font-size: 18px;
+        }
+
+        .equipment-name {
+            color: #1f2937;
+            font-weight: 600;
+            font-size: 15px;
+        }
+
+        .comparison-table {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin: 24px 0;
+        }
+
+        .table-column {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            border: 2px solid #e5e7eb;
+        }
+
+        .table-column h4 {
+            color: #164380;
+            margin-bottom: 16px;
+            font-size: 18px;
+            text-align: center;
+            padding-bottom: 12px;
+            border-bottom: 2px solid #e5e7eb;
+        }
+        
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+            padding-top: 24px;
+            border-top: 2px solid #e5e7eb;
+            gap: 16px;
+        }
+        
+        .btn {
+            padding: 14px 32px;
+            border: none;
+            border-radius: 12px;
+            font-size: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            letter-spacing: 0.3px;
+            user-select: none;
+            touch-action: manipulation;
+            display: inline-block;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #164380 0%, #0a2540 100%);
+            color: white;
+            box-shadow: 0 4px 12px rgba(22, 67, 128, 0.3);
+        }
+        
+        .btn-primary:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(22, 67, 128, 0.4);
+        }
+        
+        .btn-primary:active:not(:disabled) {
+            transform: translateY(0);
+        }
+        
+        .btn-secondary {
+            background: white;
+            color: #4b5563;
+            border: 2px solid #d1d5db;
+        }
+        
+        .btn-secondary:hover:not(:disabled) {
+            background: #f9fafb;
+            border-color: #9ca3af;
+        }
+        
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        .progress-bar {
+            height: 6px;
+            background: #e5e7eb;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 32px;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #164380 0%, #1a5099 100%);
+            transition: width 0.4s ease;
+        }
+
+        .quiz-completed-message {
+            background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+            padding: 20px;
+            border-radius: 12px;
+            margin-top: 20px;
+            border-left: 4px solid #10b981;
+            display: none;
+            animation: fadeIn 0.5s;
+        }
+
+        .quiz-completed-message.show {
+            display: block;
+        }
+
+        .quiz-completed-message p {
+            color: #065f46;
+            font-weight: 600;
+            margin: 0;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                border-radius: 0;
+            }
+            
+            .content {
+                padding: 24px 20px;
+            }
+            
+            .header {
+                padding: 24px 20px;
+            }
+            
+            .btn {
+                padding: 12px 24px;
+                font-size: 14px;
+            }
+
+            .comparison-table {
+                grid-template-columns: 1fr;
+            }
+
+            .equipment-grid {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 0;
+            }
+            
+            .slide li {
+                padding-left: 28px;
+            }
+            
+            .navigation {
+                flex-direction: column;
+                gap: 12px;
+            }
+            
+            .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo-container">
+                <div class="logo-placeholder">
+                    <strong>Logotipo da Empresa</strong>
+                    Insira a imagem do logo conforme documentação
+                </div>
+            </div>
+            <h1>Lonamento e Amarração de Cargas</h1>
+            <p style="font-size: clamp(16px, 4vw, 20px); font-weight: 600; margin-top: 12px; text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);">Procedimentos com Cintas e Catracas</p>
+        </div>
+        
+        <div class="content">
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressBar"></div>
+            </div>
+            
+            <!-- Slide 1 -->
+            <div class="slide active">
+                <h2>Bem-vindo ao Treinamento</h2>
+                <p>Este treinamento orienta motoristas e ajudantes sobre os procedimentos básicos e corretos para o lonamento e amarração das cargas com cintas e catracas.</p>
+                
+                <div class="info-box">
+                    <h3>🎯 Objetivo</h3>
+                    <p>Garantir a estabilidade da carga durante o trajeto, conforme normas de segurança e boas práticas de transporte, evitando acidentes e avarias.</p>
+                </div>
+                
+                <div class="content-box">
+                    <h3>O que você aprenderá</h3>
+                    <ul>
+                        <li>Identificação e verificação dos equipamentos necessários</li>
+                        <li>Procedimentos corretos de amarração da carga</li>
+                        <li>Técnicas de aplicação de cintas e catracas</li>
+                        <li>Conferência e manutenção durante o trajeto</li>
+                        <li>Normas de segurança e boas práticas</li>
+                    </ul>
+                </div>
+                
+                <div class="numbered-box">
+                    <h4>⏱️ Duração estimada</h4>
+                    <p>1h30 com 12 módulos interativos</p>
+                </div>
+            </div>
+            
+            <!-- Slide 2 -->
+            <div class="slide">
+                <h2>Equipamentos Necessários</h2>
+                <p>Conheça os 7 equipamentos essenciais que devem estar disponíveis e em boas condições antes de iniciar qualquer transporte.</p>
+                
+                <div class="equipment-grid">
+                    <div class="equipment-item">
+                        <div class="equipment-number">1</div>
+                        <div class="equipment-name">Cintas para Travamento</div>
+                    </div>
+                    <div class="equipment-item">
+                        <div class="equipment-number">2</div>
+                        <div class="equipment-name">Catracas</div>
+                    </div>
+                    <div class="equipment-item">
+                        <div class="equipment-number">3</div>
+                        <div class="equipment-name">Lonas de Encerado</div>
+                    </div>
+                    <div class="equipment-item">
+                        <div class="equipment-number">4</div>
+                        <div class="equipment-name">Lonas Leves Plásticas</div>
+                    </div>
+                    <div class="equipment-item">
+                        <div class="equipment-number">5</div>
+                        <div class="equipment-name">Calço para Veículo</div>
+                    </div>
+                    <div class="equipment-item">
+                        <div class="equipment-number">6</div>
+                        <div class="equipment-name">EPI's</div>
+                    </div>
+                    <div class="equipment-item">
+                        <div class="equipment-number">7</div>
+                        <div class="equipment-name">Kit Emergência</div>
+                    </div>
+                </div>
+                
+                <div class="alert-box">
+                    <h3>⚠️ Importante</h3>
+                    <p>Todos os equipamentos devem ser verificados antes da saída. Não seguir viagem se identificada alguma anomalia, avaria ou desgaste que possa comprometer o transporte ou a segurança.</p>
+                </div>
+            </div>
+            
+            <!-- Slide 3 -->
+            <div class="slide">
+                <h2>Check List do Veículo</h2>
+                <p>Antes da saída, o motorista deve fazer normalmente o check list de seu veículo e dos equipamentos necessários e obrigatórios para carregamento.</p>
+                
+                <div class="info-box">
+                    <h3>📋 Verificações Obrigatórias</h3>
+                    <ul>
+                        <li><strong>Existência:</strong> Todos os equipamentos estão presentes?</li>
+                        <li><strong>Condições de uso:</strong> Estão em bom estado de conservação?</li>
+                        <li><strong>Quantidade adequada:</strong> Há quantidade suficiente para a carga?</li>
+                    </ul>
+                </div>
+                
+                <div class="alert-box">
+                    <h3>🚫 Não Seguir Viagem Se</h3>
+                    <ul>
+                        <li>Identificada alguma anomalia nos equipamentos</li>
+                        <li>Existirem avarias que comprometam a segurança</li>
+                        <li>Houver desgastes excessivos em cintas ou catracas</li>
+                        <li>Lonas apresentarem furos ou rasgos significativos</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Slide 4 -->
+            <div class="slide">
+                <h2>Condições das Cintas e Catracas</h2>
+                <p>A verificação cuidadosa das cintas e catracas é fundamental para garantir a segurança do transporte.</p>
+                
+                <div class="alert-box">
+                    <h3>⚠️ Verificação para Substituição</h3>
+                    <h4>Cintas</h4>
+                    <ul>
+                        <li>Rasgos visíveis no tecido</li>
+                        <li>Fios rompidos ou desgastados</li>
+                        <li>Desgaste excessivo nas bordas</li>
+                        <li>Descoloração ou ressecamento</li>
+                    </ul>
+                    
+                    <h4>Catracas</h4>
+                    <ul>
+                        <li>Problemas de funcionamento</li>
+                        <li>Presença de ferrugem</li>
+                        <li>Empenamento ou deformações</li>
+                        <li>Trava com defeito</li>
+                    </ul>
+                </div>
+                
+                <div class="numbered-box">
+                    <h4>🚨 Regra Crítica</h4>
+                    <p><strong>NÃO utilizar cordas em substituição às cintas!</strong> Apenas cintas apropriadas devem ser usadas para amarração de cargas.</p>
+                </div>
+                
+                <div class="info-box">
+                    <h3>✓ Ação Imediata</h3>
+                    <p>Itens danificados devem ser substituídos imediatamente. Nunca inicie viagem com equipamentos comprometidos.</p>
+                </div>
+            </div>
+            
+            <!-- Slide 5 -->
+            <div class="slide">
+                <h2>Condições das Lonas</h2>
+                <p>As lonas são essenciais para proteger a carga contra intempéries e devem estar em perfeitas condições.</p>
+                
+                <div class="info-box">
+                    <h3>✓ Critérios de Aprovação</h3>
+                    <ul>
+                        <li><strong>Limpeza:</strong> Lonas devem estar limpas, sem óleo ou graxa</li>
+                        <li><strong>Integridade:</strong> Sem furos ou rasgos</li>
+                        <li><strong>Tamanho adequado:</strong> Suficiente para cobrir toda a carga</li>
+                        <li><strong>Impermeabilidade:</strong> Capacidade de proteção contra chuva</li>
+                    </ul>
+                </div>
+                
+                <div class="alert-box">
+                    <h3>⚠️ Lonas Contaminadas</h3>
+                    <p>Lonas sujas com óleo ou graxa devem ser limpas adequadamente ou substituídas se necessário. Contaminação pode danificar a carga.</p>
+                </div>
+                
+                <div class="content-box">
+                    <h3>Tipos de Lonas</h3>
+                    <ul>
+                        <li><strong>Lona Encerado:</strong> Uso geral, proteção completa</li>
+                        <li><strong>Lona Leve (Plástica/Azul):</strong> Uso específico para sucata</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Slide 6 -->
+            <div class="slide">
+                <h2>Quantidade de Equipamentos</h2>
+                <p>A quantidade mínima de equipamentos varia de acordo com o tipo de veículo. Conheça os requisitos para cada categoria.</p>
+                
+                <div class="comparison-table">
+                    <div class="table-column">
+                        <h4>🚚 TRUCK</h4>
+                        <ul>
+                            <li><strong>Mínimo 12 conjuntos</strong> de Cintas e Catracas</li>
+                            <li><strong>Lona ENCERADO</strong> com largura e comprimento para cobertura total</li>
+                            <li><strong>Lona Leve (Plástica)</strong> com largura e comprimento para cobertura total</li>
+                            <li><strong>Par de calços</strong> para travamento do veículo</li>
+                            <li><strong>Kit de EPI's</strong> dentro da validade</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="table-column">
+                        <h4>🚛 CARRETA</h4>
+                        <ul>
+                            <li><strong>Mínimo 15 conjuntos</strong> de Cintas e Catracas</li>
+                            <li><strong>Lona ENCERADO</strong> com largura e comprimento para cobertura total</li>
+                            <li><strong>Lona Leve (Plástica)</strong> com largura e comprimento para cobertura total</li>
+                            <li><strong>Par de calços</strong> para travamento do veículo</li>
+                            <li><strong>Kit de EPI's</strong> dentro da validade</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="numbered-box">
+                    <h4>📌 Uso dos Calços</h4>
+                    <p>Calços devem ser utilizados durante carregamento, descarregamento e durante o travamento e destravamento da carga.</p>
+                </div>
+            </div>
+            
+            <!-- Slide 7 -->
+            <div class="slide">
+                <h2>Preparação para Amarração</h2>
+                <p>A preparação adequada é essencial para garantir a segurança durante todo o processo de amarração.</p>
+                
+                <div class="success-box">
+                    <h3>✓ Passos de Preparação</h3>
+                    <ul>
+                        <li><strong>Local adequado:</strong> Verifique se o veículo está estacionado em local plano e seguro</li>
+                        <li><strong>Análise da carga:</strong> Avalie o tipo e o peso da carga</li>
+                        <li><strong>Planejamento:</strong> Defina a quantidade e capacidade das cintas necessárias</li>
+                        <li><strong>Segurança:</strong> Utilize calços de rodas sempre que estiver em procedimentos de carregamento ou descarregamento</li>
+                    </ul>
+                </div>
+                
+                <div class="info-box">
+                    <h3>📍 Posicionamento da Carga</h3>
+                    <ul>
+                        <li><strong>Centralização:</strong> Distribua uniformemente a carga sobre o eixo do veículo</li>
+                        <li><strong>Estabilidade:</strong> Evite sobreposições instáveis ou inclinações</li>
+                        <li><strong>Altura legal:</strong> Não ultrapassar em nenhuma hipótese a altura imposta pela legislação de trânsito</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Slide 8 -->
+            <div class="slide">
+                <h2>Amarração com Cintas e Catracas</h2>
+                <p>Execute a amarração seguindo os procedimentos corretos para garantir máxima segurança.</p>
+                
+                <div class="content-box">
+                    <h3>🔧 Procedimento de Amarração</h3>
+                    <ul>
+                        <li><strong>Quantidade adequada:</strong> Utilize a quantidade necessária de cintas para fixação correta de cada tipo de carga</li>
+                        <li><strong>Pontos de ancoragem:</strong> Posicione as cintas nos pontos de ancoragem adequados</li>
+                        <li><strong>Proteção da carga:</strong> Passe a cinta sobre a carga com proteção para evitar avarias</li>
+                        <li><strong>Tensionamento:</strong> Tensione a catraca até sentir resistência firme</li>
+                        <li><strong>Verificação:</strong> Certifique-se de que não há folgas ou torções</li>
+                    </ul>
+                </div>
+                
+                <div class="alert-box">
+                    <h3>⚠️ Cuidados Essenciais</h3>
+                    <ul>
+                        <li>Não utilize cintas danificadas ou desgastadas</li>
+                        <li>Sempre confira se a catraca está travada corretamente</li>
+                        <li>Teste a estabilidade da carga manualmente antes de partir</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Slide 9 -->
+            <div class="slide">
+                <h2>Aplicação da Lona</h2>
+                <p>A cobertura correta da carga com lona é fundamental para proteção durante o transporte.</p>
+                
+                <div class="success-box">
+                    <h3>✓ Procedimento de Lonamento</h3>
+                    <ul>
+                        <li><strong>Cobertura completa:</strong> Use a lona para cobrir completamente a carga</li>
+                        <li><strong>Fixação adequada:</strong> Fixe a lona com as cintas</li>
+                        <li><strong>Inspeção visual:</strong> Não deixe nenhuma parte da carga visível</li>
+                        <li><strong>Tipo correto:</strong> Utilize Lona leve (azul) para cobertura de sucata</li>
+                    </ul>
+                </div>
+                
+                <div class="info-box">
+                    <h3>🌧️ Proteção Contra Chuva</h3>
+                    <p>Verifique se a lona está impermeável e em boas condições. A proteção adequada evita danos à carga durante o transporte.</p>
+                </div>
+                
+                <div class="numbered-box">
+                    <h4>📌 Verificação Final</h4>
+                    <p>Antes de partir, faça uma inspeção visual completa. A lona deve cobrir 100% da carga e estar bem fixada pelas cintas.</p>
+                </div>
+            </div>
+            
+            <!-- Slide 10 -->
+            <div class="slide">
+                <h2>Primeira Conferência - 50 km</h2>
+                <p>A primeira conferência é crítica e deve ser realizada após os primeiros 50 km rodados.</p>
+                
+                <div class="alert-box">
+                    <h3>⚠️ Após 50 km - Parada Obrigatória</h3>
+                    <ul>
+                        <li><strong>Verificar tensão:</strong> Teste todas as cintas manualmente</li>
+                        <li><strong>Retensionar:</strong> Aperte novamente as catracas se necessário</li>
+                        <li><strong>Inspeção da lona:</strong> Verifique se continua bem posicionada</li>
+                        <li><strong>Estabilidade da carga:</strong> Confirme que não houve movimentação</li>
+                    </ul>
+                </div>
+                
+                <div class="info-box">
+                    <h3>🌧️ Atenção em Caso de Chuvas</h3>
+                    <ul>
+                        <li><strong>Impermeabilidade:</strong> Verifique se a lona está impermeável</li>
+                        <li><strong>Tração da cinta molhada:</strong> Avalie se houve perda de tensão devido à umidade</li>
+                        <li><strong>Retensionamento:</strong> Cintas molhadas podem afrouxar, verifique e ajuste</li>
+                        <li><strong>Pontos de acúmulo:</strong> Certifique-se de que não há água acumulada sobre a lona</li>
+                    </ul>
+                </div>
+                
+                <div class="numbered-box">
+                    <h4>🚨 Por que 50 km?</h4>
+                    <p>Nos primeiros quilômetros, a carga tende a se acomodar com a vibração e movimento do veículo. O retensionamento garante que tudo permaneça seguro.</p>
+                </div>
+            </div>
+            
+            <!-- Slide 11 -->
+            <div class="slide">
+                <h2>Conferências Periódicas</h2>
+                <p>Manter a vigilância constante sobre a amarração é fundamental para um transporte seguro do início ao fim da viagem.</p>
+                
+                <div class="success-box">
+                    <h3>✓ Intervalo de Conferência</h3>
+                    <p><strong>A cada 200 km ou 2 horas de viagem</strong>, você deve realizar verificação completa:</p>
+                    <ul>
+                        <li><strong>Tensão das cintas:</strong> Verificar se mantém a firmeza</li>
+                        <li><strong>Integridade das catracas:</strong> Confirmar travamento e funcionamento</li>
+                        <li><strong>Estado das cintas:</strong> Identificar desgastes ou danos</li>
+                        <li><strong>Condição das lonas:</strong> Verificar possíveis rasgos</li>
+                        <li><strong>Retensionamento:</strong> Sempre retensionar as cintas para garantir o travamento</li>
+                    </ul>
+                </div>
+                
+                <div class="alert-box">
+                    <h3>⚠️ Sinais de Alerta</h3>
+                    <p>Se durante qualquer conferência você identificar:</p>
+                    <ul>
+                        <li>Cintas frouxas ou com folga</li>
+                        <li>Rasgos na lona de cobertura</li>
+                        <li>Catracas destravadas ou com defeito</li>
+                        <li>Movimentação da carga</li>
+                        <li>Desgaste acentuado em algum ponto</li>
+                    </ul>
+                    <p><strong>PARE IMEDIATAMENTE</strong> e realize os ajustes necessários antes de prosseguir.</p>
+                </div>
+            </div>
+            
+            <!-- Slide 12 -->
+            <div class="slide">
+                <h2>Checklist de Segurança Final</h2>
+                <p>Revise os pontos fundamentais para garantir um transporte seguro e dentro das normas.</p>
+                
+                <div class="success-box">
+                    <h3>✓ Antes de Partir</h3>
+                    <ul>
+                        <li>Veículo em local plano e com calços posicionados</li>
+                        <li>Quantidade adequada de cintas conforme tipo de veículo (12 para Truck / 15 para Carreta)</li>
+                        <li>Todas as cintas e catracas em perfeito estado</li>
+                        <li>Lonas sem furos, rasgos ou contaminação</li>
+                        <li>Carga centralizada e distribuída uniformemente</li>
+                        <li>Altura dentro dos limites legais</li>
+                        <li>Todas as catracas travadas e tensionadas</li>
+                        <li>Lona cobrindo 100% da carga</li>
+                        <li>Kit de EPI's completo e dentro da validade</li>
+                    </ul>
+                </div>
+                
+                <div class="info-box">
+                    <h3>📋 Durante o Trajeto</h3>
+                    <ul>
+                        <li><strong>50 km:</strong> Primeira conferência obrigatória com retensionamento</li>
+                        <li><strong>200 km ou 2h:</strong> Conferências periódicas completas</li>
+                        <li><strong>Chuvas:</strong> Verificação extra da impermeabilidade e tensão</li>
+                        <li><strong>Qualquer anomalia:</strong> Parada imediata para correção</li>
+                    </ul>
+                </div>
+                
+                <div class="alert-box">
+                    <h3>🚫 NUNCA Faça</h3>
+                    <ul>
+                        <li>Utilizar cordas no lugar de cintas</li>
+                        <li>Seguir viagem com equipamentos danificados</li>
+                        <li>Ignorar sinais de afrouxamento das cintas</li>
+                        <li>Deixar partes da carga expostas</li>
+                        <li>Pular conferências periódicas</li>
+                        <li>Ultrapassar limites de altura estabelecidos</li>
+                    </ul>
+                </div>
+                
+                <div class="content-box">
+                    <h3>🎓 Conclusão do Treinamento</h3>
+                    <p>A amarração e o lonamento corretos da carga são responsabilidades fundamentais que garantem:</p>
+                    <ul>
+                        <li>Segurança do motorista e demais usuários da via</li>
+                        <li>Integridade da carga transportada</li>
+                        <li>Conformidade com as normas de trânsito</li>
+                        <li>Prevenção de acidentes e avarias</li>
+                        <li>Profissionalismo e qualidade no serviço</li>
+                    </ul>
+                    <p style="margin-top: 16px;"><strong>Próxima Etapa:</strong> Clique no botão abaixo para responder ao questionário de avaliação e validar seu conhecimento sobre lonamento e amarração de cargas.</p>
+                </div>
+
+                <div class="quiz-completed-message" id="quizCompletedMessage">
+                    <p>✓ Questionário aberto! Se precisar acessar novamente, clique no botão "Reabrir Avaliação".</p>
+                </div>
+            </div>
+            
+            <!-- Navigation -->
+            <div class="navigation">
+                <button class="btn btn-secondary" id="prevBtn" type="button" onclick="prevSlide()">← Anterior</button>
+                <button class="btn btn-primary" id="nextBtn" type="button" onclick="nextSlide()">Próximo →</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const totalSlides = 12;
+        let quizOpened = false;
+        let quizWindow = null;
+        
+        function updateProgress() {
+            const progress = ((currentSlide + 1) / totalSlides) * 100;
+            document.getElementById('progressBar').style.width = progress + '%';
+        }
+        
+        function showSlide(n) {
+            const slides = document.querySelectorAll('.slide');
+            slides.forEach(slide => slide.classList.remove('active'));
+            
+            if (slides[n]) {
+                slides[n].classList.add('active');
+            }
+            
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            
+            if (prevBtn) {
+                prevBtn.disabled = n === 0;
+            }
+            
+            if (nextBtn) {
+                if (n === 11) {
+                    if (quizOpened) {
+                        nextBtn.textContent = 'Reabrir Avaliação';
+                    } else {
+                        nextBtn.textContent = 'Fazer Avaliação →';
+                    }
+                } else {
+                    nextBtn.textContent = 'Próximo →';
+                }
+            }
+            
+            updateProgress();
+            
+            setTimeout(function() {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }, 100);
+        }
+        
+        function nextSlide() {
+            if (currentSlide === 11) {
+                if (quizWindow && !quizWindow.closed) {
+                    try {
+                        quizWindow.focus();
+                        alert('O questionário já está aberto em outra aba. A aba foi colocada em foco para você.');
+                        return;
+                    } catch(e) {
+                        console.log('Erro ao focar janela');
+                    }
+                }
+                
+                quizWindow = window.open('about:blank', '_blank', 'noopener,noreferrer');
+                
+                if (!quizOpened) {
+                    quizOpened = true;
+                    
+                    const nextBtn = document.getElementById('nextBtn');
+                    if (nextBtn) {
+                        nextBtn.textContent = 'Reabrir Avaliação';
+                    }
+                    
+                    const message = document.getElementById('quizCompletedMessage');
+                    if (message) {
+                        message.classList.add('show');
+                    }
+                }
+            } else if (currentSlide < totalSlides - 1) {
+                currentSlide++;
+                showSlide(currentSlide);
+            }
+        }
+        
+        function prevSlide() {
+            if (currentSlide > 0) {
+                currentSlide--;
+                showSlide(currentSlide);
+            }
+        }
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            showSlide(currentSlide);
+        });
+    </script>
+</body>
+</html>

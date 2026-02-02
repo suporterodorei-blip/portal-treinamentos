@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Treinamento - Condução Segura para Motoristas de Caminhão</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #0d3a6b 0%, #164380 25%, #1a5099 50%, #164380 75%, #0a2540 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
+            position: relative;
+        }
+        
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 20% 50%, rgba(26, 80, 153, 0.3) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 80%, rgba(10, 37, 64, 0.4) 0%, transparent 50%),
+                        radial-gradient(circle at 40% 20%, rgba(22, 67, 128, 0.2) 0%, transparent 40%);
+            pointer-events: none;
+        }
+        
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .container {
+            background: #ffffff;
+            border-radius: 20px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+            max-width: 1000px;
+            width: 100%;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #164380 0%, #0a2540 100%);
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+        }
+        
+        .logo-container {
+            text-align: center;
+            margin-bottom: 20px;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 15px;
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .logo-container img {
+            max-width: 100%;
+            height: auto;
+            max-height: 80px;
+            object-fit: contain;
+            display: block;
+            margin: 0 auto;
+        }
+        
+        .logo-placeholder {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 14px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            border: 2px dashed rgba(255, 255, 255, 0.3);
+        }
+        
+        .logo-placeholder strong {
+            display: block;
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+        
+        .header h1 {
+            font-size: clamp(24px, 5vw, 32px);
+            margin-bottom: 8px;
+            font-weight: 700;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        
+        .header p {
+            font-size: clamp(13px, 3vw, 15px);
+            opacity: 0.95;
+        }
+        
+        .content {
+            padding: clamp(20px, 5vw, 48px);
+        }
+        
+        .slide {
+            display: none;
+            animation: fadeIn 0.5s;
+        }
+        
+        .slide.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .slide h2 {
+            color: #1e3a8a;
+            margin-bottom: 24px;
+            font-size: clamp(22px, 4vw, 28px);
+            font-weight: 700;
+            line-height: 1.3;
+        }
+        
+        .slide h3 {
+            color: #2563eb;
+            margin-top: 24px;
+            margin-bottom: 14px;
+            font-size: clamp(16px, 3vw, 19px);
+            font-weight: 600;
+        }
+        
+        .slide p {
+            color: #374151;
+            line-height: 1.8;
+            margin-bottom: 16px;
+            font-size: clamp(15px, 2.5vw, 16px);
+        }
+        
+        .slide ul {
+            margin: 20px 0;
+            padding-left: 0;
+            list-style: none;
+        }
+        
+        .slide li {
+            color: #374151;
+            line-height: 1.8;
+            margin-bottom: 14px;
+            font-size: clamp(14px, 2.5vw, 16px);
+            padding-left: 24px;
+            position: relative;
+        }
+        
+        .slide li::before {
+            content: "◆";
+            position: absolute;
+            left: 0;
+            color: #3b82f6;
+            font-weight: bold;
+            font-size: 12px;
+            top: 6px;
+        }
+        
+        .info-box li::before {
+            color: #2563eb;
+        }
+        
+        .alert-box li::before {
+            color: #f59e0b;
+        }
+        
+        .success-box li::before {
+            color: #10b981;
+        }
+        
+        .slide strong {
+            color: #1f2937;
+            font-weight: 600;
+        }
+        
+        .content-box {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            padding: clamp(20px, 4vw, 28px);
+            border-radius: 12px;
+            margin: 24px 0;
+            border-left: 4px solid #3b82f6;
+        }
+        
+        .content-box h3 {
+            margin-top: 0;
+        }
+        
+        .info-box {
+            background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+            padding: clamp(20px, 4vw, 28px);
+            border-radius: 12px;
+            margin: 24px 0;
+            border-left: 4px solid #2563eb;
+        }
+        
+        .info-box h3 {
+            margin-top: 0;
+        }
+        
+        .alert-box {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            padding: clamp(20px, 4vw, 28px);
+            border-radius: 12px;
+            margin: 24px 0;
+            border-left: 4px solid #f59e0b;
+        }
+        
+        .success-box {
+            background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+            padding: clamp(20px, 4vw, 28px);
+            border-radius: 12px;
+            margin: 24px 0;
+            border-left: 4px solid #10b981;
+        }
+
+        .numbered-box {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            padding: clamp(16px, 3vw, 20px);
+            border-radius: 12px;
+            margin: 16px 0;
+            border-left: 4px solid #f59e0b;
+        }
+
+        .numbered-box h4 {
+            color: #92400e;
+            margin: 0 0 12px 0;
+            font-size: clamp(15px, 2.5vw, 17px);
+            font-weight: 600;
+        }
+
+        .numbered-box p {
+            margin: 0;
+            color: #374151;
+        }
+        
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+            padding-top: 24px;
+            border-top: 2px solid #e5e7eb;
+            gap: 16px;
+        }
+        
+        .btn {
+            padding: 14px 32px;
+            border: none;
+            border-radius: 12px;
+            font-size: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            letter-spacing: 0.3px;
+            user-select: none;
+            touch-action: manipulation;
+            display: inline-block;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #164380 0%, #0a2540 100%);
+            color: white;
+            box-shadow: 0 4px 12px rgba(22, 67, 128, 0.3);
+        }
+        
+        .btn-primary:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(22, 67, 128, 0.4);
+        }
+        
+        .btn-primary:active:not(:disabled) {
+            transform: translateY(0);
+        }
+        
+        .btn-secondary {
+            background: white;
+            color: #4b5563;
+            border: 2px solid #d1d5db;
+        }
+        
+        .btn-secondary:hover:not(:disabled) {
+            background: #f9fafb;
+            border-color: #9ca3af;
+        }
+        
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        .progress-bar {
+            height: 6px;
+            background: #e5e7eb;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 32px;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #164380 0%, #1a5099 100%);
+            transition: width 0.4s ease;
+        }
+
+        .quiz-completed-message {
+            background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+            padding: 20px;
+            border-radius: 12px;
+            margin-top: 20px;
+            border-left: 4px solid #10b981;
+            display: none;
+            animation: fadeIn 0.5s;
+        }
+
+        .quiz-completed-message.show {
+            display: block;
+        }
+
+        .quiz-completed-message p {
+            color: #065f46;
+            font-weight: 600;
+            margin: 0;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                border-radius: 0;
+            }
+            
+            .content {
+                padding: 24px 20px;
+            }
+            
+            .header {
+                padding: 24px 20px;
+            }
+            
+            .btn {
+                padding: 12px 24px;
+                font-size: 14px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 0;
+            }
+            
+            .slide li {
+                padding-left: 28px;
+            }
+            
+            .navigation {
+                flex-direction: column;
+                gap: 12px;
+            }
+            
+            .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo-container">
+                <!-- QUANDO EU CRIAR A ESTRUTURA NO SHAREPOINT: -->
+                <!-- <img src="https://rodorei.sharepoint.com/sites/intranet/Recursos-Treinamentos/logos/logo-rodorei.png" alt="Logo Rodorei" id="companyLogo"> -->
+                
+                <div class="logo-placeholder">
+                    <strong>Minha sequência: logo-rodorei.png</strong>
+                    1. Ambiente no Sharepoint: Recursos-Treinamentos/logos<br>
+                    2. link da imagem<br>
+                    3. Preciso alterar o código para ser responsivo (onde está QUANDO EU CRIAR A ESTRUTURA NO SHAREPOINT)<br>
+                    4. Não posso esquecer de remover este texto
+                </div>
+            </div>
+            <h1>Condução Segura para Motoristas de Caminhão</h1>
+            <p style="font-size: clamp(16px, 4vw, 20px); font-weight: 600; margin-top: 12px; text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);">Direção Defensiva e Prevenção de Acidentes</p>
+        </div>
+        
+        <div class="content">
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressBar"></div>
+            </div>
+            
+            <!-- Slide 1 -->
+            <div class="slide active">
+                <h2>Bem-vindo ao Treinamento</h2>
+                <p>Este treinamento aborda técnicas essenciais de condução segura para motoristas profissionais de caminhão, focando na prevenção de acidentes e na convivência segura com motociclistas.</p>
+                
+                <div class="info-box">
+                    <h3>🎯 Objetivos do Treinamento</h3>
+                    <ul>
+                        <li>Compreender os pontos cegos e limitações do caminhão</li>
+                        <li>Aprender técnicas de condução defensiva no trânsito urbano</li>
+                        <li>Identificar riscos específicos envolvendo motociclistas</li>
+                        <li>Aplicar procedimentos de segurança em todas as situações</li>
+                    </ul>
+                </div>
+                
+                <div class="content-box">
+                    <p><strong>Duração estimada:</strong> 1h30</p>
+                    <p><strong>Formato:</strong> 11 módulos interativos com conteúdo prático</p>
+                </div>
+            </div>
+            
+            <!-- Slide 2 -->
+            <div class="slide">
+                <h2>Consciência no Trânsito</h2>
+                <p>A condução segura de um caminhão exige atenção constante a diversos elementos do trânsito que não são tão relevantes para veículos de passeio.</p>
+                
+                <div class="alert-box">
+                    <h3>⚠️ Pontos de Atenção Constante</h3>
+                    <ul>
+                        <li><strong>Ponto Cego:</strong> Áreas onde não há visibilidade completa</li>
+                        <li><strong>Tráfego Cruzado:</strong> Veículos vindo de outras direções</li>
+                        <li><strong>Troca de Faixa:</strong> Manobra que exige planejamento antecipado</li>
+                        <li><strong>Corredor de Motos:</strong> Motociclistas entre as faixas</li>
+                        <li><strong>Trânsito Parado:</strong> Situação de alto risco para motos</li>
+                        <li><strong>Velocidade da Faixa:</strong> Adequar velocidade ao fluxo</li>
+                    </ul>
+                </div>
+                
+                <div class="info-box">
+                    <h3>Procedimentos Essenciais</h3>
+                    <ul>
+                        <li>Espelhos retrovisores sempre ajustados corretamente</li>
+                        <li>Sempre atento a motos no corredor - olhar constantemente</li>
+                        <li>Verificação visual antes de qualquer manobra</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Slide 3 -->
+            <div class="slide">
+                <h2>Limites do Seu Caminhão</h2>
+                <p>Entender as limitações do veículo é fundamental para uma condução segura. Um caminhão NÃO é um carro de passeio.</p>
+                
+                <div class="content-box">
+                    <h3>Características Específicas</h3>
+                    <ul>
+                        <li><strong>Maior Distância de Frenagem:</strong> O caminhão precisa de muito mais espaço para parar completamente</li>
+                        <li><strong>Maior Raio de Giro:</strong> Conversões e manobras exigem mais espaço</li>
+                        <li><strong>Aceleração Lenta:</strong> Velocidade de resposta reduzida</li>
+                        <li><strong>Maior Necessidade de Espaço:</strong> Para qualquer manobra</li>
+                        <li><strong>Maior Tempo de Ação e Reação:</strong> Todas as ações levam mais tempo</li>
+                    </ul>
+                </div>
+                
+                <div class="numbered-box">
+                    <h4>💡 Importante Lembrar</h4>
+                    <p>Caminhão não é carro de passeio. Todas as suas ações ao volante devem considerar estas limitações para garantir segurança.</p>
+                </div>
+            </div>
+            
+            <!-- Slide 4 -->
+            <div class="slide">
+                <h2>Pontos Cegos</h2>
+                <p>Compreender onde você não consegue enxergar é essencial para evitar acidentes graves, especialmente com motociclistas.</p>
+                
+                <div class="alert-box">
+                    <h3>⚠️ Entenda Onde Você Não Vê</h3>
+                    <ul>
+                        <li><strong>Laterais Estendidas:</strong> Principais zonas de risco ao longo de todo o caminhão</li>
+                        <li><strong>Dianteira da Carreta:</strong> Área imediatamente à frente do veículo</li>
+                        <li><strong>Traseira:</strong> Área atrás da carreta sem visibilidade direta</li>
+                        <li><strong>Como Carga e Comprimento Alteram:</strong> A configuração da carga modifica os pontos cegos</li>
+                    </ul>
+                </div>
+                
+                <div class="info-box">
+                    <h3>Zonas Críticas</h3>
+                    <p>As laterais estendidas são as principais zonas de risco. Um motociclista pode estar completamente invisível ao seu lado por vários metros. Sempre faça verificação dupla antes de qualquer mudança de trajetória.</p>
+                </div>
+                
+                <div class="numbered-box">
+                    <h4>🔍 Dica de Segurança</h4>
+                    <p>Se você não vê o motorista da moto no espelho, ele também não vê você. E nesta situação, ele está no seu ponto cego.</p>
+                </div>
+            </div>
+            
+            <!-- Slide 5 -->
+            <div class="slide">
+                <h2>Motos - Perfil e Riscos</h2>
+                <p>Motociclistas representam um desafio especial no trânsito devido às suas características específicas de condução.</p>
+                
+                <div class="alert-box">
+                    <h3>⚠️ Características das Motos</h3>
+                    <ul>
+                        <li><strong>Alta Aceleração e Velocidade:</strong> Podem mudar de posição rapidamente</li>
+                        <li><strong>Manobras Inesperadas:</strong> Alta manobrabilidade permite mudanças súbitas</li>
+                        <li><strong>Uso Constante de Corredores:</strong> Trafegam entre faixas frequentemente</li>
+                        <li><strong>Baixa Visibilidade:</strong> Difíceis de ver para veículos pesados</li>
+                        <li><strong>Maior Vulnerabilidade:</strong> Em colisões, consequências são graves</li>
+                        <li><strong>Alto Volume Urbano:</strong> Presença constante em trechos urbanos</li>
+                        <li><strong>Excesso de Confiança:</strong> Alguns motociclistas assumem riscos</li>
+                    </ul>
+                </div>
+                
+                <div class="numbered-box">
+                    <h4>💡 Consciência</h4>
+                    <p>Em qualquer acidente envolvendo caminhão e moto, independente da culpa, as consequências para o motociclista são sempre graves. A prevenção é sempre a melhor opção.</p>
+                </div>
+            </div>
+            
+            <!-- Slide 6 -->
+            <div class="slide">
+                <h2>Onde a Moto Se Esconde</h2>
+                <p>Motociclistas podem estar em posições que você não consegue visualizar. Conheça os locais mais comuns onde elas ficam invisíveis.</p>
+                
+                <div class="alert-box">
+                    <h3>🚨 Posições Críticas</h3>
+                    <ul>
+                        <li><strong>Ao Lado do Veículo:</strong> No ponto cego lateral, trafegando paralelo a você</li>
+                        <li><strong>No Corredor:</strong> Durante congestionamentos, trafegando entre as faixas</li>
+                        <li><strong>À Frente:</strong> Ao aproximar de semáforos, surgindo rapidamente</li>
+                        <li><strong>Atrás da Carreta:</strong> Na traseira sem visibilidade alguma</li>
+                    </ul>
+                </div>
+                
+                <div class="info-box">
+                    <h3>Como Identificar</h3>
+                    <ul>
+                        <li>Faça varredura visual constante em todos os espelhos</li>
+                        <li>Observe o movimento no corredor lateral antes de manobras</li>
+                        <li>Preste atenção em sombras que podem indicar presença de moto</li>
+                        <li>Escute o som de motores de motocicleta próximos</li>
+                        <li>Sempre olhe duas vezes antes de iniciar qualquer manobra</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Slide 7 -->
+            <div class="slide">
+                <h2>Moto no Corredor</h2>
+                <p>O corredor de motos é uma das situações mais perigosas no trânsito urbano. Saiba como agir corretamente.</p>
+                
+                <div class="alert-box">
+                    <h3>⚠️ Procedimentos Corretos</h3>
+                    <ul>
+                        <li><strong>Reduza a Velocidade Gradualmente:</strong> Não freie bruscamente</li>
+                        <li><strong>Mantenha Trajetória Reta:</strong> Não oscile entre as faixas</li>
+                        <li><strong>Evite "Fechar" a Passagem:</strong> Mantenha espaço para as motos</li>
+                        <li><strong>Não "Coma" Faixa:</strong> Fique centralizado na sua faixa</li>
+                        <li><strong>Prever Motos Surgindo:</strong> Entre faixas congestionadas</li>
+                        <li><strong>Sempre Atento:</strong> Ao corredor da direita E da esquerda</li>
+                    </ul>
+                </div>
+                
+                <div class="numbered-box">
+                    <h4>🚨 Atenção Especial</h4>
+                    <p>Ao trocar de faixa em trânsito lento, mesmo com sinalização, verifique DUAS vezes se não há moto vindo pelo corredor. Elas surgem rapidamente.</p>
+                </div>
+            </div>
+            
+            <!-- Slide 8 -->
+            <div class="slide">
+                <h2>Ultrapassagens</h2>
+                <p>Ultrapassagens e ser ultrapassado por motos exigem cuidados especiais para evitar acidentes.</p>
+                
+                <div class="info-box">
+                    <h3>Procedimentos de Segurança</h3>
+                    <ul>
+                        <li><strong>Aumente o Espaço Lateral:</strong> Dê mais distância ao ultrapassar motos</li>
+                        <li><strong>Evite Deslocamento de Ar:</strong> Reduza a velocidade ao passar próximo de motos</li>
+                        <li><strong>Não Aumente a Velocidade:</strong> Quando estiver sendo ultrapassado</li>
+                        <li><strong>Ultrapassagem Não é Competição:</strong> Não precisa ser "devolvida"</li>
+                    </ul>
+                </div>
+                
+                <div class="alert-box">
+                    <h3>⚠️ Cuidados Importantes</h3>
+                    <p>O deslocamento de ar causado pelo caminhão pode desestabilizar uma moto. Seja gentil na ultrapassagem e permita que motos ultrapassem com segurança.</p>
+                </div>
+            </div>
+            
+            <!-- Slide 9 -->
+            <div class="slide">
+                <h2>Prevenção e Boas Práticas</h2>
+                <p>A prevenção de acidentes começa com a aplicação consistente de procedimentos corretos.</p>
+                
+                <div class="success-box">
+                    <h3>✓ Checklist de Segurança</h3>
+                    <ul>
+                        <li><strong>Ajuste Correto dos Espelhos:</strong> Verificação completa antes de sair</li>
+                        <li><strong>Olhar Duas Vezes:</strong> Antes de mudar de faixa</li>
+                        <li><strong>Sinalizar com Antecedência Real:</strong> Ligar as setas com tempo</li>
+                        <li><strong>Faróis Sempre Ligados:</strong> Trafegar com faróis acesos</li>
+                        <li><strong>Manter-se na Mesma Faixa:</strong> Sempre que possível</li>
+                        <li><strong>Cuidado Redobrado em Áreas Urbanas:</strong> Maior concentração de motos</li>
+                        <li><strong>Manter-se à Direita:</strong> Ou na faixa designada</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Slide 10 -->
+            <div class="slide">
+                <h2>Condução em Trânsito Pesado</h2>
+                <p>O trânsito congestionado apresenta riscos específicos que exigem atenção redobrada.</p>
+                
+                <div class="info-box">
+                    <h3>Distância de Segurança</h3>
+                    <ul>
+                        <li><strong>Manter Distância Ampliada:</strong> 3 a 5 segundos do veículo à frente</li>
+                        <li><strong>Em Caso de Chuva:</strong> Dobre a distância de segurança</li>
+                        <li><strong>Evite Mudanças Bruscas:</strong> De faixa ou velocidade</li>
+                        <li><strong>Use o Freio Motor:</strong> Para reduzir freadas intensas</li>
+                        <li><strong>Estabilidade de Faixa:</strong> Evita risco a motociclistas</li>
+                    </ul>
+                </div>
+                
+                <div class="alert-box">
+                    <h3>⚠️ Regra de Ouro</h3>
+                    <ul>
+                        <li><strong>NUNCA use o celular:</strong> Nem parado no trânsito</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Slide 11 -->
+            <div class="slide">
+                <h2>Manobras de Maior Risco</h2>
+                <p>Algumas manobras apresentam risco elevado e exigem atenção máxima.</p>
+                
+                <div class="alert-box">
+                    <h3>🚨 Situações Críticas</h3>
+                    <ul>
+                        <li><strong>Conversões à Direita ou Esquerda:</strong> Motos ultrapassando e "presas" no ponto cego</li>
+                        <li><strong>Retas com Fluxo Misto:</strong> Motos mudam de faixa rapidamente</li>
+                        <li><strong>Estacionamentos e Recuos:</strong> Atenção redobrada, sempre pedir auxílio nas manobras de marcha à ré</li>
+                    </ul>
+                </div>
+                
+                <div class="numbered-box">
+                    <h4>💡 Procedimento</h4>
+                    <p>Em manobras de ré ou estacionamento, SEMPRE peça ajuda de outra pessoa para guiar e alertar sobre pontos cegos.</p>
+                </div>
+            </div>
+            
+            <!-- Slide 12 -->
+            <div class="slide">
+                <h2>Todo Cuidado é Pouco</h2>
+                <p>Lembre-se sempre das regras fundamentais para uma condução segura.</p>
+                
+                <div class="alert-box">
+                    <h3>🚫 NUNCA Faça:</h3>
+                    <ul>
+                        <li><strong>NÃO usar o celular:</strong> Enquanto dirige, em hipótese alguma</li>
+                        <li><strong>NÃO ter pressa ou irritação:</strong> No trânsito</li>
+                        <li><strong>NUNCA presumir:</strong> Que a moto ou carro desviará</li>
+                        <li><strong>NUNCA dirigir fatigado:</strong> Em caso de sono, pare para dormir</li>
+                        <li><strong>NUNCA se distraia:</strong> Mantenha atenção total na direção</li>
+                    </ul>
+                </div>
+                
+                <div class="success-box">
+                    <h3>✓ Princípios Fundamentais</h3>
+                    <ul>
+                        <li>A segurança sempre vem em primeiro lugar</li>
+                        <li>Dirija defensivamente, antecipando riscos</li>
+                        <li>Respeite todos os usuários da via</li>
+                        <li>Mantenha a calma em todas as situações</li>
+                        <li>Sua vida e a dos outros dependem da sua atenção</li>
+                    </ul>
+                </div>
+                
+                <div class="info-box">
+                    <h3>📋 Checklist Rápido Diário</h3>
+                    <ul>
+                        <li>✓ Espelhos ajustados corretamente</li>
+                        <li>✓ Verificação visual constante dos pontos cegos</li>
+                        <li>✓ Atenção redobrada ao corredor de motos</li>
+                        <li>✓ Distância de segurança mantida (3-5 segundos)</li>
+                        <li>✓ Sinalização com antecedência</li>
+                        <li>✓ Faróis sempre ligados</li>
+                        <li>✓ Celular guardado e desligado</li>
+                    </ul>
+                </div>
+                
+                <div class="content-box">
+                    <p><strong>Próxima Etapa:</strong> Clique no botão abaixo para responder ao questionário de avaliação e validar seu conhecimento sobre condução segura.</p>
+                </div>
+
+                <div class="quiz-completed-message" id="quizCompletedMessage">
+                    <p>✓ Questionário aberto! Se precisar acessar novamente, clique no botão "Reabrir Avaliação".</p>
+                </div>
+            </div>
+            
+            <!-- Navigation -->
+            <div class="navigation">
+                <button class="btn btn-secondary" id="prevBtn" type="button" onclick="prevSlide()">← Anterior</button>
+                <button class="btn btn-primary" id="nextBtn" type="button" onclick="nextSlide()">Próximo →</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const totalSlides = 12;
+        let quizOpened = false;
+        let quizWindow = null;
+        
+        function updateProgress() {
+            const progress = ((currentSlide + 1) / totalSlides) * 100;
+            document.getElementById('progressBar').style.width = progress + '%';
+        }
+        
+        function showSlide(n) {
+            const slides = document.querySelectorAll('.slide');
+            slides.forEach(slide => slide.classList.remove('active'));
+            
+            if (slides[n]) {
+                slides[n].classList.add('active');
+            }
+            
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            
+            if (prevBtn) {
+                prevBtn.disabled = n === 0;
+            }
+            
+            if (nextBtn) {
+                if (n === 11) {
+                    if (quizOpened) {
+                        nextBtn.textContent = 'Reabrir Avaliação';
+                    } else {
+                        nextBtn.textContent = 'Fazer Avaliação →';
+                    }
+                } else {
+                    nextBtn.textContent = 'Próximo →';
+                }
+            }
+            
+            updateProgress();
+            
+            setTimeout(function() {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }, 100);
+        }
+        
+        function nextSlide() {
+            if (currentSlide === 11) {
+                if (quizWindow && !quizWindow.closed) {
+                    try {
+                        quizWindow.focus();
+                        alert('O questionário já está aberto em outra aba. A aba foi colocada em foco para você.');
+                        return;
+                    } catch(e) {
+                        console.log('Erro ao focar janela');
+                    }
+                }
+                
+                quizWindow = window.open('https://surveymars.com/q/yrVcumVXc', '_blank', 'noopener,noreferrer');
+                
+                if (!quizOpened) {
+                    quizOpened = true;
+                    
+                    const nextBtn = document.getElementById('nextBtn');
+                    if (nextBtn) {
+                        nextBtn.textContent = 'Reabrir Avaliação';
+                    }
+                    
+                    const message = document.getElementById('quizCompletedMessage');
+                    if (message) {
+                        message.classList.add('show');
+                    }
+                }
+            } else if (currentSlide < totalSlides - 1) {
+                currentSlide++;
+                showSlide(currentSlide);
+            }
+        }
+        
+        function prevSlide() {
+            if (currentSlide > 0) {
+                currentSlide--;
+                showSlide(currentSlide);
+            }
+        }
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            showSlide(currentSlide);
+        });
+    </script>
+</body>
+</html>

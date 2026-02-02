@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Curso de Segurança da Informação</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #0d3a6b 0%, #164380 25%, #1a5099 50%, #164380 75%, #0a2540 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
+            position: relative;
+        }
+        
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 20% 50%, rgba(26, 80, 153, 0.3) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 80%, rgba(10, 37, 64, 0.4) 0%, transparent 50%),
+                        radial-gradient(circle at 40% 20%, rgba(22, 67, 128, 0.2) 0%, transparent 40%);
+            pointer-events: none;
+        }
+        
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .container {
+            background: #ffffff;
+            border-radius: 20px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+            max-width: 1000px;
+            width: 100%;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #164380 0%, #0a2540 100%);
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+        }
+        
+        .logo-container {
+            text-align: center;
+            margin-bottom: 20px;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 15px;
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .logo-container img {
+            max-width: 100%;
+            height: auto;
+            max-height: 80px;
+            object-fit: contain;
+        }
+        
+        .logo-placeholder {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 14px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            border: 2px dashed rgba(255, 255, 255, 0.3);
+        }
+        
+        .logo-placeholder strong {
+            display: block;
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+        
+        .header h1 {
+            font-size: clamp(24px, 5vw, 32px);
+            margin-bottom: 8px;
+            font-weight: 700;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        
+        .header p {
+            font-size: clamp(13px, 3vw, 15px);
+            opacity: 0.95;
+        }
+        
+        .content {
+            padding: clamp(20px, 5vw, 48px);
+        }
+        
+        .slide {
+            display: none;
+            animation: fadeIn 0.5s;
+        }
+        
+        .slide.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .slide h2 {
+            color: #1e3a8a;
+            margin-bottom: 24px;
+            font-size: clamp(22px, 4vw, 28px);
+            font-weight: 700;
+            line-height: 1.3;
+        }
+        
+        .slide h3 {
+            color: #2563eb;
+            margin-top: 24px;
+            margin-bottom: 14px;
+            font-size: clamp(16px, 3vw, 19px);
+            font-weight: 600;
+        }
+        
+        .slide p {
+            color: #374151;
+            line-height: 1.8;
+            margin-bottom: 16px;
+            font-size: clamp(15px, 2.5vw, 16px);
+        }
+        
+        .slide ul {
+            margin: 20px 0;
+            padding-left: 0;
+            list-style: none;
+        }
+        
+        .slide li {
+            color: #374151;
+            line-height: 1.8;
+            margin-bottom: 14px;
+            font-size: clamp(14px, 2.5vw, 16px);
+            padding-left: 24px;
+            position: relative;
+        }
+        
+        .slide li::before {
+            content: "●";
+            position: absolute;
+            left: 0;
+            color: #3b82f6;
+            font-weight: bold;
+            font-size: 12px;
+            top: 6px;
+        }
+        
+        .info-box li::before {
+            color: #2563eb;
+        }
+        
+        .alert-box li::before {
+            color: #f59e0b;
+        }
+        
+        .success-box li::before {
+            color: #10b981;
+        }
+        
+        .slide strong {
+            color: #1f2937;
+            font-weight: 600;
+        }
+        
+        .content-box {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            padding: clamp(20px, 4vw, 28px);
+            border-radius: 12px;
+            margin: 24px 0;
+            border-left: 4px solid #3b82f6;
+        }
+        
+        .content-box h3 {
+            margin-top: 0;
+        }
+        
+        .info-box {
+            background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+            padding: clamp(20px, 4vw, 28px);
+            border-radius: 12px;
+            margin: 24px 0;
+            border-left: 4px solid #2563eb;
+        }
+        
+        .info-box h3 {
+            margin-top: 0;
+        }
+        
+        .alert-box {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            padding: clamp(20px, 4vw, 28px);
+            border-radius: 12px;
+            margin: 24px 0;
+            border-left: 4px solid #f59e0b;
+        }
+        
+        .success-box {
+            background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+            padding: clamp(20px, 4vw, 28px);
+            border-radius: 12px;
+            margin: 24px 0;
+            border-left: 4px solid #10b981;
+        }
+        
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+            padding-top: 24px;
+            border-top: 2px solid #e5e7eb;
+            gap: 16px;
+        }
+        
+        .btn {
+            padding: 14px 32px;
+            border: none;
+            border-radius: 12px;
+            font-size: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            letter-spacing: 0.3px;
+            -webkit-appearance: button;
+            -webkit-tap-highlight-color: rgba(0,0,0,0);
+            user-select: none;
+            touch-action: manipulation;
+            display: inline-block;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #164380 0%, #0a2540 100%);
+            color: white;
+            box-shadow: 0 4px 12px rgba(22, 67, 128, 0.3);
+        }
+        
+        .btn-primary:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(22, 67, 128, 0.4);
+        }
+        
+        .btn-primary:active:not(:disabled) {
+            transform: translateY(0);
+        }
+        
+        .btn-secondary {
+            background: white;
+            color: #4b5563;
+            border: 2px solid #d1d5db;
+        }
+        
+        .btn-secondary:hover:not(:disabled) {
+            background: #f9fafb;
+            border-color: #9ca3af;
+        }
+        
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        .progress-bar {
+            height: 6px;
+            background: #e5e7eb;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 32px;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #164380 0%, #1a5099 100%);
+            transition: width 0.4s ease;
+        }
+
+        .quiz-completed-message {
+            background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+            padding: 20px;
+            border-radius: 12px;
+            margin-top: 20px;
+            border-left: 4px solid #10b981;
+            display: none;
+            animation: fadeIn 0.5s;
+        }
+
+        .quiz-completed-message.show {
+            display: block;
+        }
+
+        .quiz-completed-message p {
+            color: #065f46;
+            font-weight: 600;
+            margin: 0;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                border-radius: 0;
+            }
+            
+            .content {
+                padding: 24px 20px;
+            }
+            
+            .header {
+                padding: 24px 20px;
+            }
+            
+            .btn {
+                padding: 12px 24px;
+                font-size: 14px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 0;
+            }
+            
+            .slide li {
+                padding-left: 28px;
+            }
+            
+            .navigation {
+                flex-direction: column;
+                gap: 12px;
+            }
+            
+            .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo-container">
+                <!-- 
+                    ═══════════════════════════════════════════════════════
+                    INSTRUÇÕES PARA LOGO NO SHAREPOINT INTRANET:
+                    ═══════════════════════════════════════════════════════
+                    
+                    PASSO 1: Upload da Logo
+                    - Faça upload da logo em uma biblioteca do SharePoint
+                    - Exemplo: Sites/Intranet/Recursos/logos/logo-rodorei.png
+                    
+                    PASSO 2: Obter o Caminho
+                    Opção A - Caminho Relativo (se estiver no mesmo site):
+                    <img src="/sites/intranet/Recursos/logos/logo-rodorei.png" alt="Logo Rodorei">
+                    
+                    Opção B - URL Completa:
+                    <img src="https://suaempresa.sharepoint.com/sites/intranet/Recursos/logos/logo-rodorei.png" alt="Logo Rodorei">
+                    
+                    PASSO 3: Descomente a linha abaixo e ajuste o caminho
+                -->
+                
+                <!-- DESCOMENTE E AJUSTE O CAMINHO ABAIXO: -->
+                <!-- <img src="/sites/intranet/Recursos/logos/logo-rodorei.png" alt="Logo Rodorei" id="companyLogo"> -->
+                
+                <div class="logo-placeholder">
+                    <strong>📋 Configuração para SharePoint Intranet:</strong>
+                    1. Faça upload da logo na biblioteca "Recursos"<br>
+                    2. Copie o caminho da logo<br>
+                    3. Cole o caminho no código HTML acima<br>
+                    4. Remova este texto placeholder
+                </div>
+            </div>
+            <h1>Segurança da Informação</h1>
+            <p>Treinamento Obrigatório</p>
+        </div>
+        
+        <div class="content">
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressBar"></div>
+            </div>
+            
+            <!-- Slide 1 -->
+            <div class="slide active">
+                <h2>Bem-vindo ao Treinamento</h2>
+                <p>Este curso aborda os principais conceitos de Segurança da Informação essenciais para todos os colaboradores da organização.</p>
+                
+                <div class="info-box">
+                    <h3>Objetivos do Curso</h3>
+                    <ul>
+                        <li>Compreender a importância da segurança da informação no ambiente corporativo</li>
+                        <li>Conhecer as principais ameaças e vulnerabilidades do mundo digital</li>
+                        <li>Aprender práticas seguras para aplicar no dia a dia de trabalho</li>
+                        <li>Proteger dados sensíveis da empresa e dos clientes</li>
+                    </ul>
+                </div>
+                
+                <div class="content-box">
+                    <p><strong>Duração estimada:</strong> 15 minutos</p>
+                    <p><strong>Formato:</strong> 9 módulos interativos com avaliação final</p>
+                </div>
+            </div>
+            
+            <!-- Slide 2 -->
+            <div class="slide">
+                <h2>O que é Segurança da Informação?</h2>
+                <p>Segurança da Informação é o conjunto de práticas, políticas e tecnologias desenvolvidas para proteger dados e sistemas contra acessos não autorizados, uso indevido, divulgação, destruição ou modificação.</p>
+                
+                <div class="info-box">
+                    <h3>Os 3 Pilares da Segurança (Tríade CIA)</h3>
+                    <ul>
+                        <li><strong>Confidencialidade:</strong> Garantir que apenas pessoas autorizadas tenham acesso às informações sensíveis</li>
+                        <li><strong>Integridade:</strong> Assegurar que os dados não sejam alterados ou corrompidos de forma indevida</li>
+                        <li><strong>Disponibilidade:</strong> Manter as informações e sistemas acessíveis quando necessário</li>
+                    </ul>
+                </div>
+                
+                <div class="alert-box">
+                    <p><strong>Importante:</strong> A responsabilidade pela segurança da informação é de <strong>todos</strong> os colaboradores, não apenas da equipe de TI.</p>
+                </div>
+            </div>
+            
+            <!-- Slide 3 -->
+            <div class="slide">
+                <h2>Senhas Seguras</h2>
+                <p>Sua senha é a primeira e mais importante linha de defesa contra invasores. Uma senha forte é essencial para proteger seus acessos pessoais e dados corporativos.</p>
+                
+                <div class="info-box">
+                    <h3>Boas Práticas</h3>
+                    <ul>
+                        <li>Utilize no mínimo 12 caracteres (quanto mais longa, melhor)</li>
+                        <li>Combine letras maiúsculas e minúsculas, números e símbolos especiais</li>
+                        <li>Evite informações pessoais óbvias (nome, data de nascimento, placas de carro)</li>
+                        <li>Use senhas únicas e diferentes para cada sistema ou aplicação</li>
+                        <li>Altere suas senhas periodicamente (a cada 90 dias no mínimo)</li>
+                        <li>Considere usar um gerenciador de senhas confiável</li>
+                    </ul>
+                </div>
+                
+                <div class="alert-box">
+                    <h3>Nunca Faça</h3>
+                    <ul>
+                        <li>Compartilhar sua senha com ninguém, nem mesmo colegas ou superiores</li>
+                        <li>Anotar senhas em papéis, post-its ou arquivos desprotegidos</li>
+                        <li>Usar senhas óbvias como "123456", "senha123" ou "admin"</li>
+                        <li>Salvar senhas automaticamente em computadores públicos ou compartilhados</li>
+                        <li>Reutilizar a mesma senha em múltiplos serviços</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Slide 4 -->
+            <div class="slide">
+                <h2>Ataques de Phishing</h2>
+                <p>Phishing é uma das técnicas mais comuns de ataque cibernético. Criminosos tentam roubar informações confidenciais através de e-mails, mensagens ou sites falsos que se passam por entidades legítimas.</p>
+                
+                <div class="alert-box">
+                    <h3>Sinais de Alerta</h3>
+                    <ul>
+                        <li>Mensagens com senso de urgência excessivo ("Sua conta será bloqueada em 24h!")</li>
+                        <li>Erros gramaticais, ortográficos ou tradução automática mal feita</li>
+                        <li>Remetentes com endereços de e-mail suspeitos ou domínios desconhecidos</li>
+                        <li>Links que não correspondem ao site oficial da empresa</li>
+                        <li>Solicitações inesperadas de informações confidenciais por e-mail</li>
+                        <li>Anexos não solicitados ou com extensões suspeitas (.exe, .zip, .scr)</li>
+                        <li>Ofertas boas demais para serem verdade</li>
+                    </ul>
+                </div>
+                
+                <div class="info-box">
+                    <h3>Como se Proteger</h3>
+                    <ul>
+                        <li>Sempre verifique cuidadosamente o endereço do remetente</li>
+                        <li>Passe o mouse sobre links antes de clicar para ver o destino real</li>
+                        <li>Nunca forneça dados sensíveis (senhas, CPF, dados bancários) por e-mail</li>
+                        <li>Desconfie de solicitações urgentes ou ameaçadoras</li>
+                        <li>Em caso de dúvida, entre em contato direto com a empresa através de canais oficiais</li>
+                        <li>Reporte imediatamente qualquer tentativa suspeita ao setor de TI</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Slide 5 -->
+            <div class="slide">
+                <h2>Proteção de Dados e LGPD</h2>
+                <p>A Lei Geral de Proteção de Dados (LGPD) estabelece regras claras e obrigatórias sobre coleta, armazenamento, tratamento e compartilhamento de dados pessoais no Brasil.</p>
+                
+                <div class="info-box">
+                    <h3>Suas Responsabilidades como Colaborador</h3>
+                    <ul>
+                        <li>Coletar apenas os dados estritamente necessários para realizar suas atividades</li>
+                        <li>Armazenar dados pessoais em locais seguros e com acesso restrito</li>
+                        <li>Nunca compartilhar dados de clientes sem autorização prévia e formal</li>
+                        <li>Respeitar rigorosamente a privacidade de clientes, parceiros e colegas</li>
+                        <li>Reportar imediatamente qualquer vazamento, perda ou acesso indevido a dados</li>
+                        <li>Manter a confidencialidade mesmo após o término do contrato de trabalho</li>
+                    </ul>
+                </div>
+                
+                <div class="alert-box">
+                    <p><strong>Atenção:</strong> O descumprimento da LGPD pode resultar em multas de até R$ 50 milhões para a empresa, além de responsabilização civil e criminal dos envolvidos.</p>
+                </div>
+            </div>
+            
+            <!-- Slide 6 -->
+            <div class="slide">
+                <h2>Segurança de Dispositivos</h2>
+                <p>Proteger adequadamente seus dispositivos de trabalho é fundamental para evitar acessos não autorizados, roubo de informações e vazamento de dados sensíveis.</p>
+                
+                <div class="info-box">
+                    <h3>Computadores e Notebooks</h3>
+                    <ul>
+                        <li>Sempre bloqueie a tela ao se afastar (Windows: Win+L / Mac: Cmd+Ctrl+Q)</li>
+                        <li>Nunca deixe equipamentos corporativos sem supervisão em locais públicos</li>
+                        <li>Mantenha o antivírus e sistema operacional sempre atualizados</li>
+                        <li>Não instale programas ou aplicativos sem autorização prévia do TI</li>
+                        <li>Utilize apenas softwares licenciados e de fontes confiáveis</li>
+                        <li>Faça backup regular de arquivos importantes</li>
+                        <li>Use criptografia de disco em notebooks corporativos</li>
+                    </ul>
+                </div>
+                
+                <div class="info-box">
+                    <h3>Dispositivos Móveis</h3>
+                    <ul>
+                        <li>Configure senha forte ou biometria (impressão digital/reconhecimento facial)</li>
+                        <li>Evite conectar-se a redes Wi-Fi públicas para acessar dados corporativos</li>
+                        <li>Instale aplicativos apenas das lojas oficiais (App Store, Google Play)</li>
+                        <li>Ative a localização remota e função de apagar dados à distância</li>
+                        <li>Reporte imediatamente ao TI em caso de perda ou roubo do dispositivo</li>
+                        <li>Mantenha o sistema operacional e aplicativos sempre atualizados</li>
+                        <li>Não faça jailbreak ou root no dispositivo corporativo</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Slide 7 -->
+            <div class="slide">
+                <h2>Engenharia Social</h2>
+                <p>Engenharia Social é uma técnica sofisticada de manipulação psicológica usada por criminosos para enganar pessoas e obter informações confidenciais ou acesso não autorizado a sistemas e locais restritos.</p>
+                
+                <div class="alert-box">
+                    <h3>Exemplos Comuns de Ataques</h3>
+                    <ul>
+                        <li>Pessoas se passando por técnicos de TI solicitando senhas por telefone</li>
+                        <li>Ligações fraudulentas fingindo ser do banco, fornecedor ou órgão governamental</li>
+                        <li>E-mails falsificados com identidade de executivos solicitando transferências urgentes</li>
+                        <li>Visitantes não autorizados tentando entrar em áreas restritas seguindo funcionários</li>
+                        <li>Mensagens emocionais urgentes pedindo ajuda financeira de "colegas"</li>
+                        <li>Pesquisas falsas oferecendo prêmios em troca de informações pessoais</li>
+                    </ul>
+                </div>
+                
+                <div class="info-box">
+                    <h3>Como se Defender</h3>
+                    <ul>
+                        <li>Sempre confirme a identidade de quem solicita informações através de canais oficiais</li>
+                        <li>Desconfie de solicitações urgentes, incomuns ou que fogem do procedimento padrão</li>
+                        <li>Nunca forneça senhas, códigos ou informações confidenciais por telefone</li>
+                        <li>Valide solicitações financeiras através de múltiplos canais de comunicação</li>
+                        <li>Questione visitantes desconhecidos e verifique suas credenciais</li>
+                        <li>Reporte imediatamente qualquer tentativa suspeita ao setor de segurança</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Slide 8 -->
+            <div class="slide">
+                <h2>Incidentes de Segurança</h2>
+                <p>Um incidente de segurança é qualquer evento ou situação que possa comprometer a confidencialidade, integridade ou disponibilidade das informações e sistemas da organização.</p>
+                
+                <div class="alert-box">
+                    <h3>O que Você Deve Reportar Imediatamente</h3>
+                    <ul>
+                        <li>Acesso não autorizado ou tentativa de invasão a sistemas ou dados</li>
+                        <li>Perda, roubo ou extravio de equipamentos corporativos</li>
+                        <li>Recebimento de e-mails, mensagens ou ligações suspeitas</li>
+                        <li>Comportamento anormal, lentidão ou travamentos frequentes de sistemas</li>
+                        <li>Vazamento, exposição acidental ou compartilhamento indevido de dados</li>
+                        <li>Tentativas de invasão física ou acesso não autorizado a áreas restritas</li>
+                        <li>Infecção por vírus, malware ou ransomware</li>
+                    </ul>
+                </div>
+                
+                <div class="info-box">
+                    <h3>Procedimento Correto</h3>
+                    <ul>
+                        <li>Reporte o incidente imediatamente ao TI ou Segurança da Informação</li>
+                        <li>Não tente resolver o problema por conta própria sem orientação</li>
+                        <li>Preserve todas as evidências (não delete e-mails, arquivos ou logs suspeitos)</li>
+                        <li>Documente detalhadamente tudo que ocorreu: data, hora, o que viu</li>
+                        <li>Desconecte o equipamento da rede se suspeitar de infecção</li>
+                        <li>Aguarde orientações da equipe especializada antes de tomar qualquer ação</li>
+                        <li>Não comente sobre o incidente com pessoas não autorizadas</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Slide 9 -->
+            <div class="slide">
+                <h2>Parabéns! Treinamento Concluído</h2>
+                <p>Você completou com sucesso o treinamento de Segurança da Informação. Agora você está mais preparado para proteger os dados da empresa e contribuir para um ambiente digital mais seguro.</p>
+                
+                <div class="success-box">
+                    <h3>Pontos-Chave para Lembrar</h3>
+                    <ul>
+                        <li>Segurança da informação é responsabilidade de todos os colaboradores</li>
+                        <li>Use senhas fortes, únicas e diferentes para cada sistema</li>
+                        <li>Fique sempre alerta para e-mails e mensagens suspeitas (phishing)</li>
+                        <li>Proteja e respeite dados pessoais conforme determina a LGPD</li>
+                        <li>Bloqueie sempre sua estação de trabalho ao se afastar</li>
+                        <li>Reporte imediatamente qualquer incidente ou suspeita de segurança</li>
+                        <li>Mantenha atenção constante às práticas e políticas de segurança</li>
+                    </ul>
+                </div>
+                
+                <div class="info-box">
+                    <p><strong>Próxima Etapa:</strong> Clique no botão abaixo para responder ao questionário de avaliação e validar seu conhecimento sobre os temas abordados.</p>
+                </div>
+
+                <div class="quiz-completed-message" id="quizCompletedMessage">
+                    <p>✓ Questionário aberto! Se precisar acessar novamente, clique no botão "Reabrir Avaliação".</p>
+                </div>
+            </div>
+            
+            <!-- Navigation -->
+            <div class="navigation">
+                <button class="btn btn-secondary" id="prevBtn" type="button">← Anterior</button>
+                <button class="btn btn-primary" id="nextBtn" type="button">Próximo →</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const totalSlides = 9;
+        let quizOpened = false;
+        let quizWindow = null;
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Página carregada - iniciando treinamento'); // Debug
+            showSlide(currentSlide);
+            
+            // Event listeners para os botões (compatível com iOS e SharePoint)
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            
+            if (prevBtn) {
+                // Múltiplos eventos para compatibilidade máxima
+                prevBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    console.log('Botão Anterior clicado'); // Debug
+                    prevSlide();
+                }, false);
+                
+                prevBtn.addEventListener('touchstart', function(e) {
+                    e.preventDefault();
+                    console.log('Touch no botão Anterior'); // Debug
+                    prevSlide();
+                }, false);
+            }
+            
+            if (nextBtn) {
+                // Múltiplos eventos para compatibilidade máxima
+                nextBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    console.log('Botão Próximo clicado'); // Debug
+                    nextSlide();
+                }, false);
+                
+                nextBtn.addEventListener('touchstart', function(e) {
+                    e.preventDefault();
+                    console.log('Touch no botão Próximo'); // Debug
+                    nextSlide();
+                }, false);
+            }
+            
+            console.log('Event listeners configurados'); // Debug
+        });
+        
+        function updateProgress() {
+            const progress = ((currentSlide + 1) / totalSlides) * 100;
+            document.getElementById('progressBar').style.width = progress + '%';
+        }
+        
+        function showSlide(n) {
+            console.log('Mostrando slide:', n); // Debug
+            
+            const slides = document.querySelectorAll('.slide');
+            slides.forEach(slide => slide.classList.remove('active'));
+            
+            if (slides[n]) {
+                slides[n].classList.add('active');
+            }
+            
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            
+            if (prevBtn) {
+                prevBtn.disabled = n === 0;
+            }
+            
+            if (nextBtn) {
+                if (n === 8) {
+                    if (quizOpened) {
+                        nextBtn.textContent = 'Reabrir Avaliação';
+                        nextBtn.style.opacity = '1';
+                    } else {
+                        nextBtn.textContent = 'Fazer Avaliação →';
+                    }
+                } else {
+                    nextBtn.textContent = 'Próximo →';
+                    nextBtn.style.opacity = '1';
+                }
+            }
+            
+            updateProgress();
+            
+            // Scroll suave para o topo
+            setTimeout(function() {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }, 100);
+        }
+        
+        function nextSlide() {
+            console.log('nextSlide chamado, slide atual:', currentSlide); // Debug
+            
+            if (currentSlide === 8) {
+                // Verifica se a janela do teste ainda está aberta
+                if (quizWindow && !quizWindow.closed) {
+                    // Janela já está aberta, apenas foca nela
+                    try {
+                        quizWindow.focus();
+                    } catch(e) {
+                        console.log('Não foi possível focar na janela');
+                    }
+                    alert('O questionário já está aberto em outra aba. A aba foi colocada em foco para você.');
+                    return;
+                }
+                
+                // Abre nova janela
+                try {
+                    quizWindow = window.open('https://surveymars.com/q/NQzcgPVBi', '_blank');
+                } catch(e) {
+                    console.log('Erro ao abrir janela:', e);
+                    // Fallback para iOS
+                    window.location.href = 'https://surveymars.com/q/NQzcgPVBi';
+                }
+                
+                if (!quizOpened) {
+                    quizOpened = true;
+                    
+                    const nextBtn = document.getElementById('nextBtn');
+                    if (nextBtn) {
+                        nextBtn.textContent = 'Reabrir Avaliação';
+                        nextBtn.style.opacity = '1';
+                    }
+                    
+                    const message = document.getElementById('quizCompletedMessage');
+                    if (message) {
+                        message.classList.add('show');
+                    }
+                }
+            } else if (currentSlide < totalSlides - 1) {
+                currentSlide++;
+                console.log('Avançando para slide:', currentSlide); // Debug
+                showSlide(currentSlide);
+            }
+        }
+        
+        function prevSlide() {
+            console.log('prevSlide chamado, slide atual:', currentSlide); // Debug
+            
+            if (currentSlide > 0) {
+                currentSlide--;
+                console.log('Voltando para slide:', currentSlide); // Debug
+                showSlide(currentSlide);
+            }
+        }
+    </script>
+</body>
+</html>

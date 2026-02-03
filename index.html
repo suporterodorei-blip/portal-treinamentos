@@ -1,1 +1,665 @@
 
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portal de Treinamentos - Rodorei</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #0d3a6b 0%, #164380 25%, #1a5099 50%, #164380 75%, #0a2540 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+            padding: 40px 20px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+        }
+        
+        .logo-container {
+            margin-bottom: 30px;
+        }
+        
+        .logo-container img {
+            max-height: 120px;
+            width: auto;
+            display: block;
+            margin: 0 auto;
+            filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.3));
+        }
+        
+        .header h1 {
+            color: white;
+            font-size: clamp(28px, 5vw, 42px);
+            margin-bottom: 10px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        .header p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: clamp(16px, 3vw, 18px);
+        }
+        
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .training-card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .training-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        .card-header {
+            background: linear-gradient(135deg, #164380 0%, #1a5099 100%);
+            color: white;
+            padding: 30px 25px;
+            text-align: center;
+            min-height: 200px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .card-icon {
+            font-size: 48px;
+            margin-bottom: 15px;
+        }
+        
+        .card-header h2 {
+            font-size: 20px;
+            margin-bottom: 8px;
+        }
+        
+        .card-header p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+        
+        .card-body {
+            padding: 25px;
+        }
+        
+        .card-info {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            color: #374151;
+            font-size: 14px;
+        }
+        
+        .card-info-icon {
+            margin-right: 10px;
+            color: #164380;
+        }
+        
+        .card-description {
+            color: #6b7280;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            font-size: 15px;
+        }
+        
+        .card-topics {
+            background: #f3f4f6;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        
+        .card-topics h4 {
+            color: #1f2937;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+        
+        .card-topics ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .card-topics li {
+            color: #4b5563;
+            font-size: 13px;
+            padding-left: 20px;
+            position: relative;
+            margin-bottom: 6px;
+        }
+        
+        .card-topics li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #10b981;
+            font-weight: bold;
+        }
+        
+        .card-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #164380 0%, #0a2540 100%);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            transform: scale(1.02);
+            box-shadow: 0 5px 15px rgba(22, 67, 128, 0.4);
+        }
+        
+        .btn-secondary {
+            background: white;
+            color: #164380;
+            border: 2px solid #164380;
+        }
+        
+        .btn-secondary:hover {
+            background: #f0f9ff;
+        }
+        
+        .btn-success {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+        }
+        
+        .btn-success:hover {
+            transform: scale(1.02);
+            box-shadow: 0 5px 15px rgba(16, 185, 129, 0.4);
+        }
+        
+        .footer {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            color: white;
+            margin-top: 50px;
+        }
+        
+        @media (max-width: 768px) {
+            .cards-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo-container">
+                <img src="logo-rodorei.png" alt="Logo Rodorei">
+            </div>
+            <h1>Portal de Treinamentos</h1>
+            <p>Desenvolvimento profissional e conformidade OEA</p>
+        </div>
+        
+        <div class="cards-grid">
+            <!-- Card 1: Bom Atendimento -->
+            <div class="training-card">
+                <div class="card-header">
+                    <div class="card-icon">🤝</div>
+                    <h2>Bom Atendimento ao Cliente</h2>
+                    <p>Excelência no atendimento</p>
+                </div>
+                <div class="card-body">
+                    <div class="card-info">
+                        <span class="card-info-icon">⏱️</span>
+                        <span>Duração: 10 minutos</span>
+                    </div>
+                    <div class="card-info">
+                        <span class="card-info-icon">📊</span>
+                        <span>Nível: Todos os colaboradores</span>
+                    </div>
+                    
+                    <div class="card-description">
+                        Aprenda os fundamentos para oferecer um atendimento de excelência aos nossos clientes.
+                    </div>
+                    
+                    <div class="card-topics">
+                        <h4>📚 Tópicos Principais:</h4>
+                        <ul>
+                            <li>Comunicação eficaz</li>
+                            <li>Empatia e escuta ativa</li>
+                            <li>Resolução de problemas</li>
+                            <li>Profissionalismo</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="card-actions">
+                        <a href="treinamento-bom-atendimento.html" class="btn btn-primary">
+                            📖 Iniciar Treinamento
+                        </a>
+                        <a href="https://rodorei.sharepoint.com/Documentos%20Compartilhados/Treinametos-OEA/materiais-apoio/bom-atendimento/manual-atendimento.pdf" class="btn btn-secondary" target="_blank">
+                            📄 Material de Apoio
+                        </a>
+                        <a href="https://surveymars.com/q/eBKLFEA6S" class="btn btn-success" target="_blank">
+                            ✅ Fazer Teste
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 2: Condução Segura -->
+            <div class="training-card">
+                <div class="card-header">
+                    <div class="card-icon">🚛</div>
+                    <h2>Condução Segura</h2>
+                    <p>Motoristas de Caminhão</p>
+                </div>
+                <div class="card-body">
+                    <div class="card-info">
+                        <span class="card-info-icon">⏱️</span>
+                        <span>Duração: 2 horas</span>
+                    </div>
+                    <div class="card-info">
+                        <span class="card-info-icon">📊</span>
+                        <span>Nível: Motoristas</span>
+                    </div>
+                    
+                    <div class="card-description">
+                        Técnicas avançadas de condução segura e defensiva para motoristas profissionais.
+                    </div>
+                    
+                    <div class="card-topics">
+                        <h4>📚 Tópicos Principais:</h4>
+                        <ul>
+                            <li>Direção defensiva</li>
+                            <li>Gestão de fadiga</li>
+                            <li>Manutenção preventiva</li>
+                            <li>Legislação de trânsito</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="card-actions">
+                        <a href="treinamento-conducao-segura.html" class="btn btn-primary">
+                            📖 Iniciar Treinamento
+                        </a>
+                        <a href="https://rodorei.sharepoint.com/Documentos%20Compartilhados/Treinametos-OEA/materiais-apoio/conducao-segura/manual-conducao.pdf" class="btn btn-secondary" target="_blank">
+                            📄 Material de Apoio
+                        </a>
+                        <a href="https://surveymars.com/q/GdChPEkBT" class="btn btn-success" target="_blank">
+                            ✅ Fazer Teste
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 3: Prevenção de Acidentes -->
+            <div class="training-card">
+                <div class="card-header">
+                    <div class="card-icon">⚠️</div>
+                    <h2>Prevenção de Acidentes</h2>
+                    <p>Segurança no Trabalho</p>
+                </div>
+                <div class="card-body">
+                    <div class="card-info">
+                        <span class="card-info-icon">⏱️</span>
+                        <span>Duração: 40 minutos</span>
+                    </div>
+                    <div class="card-info">
+                        <span class="card-info-icon">📊</span>
+                        <span>Nível: Todos os colaboradores</span>
+                    </div>
+                    
+                    <div class="card-description">
+                        Práticas essenciais para prevenção de acidentes e manutenção de um ambiente seguro.
+                    </div>
+                    
+                    <div class="card-topics">
+                        <h4>📚 Tópicos Principais:</h4>
+                        <ul>
+                            <li>Identificação de riscos</li>
+                            <li>Uso correto de EPIs</li>
+                            <li>Procedimentos de emergência</li>
+                            <li>Cultura de segurança</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="card-actions">
+                        <a href="treinamento-prevencao-acidentes.html" class="btn btn-primary">
+                            📖 Iniciar Treinamento
+                        </a>
+                        <a href="https://rodorei.sharepoint.com/Documentos%20Compartilhados/Treinametos-OEA/materiais-apoio/prevencao-acidentes/manual-prevencao.pdf" class="btn btn-secondary" target="_blank">
+                            📄 Material de Apoio
+                        </a>
+                        <a href="https://surveymars.com/q/RwQtpqhgX" class="btn btn-success" target="_blank">
+                            ✅ Fazer Teste
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 4: Limpeza e Controle de Pragas -->
+            <div class="training-card">
+                <div class="card-header">
+                    <div class="card-icon">🧹</div>
+                    <h2>Limpeza e Controle de Pragas</h2>
+                    <p>Higienização de Veículos</p>
+                </div>
+                <div class="card-body">
+                    <div class="card-info">
+                        <span class="card-info-icon">⏱️</span>
+                        <span>Duração: 45 minutos</span>
+                    </div>
+                    <div class="card-info">
+                        <span class="card-info-icon">📊</span>
+                        <span>Nível: Motoristas e auxiliares</span>
+                    </div>
+                    
+                    <div class="card-description">
+                        Procedimentos para limpeza adequada e controle de pragas em veículos de transporte.
+                    </div>
+                    
+                    <div class="card-topics">
+                        <h4>📚 Tópicos Principais:</h4>
+                        <ul>
+                            <li>Limpeza interna e externa</li>
+                            <li>Controle e prevenção de pragas</li>
+                            <li>Registro e rastreabilidade</li>
+                            <li>Documentação obrigatória</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="card-actions">
+                        <a href="treinamento-limpeza-pragas.html" class="btn btn-primary">
+                            📖 Iniciar Treinamento
+                        </a>
+                        <a href="https://rodorei.sharepoint.com/Documentos%20Compartilhados/Treinametos-OEA/materiais-apoio/limpeza-pragas/manual-limpeza-pragas.pdf" class="btn btn-secondary" target="_blank">
+                            📄 Material de Apoio
+                        </a>
+                        <a href="https://surveymars.com/q/lE6BMirxU" class="btn btn-success" target="_blank">
+                            ✅ Fazer Teste
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 5: Lonas e Amarração -->
+            <div class="training-card">
+                <div class="card-header">
+                    <div class="card-icon">📦</div>
+                    <h2>Lonas e Amarração</h2>
+                    <p>Cintas e Catracas</p>
+                </div>
+                <div class="card-body">
+                    <div class="card-info">
+                        <span class="card-info-icon">⏱️</span>
+                        <span>Duração: 1h30</span>
+                    </div>
+                    <div class="card-info">
+                        <span class="card-info-icon">📊</span>
+                        <span>Nível: Motoristas e ajudantes</span>
+                    </div>
+                    
+                    <div class="card-description">
+                        Procedimentos corretos para lonamento e amarração de cargas.
+                    </div>
+                    
+                    <div class="card-topics">
+                        <h4>📚 Tópicos Principais:</h4>
+                        <ul>
+                            <li>Equipamentos necessários</li>
+                            <li>Procedimentos de amarração</li>
+                            <li>Aplicação de lonas</li>
+                            <li>Conferências periódicas</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="card-actions">
+                        <a href="treinamento-lonas-amarracao.html" class="btn btn-primary">
+                            📖 Iniciar Treinamento
+                        </a>
+                        <a href="https://rodorei.sharepoint.com/Documentos%20Compartilhados/Treinametos-OEA/materiais-apoio/lonas-amarracao/manual-amarracao.pdf" class="btn btn-secondary" target="_blank">
+                            📄 Material de Apoio
+                        </a>
+                        <a href="https://surveymars.com/q/mpABbHf6K" class="btn btn-success" target="_blank">
+                            ✅ Fazer Teste
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 6: Segurança da Informação -->
+            <div class="training-card">
+                <div class="card-header">
+                    <div class="card-icon">🔒</div>
+                    <h2>Segurança da Informação</h2>
+                    <p>Proteção de Dados e LGPD</p>
+                </div>
+                <div class="card-body">
+                    <div class="card-info">
+                        <span class="card-info-icon">⏱️</span>
+                        <span>Duração: 15 minutos</span>
+                    </div>
+                    <div class="card-info">
+                        <span class="card-info-icon">📊</span>
+                        <span>Nível: Todos os colaboradores</span>
+                    </div>
+                    
+                    <div class="card-description">
+                        Conceitos essenciais de segurança da informação e proteção de dados.
+                    </div>
+                    
+                    <div class="card-topics">
+                        <h4>📚 Tópicos Principais:</h4>
+                        <ul>
+                            <li>Senhas seguras</li>
+                            <li>Phishing e engenharia social</li>
+                            <li>LGPD e proteção de dados</li>
+                            <li>Segurança de dispositivos</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="card-actions">
+                        <a href="tecnologia-Informacao.html" class="btn btn-primary">
+                            📖 Iniciar Treinamento
+                        </a>
+                        <a href="https://rodorei.sharepoint.com/Documentos%20Compartilhados/Treinametos-OEA/materiais-apoio/seguranca-informacao/manual-seguranca.pdf" class="btn btn-secondary" target="_blank">
+                            📄 Material de Apoio
+                        </a>
+                        <a href="https://surveymars.com/q/NQzcgPVBi" class="btn btn-success" target="_blank">
+                            ✅ Fazer Teste
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 7: OEA - Portos e Aeroportos -->
+            <div class="training-card">
+                <div class="card-header">
+                    <div class="card-icon">✈️</div>
+                    <h2>OEA - Portos e Aeroportos</h2>
+                    <p>Operador Econômico Autorizado</p>
+                </div>
+                <div class="card-body">
+                    <div class="card-info">
+                        <span class="card-info-icon">⏱️</span>
+                        <span>Duração: 20 minutos</span>
+                    </div>
+                    <div class="card-info">
+                        <span class="card-info-icon">📊</span>
+                        <span>Nível: Operações portuárias</span>
+                    </div>
+                    
+                    <div class="card-description">
+                        Procedimentos para atendimento em portos e aeroportos conforme OEA.
+                    </div>
+                    
+                    <div class="card-topics">
+                        <h4>📚 Tópicos Principais:</h4>
+                        <ul>
+                            <li>Sigilo e segurança</li>
+                            <li>Identificação de cargas suspeitas</li>
+                            <li>Checklist do veículo</li>
+                            <li>Lacração e controle</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="card-actions">
+                        <a href="treinamento-portos-e-aroportos.html" class="btn btn-primary">
+                            📖 Iniciar Treinamento
+                        </a>
+                        <a href="https://rodorei.sharepoint.com/Documentos%20Compartilhados/Treinametos-OEA/materiais-apoio/oea/manual-oea-portos.pdf" class="btn btn-secondary" target="_blank">
+                            📄 Material de Apoio
+                        </a>
+                        <a href="https://surveymars.com/q/NQzcgPVBi" class="btn btn-success" target="_blank">
+                            ✅ Fazer Teste
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 8: OEA Básico -->
+            <div class="training-card">
+                <div class="card-header">
+                    <div class="card-icon">🎯</div>
+                    <h2>OEA Básico</h2>
+                    <p>Introdução ao Programa OEA</p>
+                </div>
+                <div class="card-body">
+                    <div class="card-info">
+                        <span class="card-info-icon">⏱️</span>
+                        <span>Duração: 25 minutos</span>
+                    </div>
+                    <div class="card-info">
+                        <span class="card-info-icon">📊</span>
+                        <span>Nível: Todos os colaboradores</span>
+                    </div>
+                    
+                    <div class="card-description">
+                        Fundamentos do Programa OEA e importância para a empresa.
+                    </div>
+                    
+                    <div class="card-topics">
+                        <h4>📚 Tópicos Principais:</h4>
+                        <ul>
+                            <li>O que é o OEA</li>
+                            <li>Benefícios da certificação</li>
+                            <li>Responsabilidades de cada um</li>
+                            <li>Boas práticas básicas</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="card-actions">
+                        <a href="treinamento-oea.html" class="btn btn-primary">
+                            📖 Iniciar Treinamento
+                        </a>
+                        <a href="https://rodorei.sharepoint.com/Documentos%20Compartilhados/Treinametos-OEA/materiais-apoio/oea/manual-oea-basico.pdf" class="btn btn-secondary" target="_blank">
+                            📄 Material de Apoio
+                        </a>
+                        <a href="https://surveymars.com/q/NQzcgPVBi" class="btn btn-success" target="_blank">
+                            ✅ Fazer Teste
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 9: OEA Completo -->
+            <div class="training-card">
+                <div class="card-header">
+                    <div class="card-icon">🏆</div>
+                    <h2>OEA Completo</h2>
+                    <p>Certificação e Benefícios</p>
+                </div>
+                <div class="card-body">
+                    <div class="card-info">
+                        <span class="card-info-icon">⏱️</span>
+                        <span>Duração: 30-40 minutos</span>
+                    </div>
+                    <div class="card-info">
+                        <span class="card-info-icon">📊</span>
+                        <span>Nível: Gestores e lideranças</span>
+                    </div>
+                    
+                    <div class="card-description">
+                        Treinamento completo sobre o Programa Brasileiro OEA.
+                    </div>
+                    
+                    <div class="card-topics">
+                        <h4>📚 Tópicos Principais:</h4>
+                        <ul>
+                            <li>O que é o Programa OEA</li>
+                            <li>Modalidades de certificação</li>
+                            <li>Benefícios e requisitos</li>
+                            <li>Processo de certificação</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="card-actions">
+                        <a href="treinamento-oea-completo.html" class="btn btn-primary">
+                            📖 Iniciar Treinamento
+                        </a>
+                        <a href="https://rodorei.sharepoint.com/Documentos%20Compartilhados/Treinametos-OEA/materiais-apoio/oea/manual-oea-completo.pdf" class="btn btn-secondary" target="_blank">
+                            📄 Material de Apoio
+                        </a>
+                        <a href="https://surveymars.com/q/NQzcgPVBi" class="btn btn-success" target="_blank">
+                            ✅ Fazer Teste
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p><strong>Rodorei Transportes</strong></p>
+            <p>© 2026 - Todos os direitos reservados</p>
+            <p style="margin-top: 10px; font-size: 12px;">
+                Dúvidas ou problemas técnicos? Entre em contato com o RH
+            </p>
+        </div>
+    </div>
+</body>
+</html>

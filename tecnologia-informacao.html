@@ -379,15 +379,8 @@
                 -->
                 
                 <!-- DESCOMENTE E AJUSTE O CAMINHO ABAIXO: -->
-                <!-- <img src="/sites/intranet/Recursos/logos/logo-rodorei.png" alt="Logo Rodorei" id="companyLogo"> -->
+                <img src="logo-rodorei.png" alt="Logo Rodorei">
                 
-                <div class="logo-placeholder">
-                    <strong>📋 Configuração para SharePoint Intranet:</strong>
-                    1. Faça upload da logo na biblioteca "Recursos"<br>
-                    2. Copie o caminho da logo<br>
-                    3. Cole o caminho no código HTML acima<br>
-                    4. Remova este texto placeholder
-                </div>
             </div>
             <h1>Segurança da Informação</h1>
             <p>Treinamento Obrigatório</p>
@@ -641,6 +634,13 @@
                 </div>
             </div>
             
+            
+            <div class="completion-message" id="completionMessage" style="display: none; margin-top: 40px;">
+                <div style="background: linear-gradient(135deg, #164380 0%, #0a2540 100%); color: white; padding: 25px; border-radius: 12px; text-align: center;">
+                    <h2 style="font-size: 24px; margin: 0; font-weight: 600;">Treinamento Concluído</h2>
+                </div>
+            </div>
+
             <!-- Navigation -->
             <div class="navigation">
                 <button class="btn btn-secondary" id="prevBtn" type="button">← Anterior</button>
@@ -798,5 +798,23 @@
             }
         }
     </script>
+
+    <script>
+        // Mostrar mensagem no último slide
+        if (typeof showSlide !== 'undefined') {
+            const origShowSlide = showSlide;
+            showSlide = function(n) {
+                origShowSlide(n);
+                const slides = document.getElementsByClassName('slide');
+                const msg = document.getElementById('completionMessage');
+                if (msg && n === slides.length - 1) {
+                    msg.style.display = 'block';
+                } else if (msg) {
+                    msg.style.display = 'none';
+                }
+            };
+        }
+    </script>
+
 </body>
 </html>

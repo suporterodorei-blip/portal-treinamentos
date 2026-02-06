@@ -12,8 +12,8 @@
         }
         
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-            background: linear-gradient(135deg, #0d3a6b 0%, #164380 25%, #1a5099 50%, #164380 75%, #0a2540 100%);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; font-weight: 400;
+            background: linear-gradient(135deg, #10497a 0%, #1a4d99 25%, #2060b3 50%, #1a4d99 75%, #0d2f57 100%);
             background-size: 400% 400%;
             animation: gradientShift 15s ease infinite;
             min-height: 100vh;
@@ -35,7 +35,7 @@
             text-align: center;
             margin-bottom: 50px;
             padding: 40px 20px;
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.12);
             backdrop-filter: blur(10px);
             border-radius: 20px;
         }
@@ -45,11 +45,11 @@
         }
         
         .logo-container img {
-            max-height: 120px;
+            max-height: 80px;
             width: auto;
             display: block;
             margin: 0 auto;
-            filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.3));
+            filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.15));
         }
         
         .header h1 {
@@ -57,6 +57,7 @@
             font-size: clamp(28px, 5vw, 42px);
             margin-bottom: 10px;
             text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            font-weight: 500;
         }
         
         .header p {
@@ -72,7 +73,7 @@
         }
         
         .training-card {
-            background: white;
+            background: rgba(255, 255, 255, 0.98); backdrop-filter: blur(10px);
             border-radius: 16px;
             overflow: hidden;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
@@ -85,7 +86,7 @@
         }
         
         .card-header {
-            background: linear-gradient(135deg, #164380 0%, #1a5099 100%);
+            background: linear-gradient(135deg, #1a4d99 0%, #2060b3 100%);
             color: white;
             padding: 30px 25px;
             text-align: center;
@@ -103,6 +104,7 @@
         .card-header h2 {
             font-size: 20px;
             margin-bottom: 8px;
+            font-weight: 500;
         }
         
         .card-header p {
@@ -124,7 +126,7 @@
         
         .card-info-icon {
             margin-right: 10px;
-            color: #164380;
+            color: #1a4d99;
         }
         
         .card-description {
@@ -189,19 +191,19 @@
         }
         
         .btn-primary {
-            background: linear-gradient(135deg, #164380 0%, #0a2540 100%);
+            background: linear-gradient(135deg, rgba(26, 77, 153, 0.95) 0%, rgba(13, 47, 87, 0.95) 100%);
             color: white;
         }
         
         .btn-primary:hover {
-            transform: scale(1.02);
-            box-shadow: 0 5px 15px rgba(22, 67, 128, 0.4);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(26, 77, 153, 0.3);
         }
         
         .btn-secondary {
-            background: white;
-            color: #164380;
-            border: 2px solid #164380;
+            background: rgba(255, 255, 255, 0.98); backdrop-filter: blur(10px);
+            color: #1a4d99;
+            border: 2px solid #1a4d99;
         }
         
         .btn-secondary:hover {
@@ -223,7 +225,7 @@
             color: white;
             padding: 30px 20px;
             margin-top: 50px;
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.12);
             backdrop-filter: blur(10px);
             border-radius: 20px;
         }
@@ -285,15 +287,12 @@
                     
                     <div class="card-actions">
                         <a href="treinamento-conducao-segura.html" class="btn btn-primary" target="_blank">
-                            📖 Iniciar Treinamento
+                            ▶ Iniciar Treinamento
                         </a>
-                        <a href="https://cdn.jsdelivr.net/gh/suporterodorei-blip/materiais-apoio-oea@main/conducao-segura/conducao-segura.pdf">
-                            📄 Material de Apoio
+                        <a href="https://rodorei.sharepoint.com/Documentos%20Compartilhados/Treinametos-OEA/materiais-apoio/conducao-segura/manual-conducao-segura.pdf" class="btn btn-secondary" target="_blank">
+                            📋 Material de Apoio
                         </a>
-                        <a href="https://surveymars.com/q/yrVcumVXc" class="btn btn-success" target="_blank">
-                            ✅ Fazer Teste
-                        </a>
-                    </div>
+                        </div>
                 </div>
             </div>
             
@@ -330,15 +329,12 @@
                     
                     <div class="card-actions">
                         <a href="treinamento-prevencao-acidentes.html" class="btn btn-primary" target="_blank">
-                            📖 Iniciar Treinamento
+                            ▶ Iniciar Treinamento
                         </a>
                         <a href="https://rodorei.sharepoint.com/Documentos%20Compartilhados/Treinametos-OEA/materiais-apoio/prevencao-acidentes/manual-legislacao.pdf" class="btn btn-secondary" target="_blank">
-                            📄 Material de Apoio
+                            📋 Material de Apoio
                         </a>
-                        <a href="https://surveymars.com/q/yDmVXgoWu" class="btn btn-success" target="_blank">
-                            ✅ Fazer Teste
-                        </a>
-                    </div>
+                        </div>
                 </div>
             </div>
             
@@ -375,15 +371,12 @@
                     
                     <div class="card-actions">
                         <a href="treinamento-bom-atendimento.html" class="btn btn-primary" target="_blank">
-                            📖 Iniciar Treinamento
+                            ▶ Iniciar Treinamento
                         </a>
                         <a href="https://rodorei.sharepoint.com/Documentos%20Compartilhados/Treinametos-OEA/materiais-apoio/bom-atendimento/guia-atendimento.pdf" class="btn btn-secondary" target="_blank">
-                            📄 Material de Apoio
+                            📋 Material de Apoio
                         </a>
-                        <a href="https://surveymars.com/q/lE6BMirxU" class="btn btn-success" target="_blank">
-                            ✅ Fazer Teste
-                        </a>
-                    </div>
+                        </div>
                 </div>
             </div>
             
@@ -420,15 +413,12 @@
                     
                     <div class="card-actions">
                         <a href="treinamento-limpeza-pragas.html" class="btn btn-primary" target="_blank">
-                            📖 Iniciar Treinamento
+                            ▶ Iniciar Treinamento
                         </a>
                         <a href="https://rodorei.sharepoint.com/Documentos%20Compartilhados/Treinametos-OEA/materiais-apoio/limpeza-pragas/manual-limpeza-pragas.pdf" class="btn btn-secondary" target="_blank">
-                            📄 Material de Apoio
+                            📋 Material de Apoio
                         </a>
-                        <a href="https://surveymars.com/q/lE6BMirxU" class="btn btn-success" target="_blank">
-                            ✅ Fazer Teste
-                        </a>
-                    </div>
+                        </div>
                 </div>
             </div>
 
@@ -465,15 +455,12 @@
                     
                     <div class="card-actions">
                         <a href="treinamento-lonas-amarracao.html" class="btn btn-primary" target="_blank">
-                            📖 Iniciar Treinamento
+                            ▶ Iniciar Treinamento
                         </a>
                         <a href="https://rodorei.sharepoint.com/Documentos%20Compartilhados/Treinametos-OEA/materiais-apoio/lonas-amarracao/manual-amarracao.pdf" class="btn btn-secondary" target="_blank">
-                            📄 Material de Apoio
+                            📋 Material de Apoio
                         </a>
-                        <a href="https://surveymars.com/q/mpABbHf6K" class="btn btn-success" target="_blank">
-                            ✅ Fazer Teste
-                        </a>
-                    </div>
+                        </div>
                 </div>
             </div>
 
@@ -510,15 +497,12 @@
                     
                     <div class="card-actions">
                         <a href="tecnologia-informacao.html" class="btn btn-primary" target="_blank">
-                            📖 Iniciar Treinamento
+                            ▶ Iniciar Treinamento
                         </a>
                         <a href="https://rodorei.sharepoint.com/Documentos%20Compartilhados/Treinametos-OEA/materiais-apoio/seguranca-informacao/manual-seguranca.pdf" class="btn btn-secondary" target="_blank">
-                            📄 Material de Apoio
+                            📋 Material de Apoio
                         </a>
-                        <a href="https://surveymars.com/q/NQzcgPVBi" class="btn btn-success" target="_blank">
-                            ✅ Fazer Teste
-                        </a>
-                    </div>
+                        </div>
                 </div>
             </div>
 
@@ -555,15 +539,12 @@
                     
                     <div class="card-actions">
                         <a href="treinamento-oea.html" class="btn btn-primary" target="_blank">
-                            📖 Iniciar Treinamento
+                            ▶ Iniciar Treinamento
                         </a>
                         <a href="https://rodorei.sharepoint.com/Documentos%20Compartilhados/Treinametos-OEA/materiais-apoio/oea/manual-oea-portos.pdf" class="btn btn-secondary" target="_blank">
-                            📄 Material de Apoio
+                            📋 Material de Apoio
                         </a>
-                        <a href="https://surveymars.com/q/NQzcgPVBi" class="btn btn-success" target="_blank">
-                            ✅ Fazer Teste
-                        </a>
-                    </div>
+                        </div>
                 </div>
             </div>
 
@@ -601,15 +582,12 @@
                     
                     <div class="card-actions">
                         <a href="treinamento-oea.html" class="btn btn-primary" target="_blank">
-                            📖 Iniciar Treinamento
+                            ▶ Iniciar Treinamento
                         </a>
                         <a href="https://rodorei.sharepoint.com/Documentos%20Compartilhados/Treinametos-OEA/materiais-apoio/oea/manual-oea-basico.pdf" class="btn btn-secondary" target="_blank">
-                            📄 Material de Apoio
+                            📋 Material de Apoio
                         </a>
-                        <a href="https://surveymars.com/q/NQzcgPVBi" class="btn btn-success" target="_blank">
-                            ✅ Fazer Teste
-                        </a>
-                    </div>
+                        </div>
                 </div>
             </div>
 
@@ -646,15 +624,12 @@
                     
                     <div class="card-actions">
                         <a href="treinamento-oea-completo.html" class="btn btn-primary" target="_blank">
-                            📖 Iniciar Treinamento
+                            ▶ Iniciar Treinamento
                         </a>
                         <a href="https://rodorei.sharepoint.com/Documentos%20Compartilhados/Treinametos-OEA/materiais-apoio/oea/manual-oea-completo.pdf" class="btn btn-secondary" target="_blank">
-                            📄 Material de Apoio
+                            📋 Material de Apoio
                         </a>
-                        <a href="https://surveymars.com/q/NQzcgPVBi" class="btn btn-success" target="_blank">
-                            ✅ Fazer Teste
-                        </a>
-                    </div>
+                        </div>
                 </div>
             </div>
         </div>

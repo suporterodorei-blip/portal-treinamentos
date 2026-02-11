@@ -13,7 +13,7 @@
         
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-            background: linear-gradient(135deg, #0d3a6b 0%, #164380 25%, #1a5099 50%, #164380 75%, #0a2540 100%);
+            background: linear-gradient(135deg, #0078d4 0%, #0078d4 25%, #106ebe 50%, #0078d4 75%, #005a9e 100%);
             background-size: 400% 400%;
             animation: gradientShift 15s ease infinite;
             min-height: 100vh;
@@ -54,7 +54,7 @@
         }
         
         .header {
-            background: linear-gradient(135deg, #164380 0%, #0a2540 100%);
+            background: linear-gradient(135deg, #0078d4 0%, #005a9e 100%);
             color: white;
             padding: 30px 20px;
             text-align: center;
@@ -252,14 +252,14 @@
         }
         
         .btn-primary {
-            background: linear-gradient(135deg, #164380 0%, #0a2540 100%);
+            background: linear-gradient(135deg, #0078d4 0%, #005a9e 100%);
             color: white;
-            box-shadow: 0 4px 12px rgba(22, 67, 128, 0.3);
+            box-shadow: 0 4px 12px rgba(0, 120, 212, 0.3);
         }
         
         .btn-primary:hover:not(:disabled) {
             transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(22, 67, 128, 0.4);
+            box-shadow: 0 8px 20px rgba(0, 120, 212, 0.4);
         }
         
         .btn-primary:active:not(:disabled) {
@@ -292,7 +292,7 @@
         
         .progress-fill {
             height: 100%;
-            background: linear-gradient(90deg, #164380 0%, #1a5099 100%);
+            background: linear-gradient(90deg, #0078d4 0%, #106ebe 100%);
             transition: width 0.4s ease;
         }
 
@@ -358,29 +358,8 @@
 <body>
     <div class="container">
         <div class="header">
-            <div class="logo-container">
-                <!-- 
-                    ═══════════════════════════════════════════════════════
-                    INSTRUÇÕES PARA LOGO NO SHAREPOINT INTRANET:
-                    ═══════════════════════════════════════════════════════
-                    
-                    PASSO 1: Upload da Logo
-                    - Faça upload da logo em uma biblioteca do SharePoint
-                    - Exemplo: Sites/Intranet/Recursos/logos/logo-rodorei.png
-                    
-                    PASSO 2: Obter o Caminho
-                    Opção A - Caminho Relativo (se estiver no mesmo site):
-                    <img src="/sites/intranet/Recursos/logos/logo-rodorei.png" alt="Logo Rodorei">
-                    
-                    Opção B - URL Completa:
-                    <img src="https://suaempresa.sharepoint.com/sites/intranet/Recursos/logos/logo-rodorei.png" alt="Logo Rodorei">
-                    
-                    PASSO 3: Descomente a linha abaixo e ajuste o caminho
-                -->
-                
-                <!-- DESCOMENTE E AJUSTE O CAMINHO ABAIXO: -->
+                        <div class="logo-container">
                 <img src="logo-rodorei.png" alt="Logo Rodorei">
-                
             </div>
             <h1>Segurança da Informação</h1>
             <p>Treinamento Obrigatório</p>
@@ -406,228 +385,7 @@
                     </ul>
                 </div>
                 
-                <div class="content-box">
-                    <p><strong>Duração estimada:</strong> 15 minutos</p>
-                    <p><strong>Formato:</strong> 9 módulos interativos com avaliação final</p>
-                </div>
-            </div>
-            
-            <!-- Slide 2 -->
-            <div class="slide">
-                <h2>O que é Segurança da Informação?</h2>
-                <p>Segurança da Informação é o conjunto de práticas, políticas e tecnologias desenvolvidas para proteger dados e sistemas contra acessos não autorizados, uso indevido, divulgação, destruição ou modificação.</p>
                 
-                <div class="info-box">
-                    <h3>Os 3 Pilares da Segurança (Tríade CIA)</h3>
-                    <ul>
-                        <li><strong>Confidencialidade:</strong> Garantir que apenas pessoas autorizadas tenham acesso às informações sensíveis</li>
-                        <li><strong>Integridade:</strong> Assegurar que os dados não sejam alterados ou corrompidos de forma indevida</li>
-                        <li><strong>Disponibilidade:</strong> Manter as informações e sistemas acessíveis quando necessário</li>
-                    </ul>
-                </div>
-                
-                <div class="alert-box">
-                    <p><strong>Importante:</strong> A responsabilidade pela segurança da informação é de <strong>todos</strong> os colaboradores, não apenas da equipe de TI.</p>
-                </div>
-            </div>
-            
-            <!-- Slide 3 -->
-            <div class="slide">
-                <h2>Senhas Seguras</h2>
-                <p>Sua senha é a primeira e mais importante linha de defesa contra invasores. Uma senha forte é essencial para proteger seus acessos pessoais e dados corporativos.</p>
-                
-                <div class="info-box">
-                    <h3>Boas Práticas</h3>
-                    <ul>
-                        <li>Utilize no mínimo 12 caracteres (quanto mais longa, melhor)</li>
-                        <li>Combine letras maiúsculas e minúsculas, números e símbolos especiais</li>
-                        <li>Evite informações pessoais óbvias (nome, data de nascimento, placas de carro)</li>
-                        <li>Use senhas únicas e diferentes para cada sistema ou aplicação</li>
-                        <li>Altere suas senhas periodicamente (a cada 90 dias no mínimo)</li>
-                        <li>Considere usar um gerenciador de senhas confiável</li>
-                    </ul>
-                </div>
-                
-                <div class="alert-box">
-                    <h3>Nunca Faça</h3>
-                    <ul>
-                        <li>Compartilhar sua senha com ninguém, nem mesmo colegas ou superiores</li>
-                        <li>Anotar senhas em papéis, post-its ou arquivos desprotegidos</li>
-                        <li>Usar senhas óbvias como "123456", "senha123" ou "admin"</li>
-                        <li>Salvar senhas automaticamente em computadores públicos ou compartilhados</li>
-                        <li>Reutilizar a mesma senha em múltiplos serviços</li>
-                    </ul>
-                </div>
-            </div>
-            
-            <!-- Slide 4 -->
-            <div class="slide">
-                <h2>Ataques de Phishing</h2>
-                <p>Phishing é uma das técnicas mais comuns de ataque cibernético. Criminosos tentam roubar informações confidenciais através de e-mails, mensagens ou sites falsos que se passam por entidades legítimas.</p>
-                
-                <div class="alert-box">
-                    <h3>Sinais de Alerta</h3>
-                    <ul>
-                        <li>Mensagens com senso de urgência excessivo ("Sua conta será bloqueada em 24h!")</li>
-                        <li>Erros gramaticais, ortográficos ou tradução automática mal feita</li>
-                        <li>Remetentes com endereços de e-mail suspeitos ou domínios desconhecidos</li>
-                        <li>Links que não correspondem ao site oficial da empresa</li>
-                        <li>Solicitações inesperadas de informações confidenciais por e-mail</li>
-                        <li>Anexos não solicitados ou com extensões suspeitas (.exe, .zip, .scr)</li>
-                        <li>Ofertas boas demais para serem verdade</li>
-                    </ul>
-                </div>
-                
-                <div class="info-box">
-                    <h3>Como se Proteger</h3>
-                    <ul>
-                        <li>Sempre verifique cuidadosamente o endereço do remetente</li>
-                        <li>Passe o mouse sobre links antes de clicar para ver o destino real</li>
-                        <li>Nunca forneça dados sensíveis (senhas, CPF, dados bancários) por e-mail</li>
-                        <li>Desconfie de solicitações urgentes ou ameaçadoras</li>
-                        <li>Em caso de dúvida, entre em contato direto com a empresa através de canais oficiais</li>
-                        <li>Reporte imediatamente qualquer tentativa suspeita ao setor de TI</li>
-                    </ul>
-                </div>
-            </div>
-            
-            <!-- Slide 5 -->
-            <div class="slide">
-                <h2>Proteção de Dados e LGPD</h2>
-                <p>A Lei Geral de Proteção de Dados (LGPD) estabelece regras claras e obrigatórias sobre coleta, armazenamento, tratamento e compartilhamento de dados pessoais no Brasil.</p>
-                
-                <div class="info-box">
-                    <h3>Suas Responsabilidades como Colaborador</h3>
-                    <ul>
-                        <li>Coletar apenas os dados estritamente necessários para realizar suas atividades</li>
-                        <li>Armazenar dados pessoais em locais seguros e com acesso restrito</li>
-                        <li>Nunca compartilhar dados de clientes sem autorização prévia e formal</li>
-                        <li>Respeitar rigorosamente a privacidade de clientes, parceiros e colegas</li>
-                        <li>Reportar imediatamente qualquer vazamento, perda ou acesso indevido a dados</li>
-                        <li>Manter a confidencialidade mesmo após o término do contrato de trabalho</li>
-                    </ul>
-                </div>
-                
-                <div class="alert-box">
-                    <p><strong>Atenção:</strong> O descumprimento da LGPD pode resultar em multas de até R$ 50 milhões para a empresa, além de responsabilização civil e criminal dos envolvidos.</p>
-                </div>
-            </div>
-            
-            <!-- Slide 6 -->
-            <div class="slide">
-                <h2>Segurança de Dispositivos</h2>
-                <p>Proteger adequadamente seus dispositivos de trabalho é fundamental para evitar acessos não autorizados, roubo de informações e vazamento de dados sensíveis.</p>
-                
-                <div class="info-box">
-                    <h3>Computadores e Notebooks</h3>
-                    <ul>
-                        <li>Sempre bloqueie a tela ao se afastar (Windows: Win+L / Mac: Cmd+Ctrl+Q)</li>
-                        <li>Nunca deixe equipamentos corporativos sem supervisão em locais públicos</li>
-                        <li>Mantenha o antivírus e sistema operacional sempre atualizados</li>
-                        <li>Não instale programas ou aplicativos sem autorização prévia do TI</li>
-                        <li>Utilize apenas softwares licenciados e de fontes confiáveis</li>
-                        <li>Faça backup regular de arquivos importantes</li>
-                        <li>Use criptografia de disco em notebooks corporativos</li>
-                    </ul>
-                </div>
-                
-                <div class="info-box">
-                    <h3>Dispositivos Móveis</h3>
-                    <ul>
-                        <li>Configure senha forte ou biometria (impressão digital/reconhecimento facial)</li>
-                        <li>Evite conectar-se a redes Wi-Fi públicas para acessar dados corporativos</li>
-                        <li>Instale aplicativos apenas das lojas oficiais (App Store, Google Play)</li>
-                        <li>Ative a localização remota e função de apagar dados à distância</li>
-                        <li>Reporte imediatamente ao TI em caso de perda ou roubo do dispositivo</li>
-                        <li>Mantenha o sistema operacional e aplicativos sempre atualizados</li>
-                        <li>Não faça jailbreak ou root no dispositivo corporativo</li>
-                    </ul>
-                </div>
-            </div>
-            
-            <!-- Slide 7 -->
-            <div class="slide">
-                <h2>Engenharia Social</h2>
-                <p>Engenharia Social é uma técnica sofisticada de manipulação psicológica usada por criminosos para enganar pessoas e obter informações confidenciais ou acesso não autorizado a sistemas e locais restritos.</p>
-                
-                <div class="alert-box">
-                    <h3>Exemplos Comuns de Ataques</h3>
-                    <ul>
-                        <li>Pessoas se passando por técnicos de TI solicitando senhas por telefone</li>
-                        <li>Ligações fraudulentas fingindo ser do banco, fornecedor ou órgão governamental</li>
-                        <li>E-mails falsificados com identidade de executivos solicitando transferências urgentes</li>
-                        <li>Visitantes não autorizados tentando entrar em áreas restritas seguindo funcionários</li>
-                        <li>Mensagens emocionais urgentes pedindo ajuda financeira de "colegas"</li>
-                        <li>Pesquisas falsas oferecendo prêmios em troca de informações pessoais</li>
-                    </ul>
-                </div>
-                
-                <div class="info-box">
-                    <h3>Como se Defender</h3>
-                    <ul>
-                        <li>Sempre confirme a identidade de quem solicita informações através de canais oficiais</li>
-                        <li>Desconfie de solicitações urgentes, incomuns ou que fogem do procedimento padrão</li>
-                        <li>Nunca forneça senhas, códigos ou informações confidenciais por telefone</li>
-                        <li>Valide solicitações financeiras através de múltiplos canais de comunicação</li>
-                        <li>Questione visitantes desconhecidos e verifique suas credenciais</li>
-                        <li>Reporte imediatamente qualquer tentativa suspeita ao setor de segurança</li>
-                    </ul>
-                </div>
-            </div>
-            
-            <!-- Slide 8 -->
-            <div class="slide">
-                <h2>Incidentes de Segurança</h2>
-                <p>Um incidente de segurança é qualquer evento ou situação que possa comprometer a confidencialidade, integridade ou disponibilidade das informações e sistemas da organização.</p>
-                
-                <div class="alert-box">
-                    <h3>O que Você Deve Reportar Imediatamente</h3>
-                    <ul>
-                        <li>Acesso não autorizado ou tentativa de invasão a sistemas ou dados</li>
-                        <li>Perda, roubo ou extravio de equipamentos corporativos</li>
-                        <li>Recebimento de e-mails, mensagens ou ligações suspeitas</li>
-                        <li>Comportamento anormal, lentidão ou travamentos frequentes de sistemas</li>
-                        <li>Vazamento, exposição acidental ou compartilhamento indevido de dados</li>
-                        <li>Tentativas de invasão física ou acesso não autorizado a áreas restritas</li>
-                        <li>Infecção por vírus, malware ou ransomware</li>
-                    </ul>
-                </div>
-                
-                <div class="info-box">
-                    <h3>Procedimento Correto</h3>
-                    <ul>
-                        <li>Reporte o incidente imediatamente ao TI ou Segurança da Informação</li>
-                        <li>Não tente resolver o problema por conta própria sem orientação</li>
-                        <li>Preserve todas as evidências (não delete e-mails, arquivos ou logs suspeitos)</li>
-                        <li>Documente detalhadamente tudo que ocorreu: data, hora, o que viu</li>
-                        <li>Desconecte o equipamento da rede se suspeitar de infecção</li>
-                        <li>Aguarde orientações da equipe especializada antes de tomar qualquer ação</li>
-                        <li>Não comente sobre o incidente com pessoas não autorizadas</li>
-                    </ul>
-                </div>
-            </div>
-            
-            <!-- Slide 9 -->
-            <div class="slide">
-                <h2>Parabéns! Treinamento Concluído</h2>
-                <p>Você completou com sucesso o treinamento de Segurança da Informação. Agora você está mais preparado para proteger os dados da empresa e contribuir para um ambiente digital mais seguro.</p>
-                
-                <div class="success-box">
-                    <h3>Pontos-Chave para Lembrar</h3>
-                    <ul>
-                        <li>Segurança da informação é responsabilidade de todos os colaboradores</li>
-                        <li>Use senhas fortes, únicas e diferentes para cada sistema</li>
-                        <li>Fique sempre alerta para e-mails e mensagens suspeitas (phishing)</li>
-                        <li>Proteja e respeite dados pessoais conforme determina a LGPD</li>
-                        <li>Bloqueie sempre sua estação de trabalho ao se afastar</li>
-                        <li>Reporte imediatamente qualquer incidente ou suspeita de segurança</li>
-                        <li>Mantenha atenção constante às práticas e políticas de segurança</li>
-                    </ul>
-                </div>
-                
-                <div class="info-box">
-                    <p><strong>Próxima Etapa:</strong> Clique no botão abaixo para responder ao questionário de avaliação e validar seu conhecimento sobre os temas abordados.</p>
-                </div>
 
                 <div class="quiz-completed-message" id="quizCompletedMessage">
                     <p>✓ Questionário aberto! Se precisar acessar novamente, clique no botão "Reabrir Avaliação".</p>
@@ -636,11 +394,13 @@
             
             
             <div class="completion-message" id="completionMessage" style="display: none; margin-top: 40px;">
-                <div style="background: linear-gradient(135deg, #164380 0%, #0a2540 100%); color: white; padding: 25px; border-radius: 12px; text-align: center;">
-                    <h2 style="font-size: 24px; margin: 0; font-weight: 600;">Treinamento Concluído</h2>
+                <div style="background: linear-gradient(135deg, rgba(0, 120, 212, 0.08) 0%, rgba(16, 110, 190, 0.08) 100%); backdrop-filter: blur(10px); border: 1px solid rgba(0, 120, 212, 0.2); padding: 40px; border-radius: 12px; text-align: center; box-shadow: 0 3.2px 7.2px rgba(0, 0, 0, 0.132);">
+                    <h2 style="font-size: 24px; margin: 0 0 12px 0; font-weight: 600; color: #323130;">Treinamento Concluído</h2>
+                    <p style="font-size: 15px; color: #605e5c; margin-bottom: 24px; line-height: 1.5;">Parabéns! Você completou todo o conteúdo.<br>Retorne à página inicial para realizar o teste de avaliação.</p>
+                    <a href="index.html" class="btn" style="display: inline-block; padding: 14px 32px; background: linear-gradient(135deg, #0078d4 0%, #005a9e 100%); color: white; text-decoration: none; border-radius: 12px; font-weight: 500; font-size: 15px; box-shadow: 0 4px 12px rgba(0, 120, 212, 0.3);">Página Inicial</a>
                 </div>
             </div>
-
+            
             <!-- Navigation -->
             <div class="navigation">
                 <button class="btn btn-secondary" id="prevBtn" type="button">← Anterior</button>
@@ -799,22 +559,38 @@
         }
     </script>
 
-    <script>
-        // Mostrar mensagem no último slide
-        if (typeof showSlide !== 'undefined') {
-            const origShowSlide = showSlide;
-            showSlide = function(n) {
-                origShowSlide(n);
-                const slides = document.getElementsByClassName('slide');
-                const msg = document.getElementById('completionMessage');
-                if (msg && n === slides.length - 1) {
+<script>
+// Controle da mensagem de conclusão
+(function() {
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initComplete);
+    } else {
+        initComplete();
+    }
+    
+    function initComplete() {
+        const origShow = window.showSlide;
+        if (typeof origShow !== 'function') return;
+        
+        window.showSlide = function(n) {
+            origShow(n);
+            const slides = document.getElementsByClassName('slide');
+            const msg = document.getElementById('completionMessage');
+            const nextBtn = document.getElementById('nextBtn');
+            
+            if (msg && slides.length > 0) {
+                if (n === slides.length - 1) {
                     msg.style.display = 'block';
-                } else if (msg) {
+                    if (nextBtn) nextBtn.style.display = 'none';
+                } else {
                     msg.style.display = 'none';
+                    if (nextBtn) nextBtn.style.display = 'block';
                 }
-            };
-        }
-    </script>
+            }
+        };
+    }
+})();
+</script>
 
 </body>
 </html>

@@ -13,7 +13,7 @@
         
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-            background: linear-gradient(135deg, #0d3a6b 0%, #164380 25%, #1a5099 50%, #164380 75%, #0a2540 100%);
+            background: linear-gradient(135deg, #0078d4 0%, #0078d4 25%, #106ebe 50%, #0078d4 75%, #005a9e 100%);
             background-size: 400% 400%;
             animation: gradientShift 15s ease infinite;
             min-height: 100vh;
@@ -54,7 +54,7 @@
         }
         
         .header {
-            background: linear-gradient(135deg, #164380 0%, #0a2540 100%);
+            background: linear-gradient(135deg, #0078d4 0%, #005a9e 100%);
             color: white;
             padding: 30px 20px;
             text-align: center;
@@ -272,14 +272,14 @@
         }
         
         .btn-primary {
-            background: linear-gradient(135deg, #164380 0%, #0a2540 100%);
+            background: linear-gradient(135deg, #0078d4 0%, #005a9e 100%);
             color: white;
-            box-shadow: 0 4px 12px rgba(22, 67, 128, 0.3);
+            box-shadow: 0 4px 12px rgba(0, 120, 212, 0.3);
         }
         
         .btn-primary:hover:not(:disabled) {
             transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(22, 67, 128, 0.4);
+            box-shadow: 0 8px 20px rgba(0, 120, 212, 0.4);
         }
         
         .btn-primary:active:not(:disabled) {
@@ -312,7 +312,7 @@
         
         .progress-fill {
             height: 100%;
-            background: linear-gradient(90deg, #164380 0%, #1a5099 100%);
+            background: linear-gradient(90deg, #0078d4 0%, #106ebe 100%);
             transition: width 0.4s ease;
         }
 
@@ -378,17 +378,8 @@
 <body>
     <div class="container">
         <div class="header">
-            <div class="logo-container">
-                <!-- QUANDO EU CRIAR A ESTRUTURA NO SHAREPOINT: -->
-                <!-- <img src="https://rodorei.sharepoint.com/sites/intranet/Recursos-Treinamentos/logos/logo-rodorei.png" alt="Logo Rodorei" id="companyLogo"> -->
-                
-                <div class="logo-placeholder">
-                    <strong> Minha sequência: logo-rodorei.png</strong>
-                    1. UAmbiente no Sharepoint: Recursos-Treinamentos/logos<br>
-                    2. link da imagem<br>
-                    3. Preciso alterar o código para ser responsivo (onde está QUANDO EU CRIAR A ESTRUTURA NO SHAREPOINT)<br>
-                    4. Não posso esquecer de remover este texto
-                </div>
+                        <div class="logo-container">
+                <img src="logo-rodorei.png" alt="Logo Rodorei">
             </div>
             <h1>Programa OEA</h1>
             <p style="font-size: clamp(16px, 4vw, 20px); font-weight: 600; margin-top: 12px; text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);">Ações e Cuidados em Portos e Aeroportos</p>
@@ -414,364 +405,19 @@
                     </ul>
                 </div>
                 
-                <div class="content-box">
-                    <p><strong>Duração estimada:</strong> 20 minutos</p>
-                    <p><strong>Formato:</strong> 12 módulos interativos com avaliação final</p>
-                </div>
-            </div>
-            
-            <!-- Slide 2 -->
-            <div class="slide">
-                <h2>O Programa OEA</h2>
-                <p>O Operador Econômico Autorizado (OEA) é um programa que certifica empresas que demonstram alto padrão de segurança e conformidade na cadeia logística internacional.</p>
                 
-                <div class="info-box">
-                    <h3>Pilares do Programa OEA</h3>
-                    <ul>
-                        <li><strong>Confiabilidade:</strong> Histórico consistente de cumprimento das obrigações legais</li>
-                        <li><strong>Segurança:</strong> Controles rigorosos em todas as etapas da operação</li>
-                        <li><strong>Gestão:</strong> Processos documentados e auditáveis</li>
-                        <li><strong>Transparência:</strong> Compartilhamento de informações com autoridades</li>
-                        <li><strong>Rastreabilidade:</strong> Controle completo da cadeia logística</li>
-                    </ul>
-                </div>
-                
-                <div class="success-box">
-                    <h3>✓ Benefícios da Certificação OEA</h3>
-                    <ul>
-                        <li>Facilidades e agilidade no desembaraço aduaneiro</li>
-                        <li>Redução de custos operacionais</li>
-                        <li>Reconhecimento internacional</li>
-                        <li>Maior competitividade no mercado</li>
-                        <li>Redução de inspeções físicas</li>
-                    </ul>
-                </div>
-            </div>
-            
-            <!-- Slide 3 -->
-            <div class="slide">
-                <h2>Sigilo e Segurança da Informação</h2>
-                <p>A proteção de informações confidenciais é fundamental para a segurança das operações e a conformidade com o programa OEA.</p>
-                
-                <div class="alert-box">
-                    <h3>⚠️ Informações que NUNCA devem ser compartilhadas:</h3>
-                    <ul>
-                        <li>Macros e procedimentos operacionais confidenciais</li>
-                        <li>Senhas de sistemas e acessos</li>
-                        <li>Rotas específicas de transporte</li>
-                        <li>Dados sensíveis de clientes</li>
-                        <li>Informações sobre cargas e valores</li>
-                        <li>Detalhes de segurança das operações</li>
-                    </ul>
-                </div>
-                
-                <div class="info-box">
-                    <h3>Boas Práticas</h3>
-                    <ul>
-                        <li>Não comente sobre rotas ou cargas com pessoas não autorizadas</li>
-                        <li>Não mostre documentos a terceiros</li>
-                        <li>Mantenha senhas e acessos em sigilo absoluto</li>
-                        <li>Reporte imediatamente qualquer tentativa de obter informações confidenciais</li>
-                        <li>Utilize apenas canais oficiais da empresa para comunicação</li>
-                    </ul>
-                </div>
-            </div>
-            
-            <!-- Slide 4 -->
-            <div class="slide">
-                <h2>Identificação de Cargas Suspeitas</h2>
-                <p>A identificação de materiais ilícitos é essencial para a segurança da operação e conformidade legal.</p>
-                
-                <div class="alert-box">
-                    <h3>⚠️ Materiais Ilícitos - Definições:</h3>
-                    <p><strong>Considere material ilícito:</strong> Armas, munições, explosivos, drogas ou qualquer outro material que não tenha a documentação correta para o transporte.</p>
-                </div>
-                
-                <div class="info-box">
-                    <h3>Cuidados na Verificação</h3>
-                    <ul>
-                        <li>Sempre verifique o veículo antes de iniciar a operação</li>
-                        <li>Identifique possíveis violações ou alterações no veículo</li>
-                        <li>Observe se há compartimentos ocultos ou modificações suspeitas</li>
-                        <li>Verifique a unidade de carga completamente</li>
-                        <li>Inspecione o veículo para localizar itens estranhos ou suspeitos</li>
-                        <li>Confirme se a carga corresponde à documentação</li>
-                    </ul>
-                </div>
-                
-                <div class="numbered-box">
-                    <h4>🚨 Em caso de suspeita:</h4>
-                    <p>Acione IMEDIATAMENTE o Gestor Imediato para ciência e providências. NÃO tente resolver sozinho.</p>
-                </div>
-            </div>
-            
-            <!-- Slide 5 -->
-            <div class="slide">
-                <h2>Checklist do Veículo</h2>
-                <p>A inspeção completa do veículo antes de cada operação é obrigatória e fundamental para a segurança.</p>
-                
-                <div class="info-box">
-                    <h3>✓ Itens Obrigatórios do Checklist</h3>
-                    <ul>
-                        <li>Conferir toda a documentação (sua, do veículo e da carga)</li>
-                        <li>Verificar necessidade de EPIs para o serviço</li>
-                        <li>Inspecionar o veículo para identificar problemas mecânicos</li>
-                        <li>Confirmar com o Rastreamento o sinal do veículo</li>
-                        <li>Verificar limpeza do veículo (sem sujidade ou sinais de pragas)</li>
-                        <li>Conferir validade do certificado de controle de pragas</li>
-                        <li>Verificar estado dos lacres</li>
-                    </ul>
-                </div>
-                
-                <div class="alert-box">
-                    <h3>⚠️ Importante</h3>
-                    <p><strong>Anotar TODA e QUALQUER não conformidade no Checklist da empresa.</strong> Este documento é essencial para rastreabilidade e auditoria.</p>
-                </div>
-                
-                <div class="numbered-box">
-                    <h4>📋 Tirar todas as dúvidas sobre o atendimento</h4>
-                    <p>Antes de sair para o serviço, confirme TODOS os detalhes da operação com seu gestor ou coordenador.</p>
-                </div>
-            </div>
-            
-            <!-- Slide 6 -->
-            <div class="slide">
-                <h2>Limpeza e Controle de Pragas</h2>
-                <p>A higiene dos equipamentos e o controle de pragas são requisitos essenciais do programa OEA e da legislação sanitária internacional.</p>
-                
-                <div class="info-box">
-                    <h3>Limpeza dos Equipamentos</h3>
-                    <ul>
-                        <li>Sempre manter o veículo limpo sem sinais de sujidade</li>
-                        <li>Manter o baú sempre varrido e em bom estado de conservação</li>
-                        <li>Verificar ausência de resíduos de cargas anteriores</li>
-                        <li>Garantir que não há odores ou contaminações</li>
-                        <li>Limpar o veículo após cada operação quando necessário</li>
-                    </ul>
-                </div>
-                
-                <div class="alert-box">
-                    <h3>⚠️ Controle de Pragas</h3>
-                    <ul>
-                        <li>Sempre verificar validade do certificado de controle de pragas</li>
-                        <li>Manter o selo do controle de pragas visível no veículo</li>
-                        <li>Checagem visual da existência de vestígios de pragas (insetos, roedores)</li>
-                        <li>Nos carregamentos, verificar paletes sem sinais de pragas</li>
-                        <li>NÃO carregar paletes com sinais visíveis de infestação</li>
-                        <li>Em cargas de importação/exportação, verificar se paletes têm anotação IPPC ou HT</li>
-                    </ul>
-                </div>
-                
-                <div class="numbered-box">
-                    <h4>🚨 Relatar Imediatamente</h4>
-                    <p>Qualquer inconformidade relacionada a limpeza e/ou pragas deve ser relatada de imediato ao gestor responsável.</p>
-                </div>
-            </div>
-            
-            <!-- Slide 7 -->
-            <div class="slide">
-                <h2>Lacração dos Veículos</h2>
-                <p>A lacração correta é um dos principais controles de segurança para garantir a integridade da carga durante todo o transporte.</p>
-                
-                <div class="info-box">
-                    <h3>Tipos de Lacres</h3>
-                    <ul>
-                        <li><strong>Lacre Rodorei (Vazio):</strong> Utilizado em veículos vazios ou situações específicas</li>
-                        <li><strong>Lacre RFB:</strong> Lacre da Receita Federal do Brasil para cargas específicas</li>
-                        <li><strong>Lacre do Cliente:</strong> Quando exigido pelo cliente ou operação</li>
-                    </ul>
-                </div>
-                
-                <div class="alert-box">
-                    <h3>⚠️ REGRAS IMPORTANTES DE LACRAÇÃO</h3>
-                    <ul>
-                        <li><strong>1.</strong> Sempre conferir a numeração do lacre com a documentação</li>
-                        <li><strong>2.</strong> Sempre confirmar/lacrar ou acompanhar a lacração pessoalmente</li>
-                        <li><strong>3.</strong> NUNCA trafegar sem lacre</li>
-                        <li><strong>4.</strong> Em caso de paradas, SEMPRE checar o lacre</li>
-                        <li><strong>5.</strong> NÃO ceder lacres a terceiros</li>
-                        <li><strong>6.</strong> Lacrar com a maior agilidade possível após o término do carregamento</li>
-                    </ul>
-                </div>
-                
-                <div class="numbered-box">
-                    <h4>🔍 Sinais de Violação</h4>
-                    <p>Fique atento a sinais de violação ou adulteração na carga, veículo ou lacres. Isso pode indicar riscos de fraude, contrabando e adulteração de cargas. Reporte IMEDIATAMENTE.</p>
-                </div>
-            </div>
-            
-            <!-- Slide 8 -->
-            <div class="slide">
-                <h2>Segurança no Trajeto - Parte 1</h2>
-                <p>Durante o transporte, é fundamental seguir rigorosamente as regras de trânsito e gerenciamento de risco.</p>
-                
-                <div class="info-box">
-                    <h3>🚗 Regras de Trânsito</h3>
-                    <ul>
-                        <li><strong>1.</strong> Respeitar as Leis de Trânsito</li>
-                        <li><strong>2.</strong> Respeitar os Limites de Velocidade</li>
-                        <li><strong>3.</strong> Respeitar os Veículos ao Redor</li>
-                        <li><strong>4.</strong> Não efetuar ultrapassagens perigosas</li>
-                        <li><strong>5.</strong> Não parar em locais não permitidos</li>
-                        <li><strong>6.</strong> Não mostrar nenhum documento a terceiros</li>
-                        <li><strong>7.</strong> Respeitar as rotas pré-definidas pela empresa</li>
-                    </ul>
-                </div>
-                
-                <div class="alert-box">
-                    <h3>⚠️ Gerenciamento de Risco</h3>
-                    <ul>
-                        <li>Usar SEMPRE a rota previamente aprovada</li>
-                        <li>SEMPRE respeitar as regras de GR (Gerenciamento de Risco)</li>
-                        <li>Realizar envio de macros de acordo com cada fase do serviço</li>
-                        <li>Assegurar que os lacres não sejam rompidos no trajeto</li>
-                        <li>Não comentar sua rota com terceiros</li>
-                    </ul>
-                </div>
-            </div>
-            
-            <!-- Slide 9 -->
-            <div class="slide">
-                <h2>Segurança no Trajeto - Parte 2</h2>
-                <p>Reconhecer situações suspeitas e seguir protocolos de segurança pode prevenir incidentes graves.</p>
-                
-                <div class="alert-box">
-                    <h3>⚠️ Reconhecimento de Situações Suspeitas</h3>
-                    <ul>
-                        <li>Pessoas estranhas tentando abordar ou seguir o veículo</li>
-                        <li>Veículos sem autorização tentando se aproximar</li>
-                        <li>Solicitações incomuns ou fora do padrão</li>
-                        <li>Documentos incoerentes ou suspeitos</li>
-                        <li>Tentativas de obter informações sobre a carga ou rota</li>
-                        <li>Comportamentos anormais em pontos de parada</li>
-                    </ul>
-                </div>
-                
-                <div class="info-box">
-                    <h3>Cuidados em Paradas</h3>
-                    <ul>
-                        <li>Em necessidade de parada, escolher local homologado e com câmeras</li>
-                        <li>Em caso de parada necessária, verificar veículo para identificar possíveis objetos ilícitos</li>
-                        <li>Em paradas, sempre conferir os lacres</li>
-                        <li>Nunca parar em locais isolados ou sem movimento</li>
-                        <li>Evitar paradas desnecessárias</li>
-                    </ul>
-                </div>
-                
-                <div class="numbered-box">
-                    <h4>🚨 Ação Imediata</h4>
-                    <p>Em qualquer situação suspeita, acione IMEDIATAMENTE o centro de controle ou seu gestor. Não tente resolver sozinho.</p>
-                </div>
-            </div>
-            
-            <!-- Slide 10 -->
-            <div class="slide">
-                <h2>Proibições Absolutas</h2>
-                <p>Existem condutas que são estritamente proibidas e podem resultar em desligamento imediato, além de responsabilização legal.</p>
-                
-                <div class="alert-box">
-                    <h3>🚫 NUNCA FAÇA:</h3>
-                    <ul>
-                        <li>Transportar nada que não esteja declarado na documentação de transporte</li>
-                        <li>Dar carona a qualquer pessoa</li>
-                        <li>Levar qualquer tipo de embalagem ou produto não autorizado</li>
-                        <li>Desviar da rota pré-estabelecida sem autorização</li>
-                        <li>Comentar sobre rotas, cargas ou valores com terceiros</li>
-                        <li>Abrir ou violar lacres por qualquer motivo</li>
-                        <li>Aceitar qualquer tipo de "presente" ou "agrado" de terceiros</li>
-                        <li>Permitir acesso de pessoas não autorizadas ao veículo ou carga</li>
-                    </ul>
-                </div>
-                
-                <div class="info-box">
-                    <h3>Consequências</h3>
-                    <p>O descumprimento destas regras pode resultar em:</p>
-                    <ul>
-                        <li>Desligamento por justa causa</li>
-                        <li>Responsabilização civil e criminal</li>
-                        <li>Perda da certificação OEA da empresa</li>
-                        <li>Multas e sanções legais</li>
-                        <li>Prejuízos irreparáveis à imagem da empresa</li>
-                    </ul>
-                </div>
-            </div>
-            
-            <!-- Slide 11 -->
-            <div class="slide">
-                <h2>Comunicação de Anomalias</h2>
-                <p>A comunicação imediata de qualquer anomalia é essencial para a segurança das operações e pode prevenir incidentes graves.</p>
-                
-                <div class="alert-box">
-                    <h3>⚠️ O que Reportar IMEDIATAMENTE</h3>
-                    <ul>
-                        <li>Sinais de violação ou adulteração na carga, veículo ou lacres</li>
-                        <li>Presença de materiais suspeitos ou não declarados</li>
-                        <li>Pessoas ou veículos suspeitos seguindo ou abordando</li>
-                        <li>Solicitações incomuns ou fora do procedimento padrão</li>
-                        <li>Tentativas de subornar ou coagir</li>
-                        <li>Qualquer não conformidade nos processos de segurança</li>
-                        <li>Problemas mecânicos que possam comprometer a operação</li>
-                        <li>Acidentes ou incidentes durante o trajeto</li>
-                    </ul>
-                </div>
-                
-                <div class="info-box">
-                    <h3>Como Reportar</h3>
-                    <ul>
-                        <li>Entre em contato IMEDIATAMENTE com o Gestor Imediato</li>
-                        <li>Acione o centro de controle ou rastreamento</li>
-                        <li>Informe todos os detalhes: local, horário, descrição completa</li>
-                        <li>Preserve evidências (fotos, documentos, testemunhas)</li>
-                        <li>NÃO tente resolver o problema sozinho</li>
-                        <li>Aguarde orientações antes de prosseguir</li>
-                        <li>Documente tudo no checklist da empresa</li>
-                    </ul>
-                </div>
-                
-                <div class="numbered-box">
-                    <h4>💡 Lembre-se</h4>
-                    <p>É melhor reportar uma suspeita que depois se mostre falsa do que deixar de reportar uma situação real. SEMPRE que tiver dúvida, reporte!</p>
-                </div>
-            </div>
-            
-            <!-- Slide 12 -->
-            <div class="slide">
-                <h2>Parabéns! Treinamento Concluído</h2>
-                <p>Você completou com sucesso o treinamento de Operador Econômico Autorizado (OEA). Agora você está preparado para realizar operações em portos e aeroportos com segurança e conformidade.</p>
-                
-                <div class="success-box">
-                    <h3>✓ Pontos-Chave para Lembrar</h3>
-                    <ul>
-                        <li>A certificação OEA depende do cumprimento rigoroso de todos os procedimentos</li>
-                        <li>Mantenha sempre sigilo sobre informações confidenciais da empresa</li>
-                        <li>Faça inspeção completa do veículo antes de cada operação</li>
-                        <li>Reporte IMEDIATAMENTE qualquer situação suspeita ou irregular</li>
-                        <li>NUNCA transporte nada que não esteja declarado na documentação</li>
-                        <li>Sempre confira e proteja os lacres durante todo o trajeto</li>
-                        <li>Mantenha o veículo limpo e com controle de pragas em dia</li>
-                        <li>Respeite as rotas e regras de gerenciamento de risco</li>
-                    </ul>
-                </div>
-                
-                <div class="info-box">
-                    <h3>📋 Checklist Rápido Diário</h3>
-                    <ul>
-                        <li>✓ Documentação conferida (pessoal, veículo e carga)</li>
-                        <li>✓ Veículo inspecionado (mecânica e limpeza)</li>
-                        <li>✓ Controle de pragas válido e visível</li>
-                        <li>✓ Lacres conferidos e íntegros</li>
-                        <li>✓ Rastreamento confirmado</li>
-                        <li>✓ EPIs verificados</li>
-                        <li>✓ Rota confirmada e autorizada</li>
-                    </ul>
-                </div>
-                
-                <div class="content-box">
-                    <p><strong>Próxima Etapa:</strong> Clique no botão abaixo para responder ao questionário de avaliação e validar seu conhecimento sobre os procedimentos OEA.</p>
-                </div>
 
                 <div class="quiz-completed-message" id="quizCompletedMessage">
                     <p>✓ Questionário aberto! Se precisar acessar novamente, clique no botão "Reabrir Avaliação".</p>
+                </div>
+            </div>
+            
+            
+            <div class="completion-message" id="completionMessage" style="display: none; margin-top: 40px;">
+                <div style="background: linear-gradient(135deg, rgba(0, 120, 212, 0.08) 0%, rgba(16, 110, 190, 0.08) 100%); backdrop-filter: blur(10px); border: 1px solid rgba(0, 120, 212, 0.2); padding: 40px; border-radius: 12px; text-align: center; box-shadow: 0 3.2px 7.2px rgba(0, 0, 0, 0.132);">
+                    <h2 style="font-size: 24px; margin: 0 0 12px 0; font-weight: 600; color: #323130;">Treinamento Concluído</h2>
+                    <p style="font-size: 15px; color: #605e5c; margin-bottom: 24px; line-height: 1.5;">Parabéns! Você completou todo o conteúdo.<br>Retorne à página inicial para realizar o teste de avaliação.</p>
+                    <a href="index.html" class="btn" style="display: inline-block; padding: 14px 32px; background: linear-gradient(135deg, #0078d4 0%, #005a9e 100%); color: white; text-decoration: none; border-radius: 12px; font-weight: 500; font-size: 15px; box-shadow: 0 4px 12px rgba(0, 120, 212, 0.3);">Página Inicial</a>
                 </div>
             </div>
             
@@ -872,5 +518,39 @@
             showSlide(currentSlide);
         });
     </script>
+
+<script>
+// Controle da mensagem de conclusão
+(function() {
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initComplete);
+    } else {
+        initComplete();
+    }
+    
+    function initComplete() {
+        const origShow = window.showSlide;
+        if (typeof origShow !== 'function') return;
+        
+        window.showSlide = function(n) {
+            origShow(n);
+            const slides = document.getElementsByClassName('slide');
+            const msg = document.getElementById('completionMessage');
+            const nextBtn = document.getElementById('nextBtn');
+            
+            if (msg && slides.length > 0) {
+                if (n === slides.length - 1) {
+                    msg.style.display = 'block';
+                    if (nextBtn) nextBtn.style.display = 'none';
+                } else {
+                    msg.style.display = 'none';
+                    if (nextBtn) nextBtn.style.display = 'block';
+                }
+            }
+        };
+    }
+})();
+</script>
+
 </body>
 </html>

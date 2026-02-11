@@ -13,7 +13,7 @@
         
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-            background: linear-gradient(135deg, #0d3a6b 0%, #164380 25%, #1a5099 50%, #164380 75%, #0a2540 100%);
+            background: linear-gradient(135deg, #0078d4 0%, #0078d4 25%, #106ebe 50%, #0078d4 75%, #005a9e 100%);
             background-size: 400% 400%;
             animation: gradientShift 15s ease infinite;
             min-height: 100vh;
@@ -54,7 +54,7 @@
         }
         
         .header {
-            background: linear-gradient(135deg, #164380 0%, #0a2540 100%);
+            background: linear-gradient(135deg, #0078d4 0%, #005a9e 100%);
             color: white;
             padding: 30px 20px;
             text-align: center;
@@ -270,7 +270,7 @@
         }
 
         .equipment-number {
-            background: linear-gradient(135deg, #164380 0%, #0a2540 100%);
+            background: linear-gradient(135deg, #0078d4 0%, #005a9e 100%);
             color: white;
             width: 40px;
             height: 40px;
@@ -336,14 +336,14 @@
         }
         
         .btn-primary {
-            background: linear-gradient(135deg, #164380 0%, #0a2540 100%);
+            background: linear-gradient(135deg, #0078d4 0%, #005a9e 100%);
             color: white;
-            box-shadow: 0 4px 12px rgba(22, 67, 128, 0.3);
+            box-shadow: 0 4px 12px rgba(0, 120, 212, 0.3);
         }
         
         .btn-primary:hover:not(:disabled) {
             transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(22, 67, 128, 0.4);
+            box-shadow: 0 8px 20px rgba(0, 120, 212, 0.4);
         }
         
         .btn-primary:active:not(:disabled) {
@@ -376,7 +376,7 @@
         
         .progress-fill {
             height: 100%;
-            background: linear-gradient(90deg, #164380 0%, #1a5099 100%);
+            background: linear-gradient(90deg, #0078d4 0%, #106ebe 100%);
             transition: width 0.4s ease;
         }
 
@@ -450,11 +450,8 @@
 <body>
     <div class="container">
         <div class="header">
-            <div class="logo-container">
-                <div class="logo-placeholder">
-                    <strong>Logotipo da Empresa</strong>
-                    Insira a imagem do logo conforme documentação
-                </div>
+                        <div class="logo-container">
+                <img src="logo-rodorei.png" alt="Logo Rodorei">
             </div>
             <h1>Lonamento e Amarração de Cargas</h1>
             <p style="font-size: clamp(16px, 4vw, 20px); font-weight: 600; margin-top: 12px; text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);">Procedimentos com Cintas e Catracas</p>
@@ -857,6 +854,15 @@
                 </div>
             </div>
             
+            
+            <div class="completion-message" id="completionMessage" style="display: none; margin-top: 40px;">
+                <div style="background: linear-gradient(135deg, rgba(0, 120, 212, 0.08) 0%, rgba(16, 110, 190, 0.08) 100%); backdrop-filter: blur(10px); border: 1px solid rgba(0, 120, 212, 0.2); padding: 40px; border-radius: 12px; text-align: center; box-shadow: 0 3.2px 7.2px rgba(0, 0, 0, 0.132);">
+                    <h2 style="font-size: 24px; margin: 0 0 12px 0; font-weight: 600; color: #323130;">Treinamento Concluído</h2>
+                    <p style="font-size: 15px; color: #605e5c; margin-bottom: 24px; line-height: 1.5;">Parabéns! Você completou todo o conteúdo.<br>Retorne à página inicial para realizar o teste de avaliação.</p>
+                    <a href="index.html" class="btn" style="display: inline-block; padding: 14px 32px; background: linear-gradient(135deg, #0078d4 0%, #005a9e 100%); color: white; text-decoration: none; border-radius: 12px; font-weight: 500; font-size: 15px; box-shadow: 0 4px 12px rgba(0, 120, 212, 0.3);">Página Inicial</a>
+                </div>
+            </div>
+            
             <!-- Navigation -->
             <div class="navigation">
                 <button class="btn btn-secondary" id="prevBtn" type="button" onclick="prevSlide()">← Anterior</button>
@@ -954,5 +960,39 @@
             showSlide(currentSlide);
         });
     </script>
+
+<script>
+// Controle da mensagem de conclusão
+(function() {
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initComplete);
+    } else {
+        initComplete();
+    }
+    
+    function initComplete() {
+        const origShow = window.showSlide;
+        if (typeof origShow !== 'function') return;
+        
+        window.showSlide = function(n) {
+            origShow(n);
+            const slides = document.getElementsByClassName('slide');
+            const msg = document.getElementById('completionMessage');
+            const nextBtn = document.getElementById('nextBtn');
+            
+            if (msg && slides.length > 0) {
+                if (n === slides.length - 1) {
+                    msg.style.display = 'block';
+                    if (nextBtn) nextBtn.style.display = 'none';
+                } else {
+                    msg.style.display = 'none';
+                    if (nextBtn) nextBtn.style.display = 'block';
+                }
+            }
+        };
+    }
+})();
+</script>
+
 </body>
 </html>

@@ -316,46 +316,7 @@
             transition: width 0.4s ease;
         }
 
-        .quiz-completed-message {
-            background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
-            padding: 20px;
-            border-radius: 12px;
-            margin-top: 20px;
-            border-left: 4px solid #10b981;
-            display: none;
-            animation: fadeIn 0.5s;
-        }
-
-        .quiz-completed-message.show {
-            display: block;
-        }
-
-        .quiz-completed-message p {
-            color: #065f46;
-            font-weight: 600;
-            margin: 0;
-        }
-        
-        @media (max-width: 768px) {
-            .container {
-                border-radius: 0;
-            }
-            
-            .content {
-                padding: 24px 20px;
-            }
-            
-            .header {
-                padding: 24px 20px;
-            }
-            
-            .btn {
-                padding: 12px 24px;
-                font-size: 14px;
-            }
-        }
-
-        @media (max-width: 480px) {
+                                @media (max-width: 480px) {
             body {
                 padding: 0;
             }
@@ -379,7 +340,7 @@
     <div class="container">
         <div class="header">
             <div class="logo-container">
-                <img src="logo-rodorei.png" alt="Logo Rodorei">
+                <img src="https://raw.githubusercontent.com/seu-usuario/seu-repositorio/main/logo-rodorei.png" alt="Logo Rodorei">
             </div>
             <h1>Programa OEA</h1>
             <p style="font-size: clamp(16px, 4vw, 20px); font-weight: 600; margin-top: 12px; text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);">Ações e Cuidados em Portos e Aeroportos</p>
@@ -762,10 +723,7 @@
                     <p><strong>Próxima Etapa:</strong> Clique no botão abaixo para responder ao questionário de avaliação e validar seu conhecimento sobre os procedimentos OEA.</p>
                 </div>
 
-                <div class="quiz-completed-message" id="quizCompletedMessage">
-                    <p>✓ Questionário aberto! Se precisar acessar novamente, clique no botão "Reabrir Avaliação".</p>
-                </div>
-            </div>            
+                </div>            
             <div class="completion-message" id="completionMessage" style="display: none; margin-top: 40px;">
                 <div style="background: linear-gradient(135deg, rgba(0, 120, 212, 0.08) 0%, rgba(16, 110, 190, 0.08) 100%); backdrop-filter: blur(10px); border: 1px solid rgba(0, 120, 212, 0.2); padding: 40px; border-radius: 12px; text-align: center; box-shadow: 0 3.2px 7.2px rgba(0, 0, 0, 0.132);">
                     <h2 style="font-size: 24px; margin: 0 0 12px 0; font-weight: 600; color: #323130;">Treinamento Concluído</h2>
@@ -788,9 +746,6 @@
     <script>
         let currentSlide = 0;
         const totalSlides = 11;
-        let quizOpened = false;
-        let quizWindow = null;
-        
         function updateProgress() {
             const progress = ((currentSlide + 1) / totalSlides) * 100;
             document.getElementById('progressBar').style.width = progress + '%';
@@ -812,15 +767,7 @@
             }
             
             if (nextBtn) {
-                if (n === 10) {
-                    if (quizOpened) {
-                        nextBtn.textContent = 'Reabrir Avaliação';
-                    } else {
-                        nextBtn.textContent = 'Fazer Avaliação →';
-                    }
-                } else {
-                    nextBtn.textContent = 'Próximo →';
-                }
+                nextBtn.textContent = 'Próximo →';
             }
             
             updateProgress();
@@ -831,33 +778,7 @@
         }
         
         function nextSlide() {
-            if (currentSlide === 10) {
-                if (quizWindow && !quizWindow.closed) {
-                    try {
-                        quizWindow.focus();
-                        alert('O questionário já está aberto em outra aba. A aba foi colocada em foco para você.');
-                        return;
-                    } catch(e) {
-                        console.log('Erro ao focar janela');
-                    }
-                }
-                
-                quizWindow = window.open('https://surveymars.com/q/yrVcumVXc', '_blank', 'noopener,noreferrer');
-                
-                if (!quizOpened) {
-                    quizOpened = true;
-                    
-                    const nextBtn = document.getElementById('nextBtn');
-                    if (nextBtn) {
-                        nextBtn.textContent = 'Reabrir Avaliação';
-                    }
-                    
-                    const message = document.getElementById('quizCompletedMessage');
-                    if (message) {
-                        message.classList.add('show');
-                    }
-                }
-            } else if (currentSlide < totalSlides - 1) {
+            if (currentSlide < totalSlides) {
                 currentSlide++;
                 showSlide(currentSlide);
             }

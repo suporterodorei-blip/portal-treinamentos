@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Treinamento - Prevenção de Acidentes e Legislação de Trânsito</title>
+    <title>Treinamento - Limpeza e Controle de Pragas em Caminhões</title>
     <style>
         * {
             margin: 0;
@@ -378,11 +378,12 @@
 <body>
     <div class="container">
         <div class="header">
-                        <div class="logo-container">
+            <div class="logo-container">
                 <img src="logo-rodorei.png" alt="Logo Rodorei">
             </div>
             <h1>Prevenção de Acidentes e Legislação de Trânsito</h1>
             <p style="font-size: clamp(16px, 4vw, 20px); font-weight: 600; margin-top: 12px; text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);">Prevenir Acidentes e Respeitar as Leis de Trânsito Não Faz Mal a Ninguém</p>
+            <p style="font-size: clamp(13px, 3vw, 15px); margin-top: 8px; opacity: 0.9;">2025-09</p>
         </div>
         
         <div class="content">
@@ -408,7 +409,7 @@
                 </div>
                 
                 <div class="content-box">
-                    <p><strong>Duração estimada:</strong> 1h30</p>
+                    <p><strong>Duração estimada:</strong> 1h - 3h</p>
                     <p><strong>Formato:</strong> 12 módulos interativos com conteúdo crítico de segurança</p>
                 </div>
             </div>
@@ -772,16 +773,20 @@
                     <p><strong>Próxima Etapa:</strong> Clique no botão abaixo para responder ao questionário de avaliação e validar seu conhecimento sobre prevenção de acidentes e legislação de trânsito.</p>
                 </div>
 
-                
-            </div>
-<div class="completion-message" id="completionMessage" style="display: none; margin-top: 40px;">
+                <div class="quiz-completed-message" id="quizCompletedMessage">
+                    <p>✓ Questionário aberto! Se precisar acessar novamente, clique no botão "Reabrir Avaliação".</p>
+                </div>
+            </div>            
+            <div class="completion-message" id="completionMessage" style="display: none; margin-top: 40px;">
                 <div style="background: linear-gradient(135deg, rgba(0, 120, 212, 0.08) 0%, rgba(16, 110, 190, 0.08) 100%); backdrop-filter: blur(10px); border: 1px solid rgba(0, 120, 212, 0.2); padding: 40px; border-radius: 12px; text-align: center; box-shadow: 0 3.2px 7.2px rgba(0, 0, 0, 0.132);">
                     <h2 style="font-size: 24px; margin: 0 0 12px 0; font-weight: 600; color: #323130;">Treinamento Concluído</h2>
-                    <p style="font-size: 15px; color: #605e5c; margin-bottom: 24px; line-height: 1.5;">Parabéns! Você completou todo o conteúdo do treinamento!</p>
+                    <p style="font-size: 15px; color: #605e5c; margin-bottom: 24px; line-height: 1.5;">Parabéns! Você completou todo o conteúdo.<br>Retorne à página inicial para realizar o teste de avaliação.</p>
                     <a href="index.html" class="btn" style="display: inline-block; padding: 14px 32px; background: linear-gradient(135deg, #0078d4 0%, #005a9e 100%); color: white; text-decoration: none; border-radius: 12px; font-weight: 500; font-size: 15px; box-shadow: 0 4px 12px rgba(0, 120, 212, 0.3);">← Voltar ao Início</a>
                 </div>
             </div>
 
+
+            
             
             <!-- Navigation -->
             <div class="navigation">
@@ -791,15 +796,11 @@
         </div>
     </div>
 
-    
-</div>
-    </div>
-
     <script>
         let currentSlide = 0;
         const totalSlides = 12;
-        
-        
+        let quizOpened = false;
+        let quizWindow = null;
         
         function updateProgress() {
             const progress = ((currentSlide + 1) / totalSlides) * 100;
@@ -822,8 +823,11 @@
             }
             
             if (nextBtn) {
-                 else {
-                        nextBtn.textContent = 'Próximo →';
+                if (n === 11) {
+                    if (quizOpened) {
+                        nextBtn.textContent = 'Reabrir Avaliação';
+                    } else {
+                        nextBtn.textContent = 'Fazer Avaliação →';
                     }
                 } else {
                     nextBtn.textContent = 'Próximo →';
@@ -838,7 +842,33 @@
         }
         
         function nextSlide() {
-            if (currentSlide < totalSlides - 1) {
+            if (currentSlide === 11) {
+                if (quizWindow && !quizWindow.closed) {
+                    try {
+                        quizWindow.focus();
+                        alert('O questionário já está aberto em outra aba. A aba foi colocada em foco para você.');
+                        return;
+                    } catch(e) {
+                        console.log('Erro ao focar janela');
+                    }
+                }
+                
+                quizWindow = window.open('https://surveymars.com/q/yrVcumVXc', '_blank', 'noopener,noreferrer');
+                
+                if (!quizOpened) {
+                    quizOpened = true;
+                    
+                    const nextBtn = document.getElementById('nextBtn');
+                    if (nextBtn) {
+                        nextBtn.textContent = 'Reabrir Avaliação';
+                    }
+                    
+                    const message = document.getElementById('quizCompletedMessage');
+                    if (message) {
+                        message.classList.add('show');
+                    }
+                }
+            } else if (currentSlide < totalSlides - 1) {
                 currentSlide++;
                 showSlide(currentSlide);
             }
@@ -889,6 +919,5 @@
 })();
 </script>
 
-</body>
 </body>
 </html>

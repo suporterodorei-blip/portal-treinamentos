@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Treinamento - Lonamento e Amarração das Cargas com Cintas e Catracas</title>
+    <title>Treinamento - Limpeza e Controle de Pragas em Caminhões</title>
     <style>
         * {
             margin: 0;
@@ -247,70 +247,6 @@
             margin: 0;
             color: #374151;
         }
-
-        .equipment-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 16px;
-            margin: 24px 0;
-        }
-
-        .equipment-item {
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            border: 2px solid #e5e7eb;
-            text-align: center;
-            transition: all 0.3s ease;
-        }
-
-        .equipment-item:hover {
-            border-color: #3b82f6;
-            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2);
-        }
-
-        .equipment-number {
-            background: linear-gradient(135deg, #0078d4 0%, #005a9e 100%);
-            color: white;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 12px;
-            font-weight: 700;
-            font-size: 18px;
-        }
-
-        .equipment-name {
-            color: #1f2937;
-            font-weight: 600;
-            font-size: 15px;
-        }
-
-        .comparison-table {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 16px;
-            margin: 24px 0;
-        }
-
-        .table-column {
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            border: 2px solid #e5e7eb;
-        }
-
-        .table-column h4 {
-            color: #164380;
-            margin-bottom: 16px;
-            font-size: 18px;
-            text-align: center;
-            padding-bottom: 12px;
-            border-bottom: 2px solid #e5e7eb;
-        }
         
         .navigation {
             display: flex;
@@ -417,14 +353,6 @@
                 padding: 12px 24px;
                 font-size: 14px;
             }
-
-            .comparison-table {
-                grid-template-columns: 1fr;
-            }
-
-            .equipment-grid {
-                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            }
         }
 
         @media (max-width: 480px) {
@@ -450,11 +378,12 @@
 <body>
     <div class="container">
         <div class="header">
-                        <div class="logo-container">
+            <div class="logo-container">
                 <img src="logo-rodorei.png" alt="Logo Rodorei">
             </div>
             <h1>Lonamento e Amarração de Cargas</h1>
             <p style="font-size: clamp(16px, 4vw, 20px); font-weight: 600; margin-top: 12px; text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);">Procedimentos com Cintas e Catracas</p>
+            <p style="font-size: clamp(13px, 3vw, 15px); margin-top: 8px; opacity: 0.9;">2025-09</p>
         </div>
         
         <div class="content">
@@ -484,7 +413,7 @@
                 </div>
                 
                 <div class="numbered-box">
-                    <h4>⏱️ Duração estimada</h4>
+                    <p><strong>Duração estimada:</strong> 1h - 3h</p>
                     <p>1h30 com 12 módulos interativos</p>
                 </div>
             </div>
@@ -852,16 +781,17 @@
                 <div class="quiz-completed-message" id="quizCompletedMessage">
                     <p>✓ Questionário aberto! Se precisar acessar novamente, clique no botão "Reabrir Avaliação".</p>
                 </div>
-            </div>
-            
-            
+            </div>            
             <div class="completion-message" id="completionMessage" style="display: none; margin-top: 40px;">
                 <div style="background: linear-gradient(135deg, rgba(0, 120, 212, 0.08) 0%, rgba(16, 110, 190, 0.08) 100%); backdrop-filter: blur(10px); border: 1px solid rgba(0, 120, 212, 0.2); padding: 40px; border-radius: 12px; text-align: center; box-shadow: 0 3.2px 7.2px rgba(0, 0, 0, 0.132);">
                     <h2 style="font-size: 24px; margin: 0 0 12px 0; font-weight: 600; color: #323130;">Treinamento Concluído</h2>
                     <p style="font-size: 15px; color: #605e5c; margin-bottom: 24px; line-height: 1.5;">Parabéns! Você completou todo o conteúdo.<br>Retorne à página inicial para realizar o teste de avaliação.</p>
-                    <a href="index.html" class="btn" style="display: inline-block; padding: 14px 32px; background: linear-gradient(135deg, #0078d4 0%, #005a9e 100%); color: white; text-decoration: none; border-radius: 12px; font-weight: 500; font-size: 15px; box-shadow: 0 4px 12px rgba(0, 120, 212, 0.3);">Página Inicial</a>
+                    <a href="index.html" class="btn" style="display: inline-block; padding: 14px 32px; background: linear-gradient(135deg, #0078d4 0%, #005a9e 100%); color: white; text-decoration: none; border-radius: 12px; font-weight: 500; font-size: 15px; box-shadow: 0 4px 12px rgba(0, 120, 212, 0.3);">← Voltar ao Início</a>
                 </div>
             </div>
+
+
+            
             
             <!-- Navigation -->
             <div class="navigation">
@@ -873,7 +803,7 @@
 
     <script>
         let currentSlide = 0;
-        const totalSlides = 12;
+        const totalSlides = 11;
         let quizOpened = false;
         let quizWindow = null;
         
@@ -898,7 +828,7 @@
             }
             
             if (nextBtn) {
-                if (n === 11) {
+                if (n === 10) {
                     if (quizOpened) {
                         nextBtn.textContent = 'Reabrir Avaliação';
                     } else {
@@ -917,7 +847,7 @@
         }
         
         function nextSlide() {
-            if (currentSlide === 11) {
+            if (currentSlide === 10) {
                 if (quizWindow && !quizWindow.closed) {
                     try {
                         quizWindow.focus();
@@ -928,7 +858,7 @@
                     }
                 }
                 
-                quizWindow = window.open('about:blank', '_blank', 'noopener,noreferrer');
+                quizWindow = window.open('https://surveymars.com/q/yrVcumVXc', '_blank', 'noopener,noreferrer');
                 
                 if (!quizOpened) {
                     quizOpened = true;

@@ -316,46 +316,7 @@
             transition: width 0.4s ease;
         }
 
-        .quiz-completed-message {
-            background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
-            padding: 20px;
-            border-radius: 12px;
-            margin-top: 20px;
-            border-left: 4px solid #10b981;
-            display: none;
-            animation: fadeIn 0.5s;
-        }
-
-        .quiz-completed-message.show {
-            display: block;
-        }
-
-        .quiz-completed-message p {
-            color: #065f46;
-            font-weight: 600;
-            margin: 0;
-        }
-        
-        @media (max-width: 768px) {
-            .container {
-                border-radius: 0;
-            }
-            
-            .content {
-                padding: 24px 20px;
-            }
-            
-            .header {
-                padding: 24px 20px;
-            }
-            
-            .btn {
-                padding: 12px 24px;
-                font-size: 14px;
-            }
-        }
-
-        @media (max-width: 480px) {
+                                @media (max-width: 480px) {
             body {
                 padding: 0;
             }
@@ -379,7 +340,7 @@
     <div class="container">
         <div class="header">
             <div class="logo-container">
-                <img src="logo-rodorei.png" alt="Logo Rodorei">
+                <img src="https://raw.githubusercontent.com/seu-usuario/seu-repositorio/main/logo-rodorei.png" alt="Logo Rodorei">
             </div>
             <h1>Limpeza e Controle de Pragas em Caminhões</h1>
             <p style="font-size: clamp(16px, 4vw, 20px); font-weight: 600; margin-top: 12px; text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);">Conformidade com o Programa OEA</p>
@@ -631,9 +592,6 @@
     <script>
         let currentSlide = 0;
         const totalSlides = 9;
-        let quizOpened = false;
-        let quizWindow = null;
-        
         function updateProgress() {
             const progress = ((currentSlide + 1) / totalSlides) * 100;
             document.getElementById('progressBar').style.width = progress + '%';
@@ -655,15 +613,7 @@
             }
             
             if (nextBtn) {
-                if (n === 8) {
-                    if (quizOpened) {
-                        nextBtn.textContent = 'Reabrir Avaliação';
-                    } else {
-                        nextBtn.textContent = 'Fazer Avaliação →';
-                    }
-                } else {
-                    nextBtn.textContent = 'Próximo →';
-                }
+                nextBtn.textContent = 'Próximo →';
             }
             
             updateProgress();
@@ -674,33 +624,7 @@
         }
         
         function nextSlide() {
-            if (currentSlide === 8) {
-                if (quizWindow && !quizWindow.closed) {
-                    try {
-                        quizWindow.focus();
-                        alert('O questionário já está aberto em outra aba. A aba foi colocada em foco para você.');
-                        return;
-                    } catch(e) {
-                        console.log('Erro ao focar janela');
-                    }
-                }
-                
-                quizWindow = window.open('https://surveymars.com/q/yrVcumVXc', '_blank', 'noopener,noreferrer');
-                
-                if (!quizOpened) {
-                    quizOpened = true;
-                    
-                    const nextBtn = document.getElementById('nextBtn');
-                    if (nextBtn) {
-                        nextBtn.textContent = 'Reabrir Avaliação';
-                    }
-                    
-                    const message = document.getElementById('quizCompletedMessage');
-                    if (message) {
-                        message.classList.add('show');
-                    }
-                }
-            } else if (currentSlide < totalSlides - 1) {
+            if (currentSlide < totalSlides) {
                 currentSlide++;
                 showSlide(currentSlide);
             }

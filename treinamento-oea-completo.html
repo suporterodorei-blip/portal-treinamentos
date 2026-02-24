@@ -14,8 +14,8 @@
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
             background: linear-gradient(135deg, #0078d4 0%, #0078d4 25%, #106ebe 50%, #0078d4 75%, #005a9e 100%);
-            background-size: 400% 400%;
-            animation: gradientShift 15s ease infinite;
+            background-size: 100% 100%;
+            /* animation: gradientShift 15s ease infinite; */ /* Desabilitado */
             min-height: 100vh;
             display: flex;
             justify-content: center;
@@ -63,16 +63,16 @@
         .logo-container {
             text-align: center;
             margin-bottom: 20px;
-            background: rgba(255, 255, 255, 0.15);
+            background: white;
             padding: 15px;
             border-radius: 12px;
-            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
         }
         
         .logo-container img {
             max-width: 100%;
             height: auto;
-            max-height: 80px;
+            max-height: 90px;
             object-fit: contain;
             display: block;
             margin: 0 auto;

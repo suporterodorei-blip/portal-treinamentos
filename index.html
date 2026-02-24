@@ -14,8 +14,8 @@
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; font-weight: 400;
             background: linear-gradient(135deg, #0078d4 0%, #0078d4 25%, #106ebe 50%, #0078d4 75%, #005a9e 100%);
-            background-size: 100% 100%;
-            /* animation: gradientShift 15s ease infinite; */ /* Desabilitado */
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
             min-height: 100vh;
             padding: 20px;
         }
@@ -46,19 +46,11 @@
         }
         
         .logo-container img {
-            max-width: 90%;
-            max-height: 120px;
+            max-height: 140px;
             width: auto;
-            height: auto;
             display: block;
             margin: 0 auto;
             filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.15));
-        }
-        
-        @media (max-width: 768px) {
-            .logo-container img {
-                max-height: 80px;
-            }
         }
         
         .header h1 {
@@ -268,7 +260,7 @@
         
         <div class="cards-grid">
             <!-- Card 1: Condução Segura -->
-            <div class="training-card" id="card-conducao">
+            <div class="training-card">
                 <div class="card-header">
                     <div class="card-icon">🚛</div>
                     <h2>Condução Segura</h2>
@@ -302,7 +294,7 @@
                         <a href="treinamento-conducao-segura.html" class="btn btn-primary" target="_blank">
                             ▶ Iniciar Treinamento
                         </a>
-                        <a href="https://suporterodorei-blip.github.io/materiais-apoio-oea/treinamento-conducao-segura.pdf" class="btn btn-secondary" target="_blank">
+                        <a href="https://rodorei.sharepoint.com/Documentos%20Compartilhados/Treinametos-OEA/materiais-apoio/conducao-segura/manual-conducao-segura.pdf" class="btn btn-secondary" target="_blank">
                             📋 Material de Apoio
                         </a>
                         <a href="https://surveymars.com/q/eBKLFEA6S" class="btn btn-success" target="_blank">
@@ -313,7 +305,7 @@
             </div>
             
             <!-- Card 2: Prevenção de Acidentes -->
-            <div class="training-card" id="card-prevencao">
+            <div class="training-card">
                 <div class="card-header">
                     <div class="card-icon">🚦</div>
                     <h2>Prevenção de Acidentes</h2>
@@ -347,7 +339,7 @@
                         <a href="treinamento-prevencao-acidentes.html" class="btn btn-primary" target="_blank">
                             ▶ Iniciar Treinamento
                         </a>
-                        <a href="https://suporterodorei-blip.github.io/materiais-apoio-oea/prevencao-acidentes.pdf" class="btn btn-secondary" target="_blank">
+                        <a href="https://rodorei.sharepoint.com/Documentos%20Compartilhados/Treinametos-OEA/materiais-apoio/prevencao-acidentes/manual-legislacao.pdf" class="btn btn-secondary" target="_blank">
                             📋 Material de Apoio
                         </a>
                         <a href="https://surveymars.com/q/GdChPEkBT" class="btn btn-success" target="_blank">
@@ -358,7 +350,7 @@
             </div>
             
             <!-- Card 3: Bom Atendimento -->
-            <div class="training-card" id="card-bom-atendimento">
+            <div class="training-card">
                 <div class="card-header">
                     <div class="card-icon">🤝</div>
                     <h2>Bom Atendimento</h2>
@@ -392,7 +384,7 @@
                         <a href="treinamento-bom-atendimento.html" class="btn btn-primary" target="_blank">
                             ▶ Iniciar Treinamento
                         </a>
-                        <a href="https://suporterodorei-blip.github.io/materiais-apoio-oea/treinamento-bom-atendimento.pdf" class="btn btn-secondary" target="_blank">
+                        <a href="https://rodorei.sharepoint.com/Documentos%20Compartilhados/Treinametos-OEA/materiais-apoio/bom-atendimento/guia-atendimento.pdf" class="btn btn-secondary" target="_blank">
                             📋 Material de Apoio
                         </a>
                         <a href="https://surveymars.com/q/RwQtpqhgX" class="btn btn-success" target="_blank">
@@ -403,7 +395,7 @@
             </div>
             
             <!-- Card 4: Limpeza e Controle de Pragas -->
-            <div class="training-card" id="card-limpeza">
+            <div class="training-card">
                 <div class="card-header">
                     <div class="card-icon">🧹</div>
                     <h2>Limpeza e Controle de Pragas</h2>
@@ -437,7 +429,7 @@
                         <a href="treinamento-limpeza-pragas.html" class="btn btn-primary" target="_blank">
                             ▶ Iniciar Treinamento
                         </a>
-                        <a href="https://suporterodorei-blip.github.io/materiais-apoio-oea/limpeza-e-controle-de-pragas.pdf" class="btn btn-secondary" target="_blank">
+                        <a href="https://rodorei.sharepoint.com/Documentos%20Compartilhados/Treinametos-OEA/materiais-apoio/limpeza-pragas/manual-limpeza-pragas.pdf" class="btn btn-secondary" target="_blank">
                             📋 Material de Apoio
                         </a>
                         <a href="https://surveymars.com/q/lE6BMirxU" class="btn btn-success" target="_blank">
@@ -448,7 +440,10 @@
             </div>
 
             <!-- Card 5: Lonas e Amarração -->
-            <div class="training-card" id="card-lonas"><div class="card-header"><div class="card-icon">📦</div><h2>Lonas e Amarração</h2>
+            <div class="training-card">
+                <div class="card-header">
+                    <div class="card-icon">📦</div>
+                    <h2>Lonas e Amarração</h2>
                     <p>Cintas e Catracas</p>
                 </div>
                 <div class="card-body">
@@ -479,7 +474,7 @@
                         <a href="treinamento-lonas-amarracao.html" class="btn btn-primary" target="_blank">
                             ▶ Iniciar Treinamento
                         </a>
-                        <a href="https://suporterodorei-blip.github.io/materiais-apoio-oea/treinamento-lonas-amarracao.pdf" class="btn btn-secondary" target="_blank">
+                        <a href="https://rodorei.sharepoint.com/Documentos%20Compartilhados/Treinametos-OEA/materiais-apoio/lonas-amarracao/manual-amarracao.pdf" class="btn btn-secondary" target="_blank">
                             📋 Material de Apoio
                         </a>
                         <a href="https://surveymars.com/q/mpABbHf6K" class="btn btn-success" target="_blank">
@@ -490,7 +485,10 @@
             </div>
 
             <!-- Card 6: Segurança da Informação -->
-            <div class="training-card" id="card-tecnologia"><div class="card-header"><div class="card-icon">💻</div><h2>Segurança da Informação</h2>
+            <div class="training-card">
+                <div class="card-header">
+                    <div class="card-icon">💻</div>
+                    <h2>Segurança da Informação</h2>
                     <p>Proteção de Dados e LGPD</p>
                 </div>
                 <div class="card-body">
@@ -521,7 +519,7 @@
                         <a href="tecnologia-informacao.html" class="btn btn-primary" target="_blank">
                             ▶ Iniciar Treinamento
                         </a>
-                        <a href="https://suporterodorei-blip.github.io/materiais-apoio-oea/tecnologia-informacao.pdf" class="btn btn-secondary" target="_blank">
+                        <a href="https://rodorei.sharepoint.com/Documentos%20Compartilhados/Treinametos-OEA/materiais-apoio/seguranca-informacao/manual-seguranca.pdf" class="btn btn-secondary" target="_blank">
                             📋 Material de Apoio
                         </a>
                         <a href="https://surveymars.com/q/NQzcgPVBi" class="btn btn-success" target="_blank">
@@ -532,7 +530,7 @@
             </div>
 
             <!-- Card 7: OEA Portos -->
-            <div class="training-card" id="card-portos">
+            <div class="training-card">
                 <div class="card-header">
                     <div class="card-icon">✈️</div>
                     <h2>OEA - Portos e Aeroportos</h2>
@@ -566,7 +564,7 @@
                         <a href="treinamento-oea.html" class="btn btn-primary" target="_blank">
                             ▶ Iniciar Treinamento
                         </a>
-                        <a href="https://suporterodorei-blip.github.io/materiais-apoio-oea/treinamento-oea.pdf" class="btn btn-secondary" target="_blank">
+                        <a href="https://rodorei.sharepoint.com/Documentos%20Compartilhados/Treinametos-OEA/materiais-apoio/oea/manual-oea-portos.pdf" class="btn btn-secondary" target="_blank">
                             📋 Material de Apoio
                         </a>
                         <a href="https://surveymars.com/q/NQzcgPVBi" class="btn btn-success" target="_blank">
@@ -578,7 +576,7 @@
 
 
             <!-- Card 8: OEA Básico -->
-            <div class="training-card" id="card-oea">
+            <div class="training-card">
                 <div class="card-header">
                     <div class="card-icon">🎯</div>
                     <h2>OEA Básico</h2>
@@ -612,7 +610,7 @@
                         <a href="treinamento-oea.html" class="btn btn-primary" target="_blank">
                             ▶ Iniciar Treinamento
                         </a>
-                        <a href="https://suporterodorei-blip.github.io/materiais-apoio-oea/treinamento-oea.pdf" class="btn btn-secondary" target="_blank">
+                        <a href="https://rodorei.sharepoint.com/Documentos%20Compartilhados/Treinametos-OEA/materiais-apoio/oea/manual-oea-basico.pdf" class="btn btn-secondary" target="_blank">
                             📋 Material de Apoio
                         </a>
                         <a href="https://surveymars.com/q/NQzcgPVBi" class="btn btn-success" target="_blank">
@@ -623,7 +621,7 @@
             </div>
 
             <!-- Card 9: OEA Completo -->
-            <div class="training-card" id="card-oea-completo">
+            <div class="training-card">
                 <div class="card-header">
                     <div class="card-icon">🏆</div>
                     <h2>OEA Completo</h2>
@@ -657,7 +655,7 @@
                         <a href="treinamento-oea-completo.html" class="btn btn-primary" target="_blank">
                             ▶ Iniciar Treinamento
                         </a>
-                        <a href="https://suporterodorei-blip.github.io/materiais-apoio-oea/treinamento-oea-completo.pdf" class="btn btn-secondary" target="_blank">
+                        <a href="https://rodorei.sharepoint.com/Documentos%20Compartilhados/Treinametos-OEA/materiais-apoio/oea/manual-oea-completo.pdf" class="btn btn-secondary" target="_blank">
                             📋 Material de Apoio
                         </a>
                         <a href="https://surveymars.com/q/NQzcgPVBi" class="btn btn-success" target="_blank">

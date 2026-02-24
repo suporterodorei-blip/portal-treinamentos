@@ -42,15 +42,21 @@
         }
         
         .logo-container {
-            margin-bottom: 30px;
+            text-align: center;
+            margin-bottom: 20px;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 15px;
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
         }
         
         .logo-container img {
-            max-height: 140px;
-            width: auto;
+            max-width: 100%;
+            height: auto;
+            max-height: 100px;
+            object-fit: contain;
             display: block;
             margin: 0 auto;
-            filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.15));
         }
         
         .header h1 {
@@ -260,7 +266,7 @@
         
         <div class="cards-grid">
             <!-- Card 1: Condução Segura -->
-            <div class="training-card">
+            <div class="training-card" id="card-conducao">
                 <div class="card-header">
                     <div class="card-icon">🚛</div>
                     <h2>Condução Segura</h2>
@@ -305,7 +311,7 @@
             </div>
             
             <!-- Card 2: Prevenção de Acidentes -->
-            <div class="training-card">
+            <div class="training-card" id="card-prevencao">
                 <div class="card-header">
                     <div class="card-icon">🚦</div>
                     <h2>Prevenção de Acidentes</h2>
@@ -350,7 +356,7 @@
             </div>
             
             <!-- Card 3: Bom Atendimento -->
-            <div class="training-card">
+            <div class="training-card" id="card-bom-atendimento">
                 <div class="card-header">
                     <div class="card-icon">🤝</div>
                     <h2>Bom Atendimento</h2>
@@ -395,7 +401,7 @@
             </div>
             
             <!-- Card 4: Limpeza e Controle de Pragas -->
-            <div class="training-card">
+            <div class="training-card" id="card-limpeza">
                 <div class="card-header">
                     <div class="card-icon">🧹</div>
                     <h2>Limpeza e Controle de Pragas</h2>
@@ -440,7 +446,7 @@
             </div>
 
             <!-- Card 5: Lonas e Amarração -->
-            <div class="training-card">
+            <div class="training-card" id="card-lonas">
                 <div class="card-header">
                     <div class="card-icon">📦</div>
                     <h2>Lonas e Amarração</h2>
@@ -485,7 +491,7 @@
             </div>
 
             <!-- Card 6: Segurança da Informação -->
-            <div class="training-card">
+            <div class="training-card" id="card-tecnologia">
                 <div class="card-header">
                     <div class="card-icon">💻</div>
                     <h2>Segurança da Informação</h2>
@@ -530,7 +536,7 @@
             </div>
 
             <!-- Card 7: OEA Portos -->
-            <div class="training-card">
+            <div class="training-card" id="card-portos">
                 <div class="card-header">
                     <div class="card-icon">✈️</div>
                     <h2>OEA - Portos e Aeroportos</h2>
@@ -576,7 +582,7 @@
 
 
             <!-- Card 8: OEA Básico -->
-            <div class="training-card">
+            <div class="training-card" id="card-oea">
                 <div class="card-header">
                     <div class="card-icon">🎯</div>
                     <h2>OEA Básico</h2>
@@ -621,7 +627,7 @@
             </div>
 
             <!-- Card 9: OEA Completo -->
-            <div class="training-card">
+            <div class="training-card" id="card-oea-completo">
                 <div class="card-header">
                     <div class="card-icon">🏆</div>
                     <h2>OEA Completo</h2>

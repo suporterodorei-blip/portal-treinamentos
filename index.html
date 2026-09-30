@@ -28,8 +28,8 @@ body:after{width:500px;height:500px;right:-230px;bottom:-150px;background:radial
 .container{max-width:1400px;margin:auto}
 .header{position:relative;overflow:hidden;padding:20px 26px 24px;margin-bottom:22px;border:1px solid rgba(255,255,255,.28);border-radius:20px;background:linear-gradient(135deg,rgba(255,255,255,.18),rgba(255,255,255,.08));box-shadow:0 20px 56px rgba(0,31,69,.2),inset 0 1px rgba(255,255,255,.24);backdrop-filter:blur(18px)}
 .header:after{content:"";position:absolute;inset:auto -10% -70% 25%;height:200px;background:radial-gradient(ellipse,rgba(255,255,255,.15),transparent 66%);pointer-events:none}
-.logo-container{display:block;margin-bottom:14px}
-.logo-container img{width:clamp(190px,26vw,290px);height:auto;max-height:135px;display:block;object-fit:contain;filter:drop-shadow(0 2px 10px rgba(0,25,70,.22))}
+.logo-container{display:inline-flex;align-items:center;justify-content:center;padding:10px 22px;border-radius:13px;background:#fff;box-shadow:0 8px 22px rgba(0,25,70,.16);margin-bottom:14px}
+.logo-container img{height:76px;width:auto;max-width:100%;display:block;object-fit:contain}
 .header h1{color:#fff;font-size:clamp(24px,3.8vw,34px);letter-spacing:-.4px;line-height:1.1;margin-bottom:8px;font-weight:500;text-shadow:0 4px 20px rgba(0,0,0,.2)}
 .header p{color:rgba(255,255,255,.88);font-size:14px;max-width:680px}
 .cards-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(268px,1fr));gap:16px;margin-bottom:26px}
@@ -59,6 +59,7 @@ body:after{width:500px;height:500px;right:-230px;bottom:-150px;background:radial
 .btn-secondary:hover{background:#f3f2f1;border-color:#0078d4}
 .btn-success{color:#fff;background:linear-gradient(135deg,#107c10,#0e6b0e);border-color:transparent}
 .btn-success:hover{background:linear-gradient(135deg,#0e6b0e,#0c5a0c);transform:translateY(-2px);box-shadow:0 8px 18px rgba(16,124,16,.24)}
+.btn-disabled{background:#e5e9f0;color:#7a8799;border-color:#d5dbe5;cursor:not-allowed;pointer-events:none}
 .footer{background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.18);border-radius:20px;padding:20px;text-align:center;color:#fff;box-shadow:0 16px 40px rgba(0,30,70,.15);backdrop-filter:blur(14px);margin-top:22px}
 .footer p{font-size:12.5px;opacity:.88;font-weight:400}
 @media(max-width:768px){
@@ -75,7 +76,7 @@ body:after{width:500px;height:500px;right:-230px;bottom:-150px;background:radial
     <div class="container">
         <div class="header">
             <div class="logo-container">
-                <img src="logo-rodorei-branca.png" alt="Logo Rodorei">
+                <img src="logo-rodorei-transparente.png" alt="Logo Rodorei">
             </div>
             <h1>Portal de Treinamentos</h1>
             <p>Desenvolvimento Profissional e Segurança</p>
@@ -313,6 +314,32 @@ body:after{width:500px;height:500px;right:-230px;bottom:-150px;background:radial
                         <a href="treinamento-oea-completo.html" class="btn btn-primary" target="_blank">▶ Iniciar Treinamento</a>
                         <a href="https://suporterodorei-blip.github.io/materiais-apoio-oea/treinamento-oea-completo.pdf" class="btn btn-secondary" target="_blank">📋 Material de Apoio</a>
                         <a href="https://surveymars.com/q/NQzcgPVBi" class="btn btn-success" target="_blank">✓ Fazer Teste</a>
+                    </div>
+                </div>
+            </div>
+            <div class="training-card" id="card-lacres">
+                <div class="card-header">
+                    <div class="card-icon">🔒</div>
+                    <h2>Lacres em Baús e Containers</h2>
+                    <p>Segurança da Carga e OEA</p>
+                </div>
+                <div class="card-body">
+                    <div class="card-info"><span class="card-info-icon">⏱️</span><span>Duração: 1h-3h</span></div>
+                    <div class="card-info"><span class="card-info-icon">📊</span><span>Nível: Motoristas</span></div>
+                    <div class="card-description">Uso correto de lacres para garantir a inviolabilidade da carga e a conformidade com o Programa OEA.</div>
+                    <div class="card-topics">
+                        <h4>📚 Tópicos Principais:</h4>
+                        <ul>
+                            <li>Importância e tipos de lacres</li>
+                            <li>Lacre RFB e Lacre Rodorei</li>
+                            <li>Procedimento do motorista na viagem</li>
+                            <li>Conferência e documentação</li>
+                        </ul>
+                    </div>
+                    <div class="card-actions">
+                        <a href="treinamento-lacres.html" class="btn btn-primary" target="_blank">▶ Iniciar Treinamento</a>
+                        <a href="https://suporterodorei-blip.github.io/materiais-apoio-oea/treinamento-lacres.pdf" class="btn btn-secondary" target="_blank">📋 Material de Apoio</a>
+                        <span class="btn btn-disabled" aria-disabled="true">✓ Teste em breve</span>
                     </div>
                 </div>
             </div>
